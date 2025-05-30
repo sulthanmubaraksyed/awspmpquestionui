@@ -2,7 +2,11 @@
   "name": "pmpquestions-ui",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -21,7 +25,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"npm run start\" \"npm run watch\"",
+    "watch": "nodemon --watch src --ext js,jsx,ts,tsx,css,scss,json --ignore src/**/*.test.* --exec \"npm run lint\"",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "clean": "rm -rf node_modules/.cache",
+    "reset": "npm run clean && npm start"
   },
   "eslintConfig": {
     "extends": [
@@ -40,5 +49,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.10"
   }
 }

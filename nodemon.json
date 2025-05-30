@@ -1,0 +1,15 @@
+{
+  "verbose": true,
+  "ignore": [
+    "node_modules",
+    ".git",
+    "build",
+    "dist",
+    "coverage"
+  ],
+  "watch": [
+    "src"
+  ],
+  "ext": "js,jsx,ts,tsx,css,scss,json",
+  "delay": "1000"
+} 

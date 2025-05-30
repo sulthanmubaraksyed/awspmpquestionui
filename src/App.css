@@ -1,5 +1,138 @@
 .App {
+  min-height: 100vh;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.header {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  text-align: left;
+  margin-bottom: 12px;
+  padding: 12px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.5px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 240px;
+}
+
+.selector-group {
+  display: flex;
+  gap: 20px;
+  flex-shrink: 0;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.selectors-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  margin-bottom: 8px;
+  width: 695px;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.process-group-container {
+  flex-shrink: 0;
+}
+
+.knowledge-area-container {
+  flex-shrink: 0;
+}
+
+.question-label {
+  font-size: 21px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 12px 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 695px;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.main-content {
+  display: flex;
+  gap: 70px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.process-scores-container {
+  flex: 0 0 300px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  margin-top: 35px;
+}
+
+.process-scores-container h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #1d1d1f;
   text-align: center;
+  font-weight: 600;
+}
+
+.question-container {
+  display: flex;
+  flex-direction: column;
+  width: 695px;
+  flex: 0 0 auto;
+  min-width: 695px;
+  max-width: 695px;
+  margin: 0;
+  padding: 0;
+}
+
+.question-area {
+  width: 100%;
+  min-height: 187.5px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: none;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.04);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  resize: vertical;
+  margin-bottom: 0;
+}
+
+.question-area:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0071e3;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Remove default styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .App-logo {
@@ -35,4 +168,175 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Add styles for the labels container */
+.labels-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+  margin-left: 0;
+  flex-wrap: nowrap;
+  width: 695px;
+  justify-content: space-between;
+}
+
+/* Ensure all selector containers have the same height and width */
+.labels-container > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  min-width: 0; /* Allow flex items to shrink below their minimum content size */
+}
+
+/* Ensure all labels have the same height and alignment */
+.labels-container label {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Update options container to match question area width */
+.options-container {
+  margin-top: 24px;
+  padding: 0 40px;
+  width: 765px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.explanation-container {
+  display: flex;
+  flex-direction: column;
+  width: 695px;
+  flex: 0 0 695px;
+  min-width: 695px;
+  max-width: 695px;
+  margin-left: 0;
+  padding: 0;
+}
+
+.explanation-label {
+  font-size: 21px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 12px 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.explanation-area {
+  width: 100%;
+  min-height: 100px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: none;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.04);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  resize: vertical;
+  color: #1d1d1f;
+}
+
+.explanation-area:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0071e3;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.labels-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1430px;
+  margin: 0 auto;
+  padding: 0 35px;
+  gap: 35px;
+}
+
+.spinner {
+  margin: 0 auto 24px auto;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #0071e3;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.nav-button {
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #007AFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.nav-button:hover:not(:disabled) {
+    background: #0066CC;
+}
+
+.nav-button:active:not(:disabled) {
+    background: #0055AA;
+    transform: scale(0.98);
+}
+
+.nav-button:disabled {
+    background: #B0B0B0;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.prev-button {
+    background: #8E8E93;
+}
+
+.prev-button:hover:not(:disabled) {
+    background: #6E6E73;
+}
+
+.prev-button:active:not(:disabled) {
+    background: #5E5E62;
+}
+
+.process-group-container select,
+.knowledge-area-container select,
+.tool-container select {
+    width: 180px;
+    min-width: 120px;
+    max-width: 220px;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
 }

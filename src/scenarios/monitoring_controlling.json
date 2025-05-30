@@ -1,0 +1,79 @@
+{
+    "scenarios": [
+        {
+            "scenario": "While monitoring a project at a work site, the project manager notices that the site team's work breaks have increased by a few minutes every week. How should the project manager approach this?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project team is preparing a report for the stakeholders. The team gathers and collates a large amount of data to be included in the status report. What should the project manager do next?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "After the merger of two large companies, a project manager is assigned to a project. The company hires a consultant to ensure best practices are being used in information security. During an iteration, the consultant requests changes to a software component, claiming that it is not meeting market requirements. What should the project manager do?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "A project manager is assigned to a multiyear project. During project execution, the customer delegates a new representative who contacts the project manager directly with a concern about their participation in status meetings. The representative wants to contact team members directly. What should the project manager do next?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "A project manager is part of a global project team and manages the scope defined by their country. There is a clear division regarding which pieces of the scope should be treated by global and local teams. During the last sprints, the project manager has received requests the global team should handle. What should the project manager do in this situation?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Scope Management"
+        },
+        {
+            "scenario": "A project manager is managing a project to deploy new software to 200 end users. During the implementation, there is a missed process that caused some of the users to lose their computer data. What should the project manager do first?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "A senior manager attends one of the project review meetings and expresses concern that the project will not meet the quality standards. What should the project manager do?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "The project sponsor has approached a project manager about adding to the project scope. How should the project manager accommodate this request?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Scope Management"
+        },
+        {
+            "scenario": "A project manager has been given a critical, 5-day window and is allocated a maximum of US$100,000 as a contingency reserve. Subsequently, the project manager drafted a course of action based upon the best available information. Overall, five actions were required to be completed at a cost of US$20,000 and a duration of 1 day each. After 3 days of work, the project manager completed two actions and spent US$80,000. What should the project manager do next?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Cost Management"
+        },
+        {
+            "scenario": "A project is starting its sixth iteration out seven. During the daily meeting, a team member explains that a key function will take longer to complete than originally anticipated. What should the project manager do?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Schedule Management"
+        },
+        {
+            "scenario": "A project manager has completed an assessment of the project team's performance. Some team members have performed poorly on their assigned tasks. What should the project manager do?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A team needs to implement a mandatory compliance regulation in a product, which is required for its release. While nearing the product release, when completeness was being verified, it was found that the compliance part was not implemented in the project. What should the project manager do next?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "A project manager has been assigned to lead an IT project to store information on sold lottery tickets. During the project execution, a failure in the system caused 10 numbers to be sold two times. This happened during the month of greatest demand because the prize was the highest of the year. The project team is concerned that one of those tickets could be the winner. What should the project manager do first?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "After a recent status review meeting, the project manager becomes aware that an influential stakeholder is unclear about the purpose and benefits of the project Consequently, the stakeholder has questioned the viability of continuing the project. What should the project manager do next to address the situation?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Stakeholder Management"
+        },
+        {
+            "scenario": "A project is ending its fifth out of six iterations. During the iteration review, a customer adds a new regulatory feature that exceeds the capacity of the remaining iteration. What should the project lead do?",
+            "process_group": "Monitoring and Controlling",
+            "knowledge_area": "Scope Management"
+        }
+    ]
+} 

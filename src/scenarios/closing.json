@@ -1,0 +1,29 @@
+{
+    "scenarios": [
+        {
+            "scenario": "A project manager just completed a successful deployment and is preparing to transition the project to an operational state before starting closeout actions. What should the project manager do to ensure that the project is ready to move to an operational state?",
+            "process_group": "Closing",
+            "knowledge_area": "Integration Management"
+        },
+        {
+            "scenario": "During the lessons learned workshop, one stakeholder mentioned that the project was unsuccessful as it did not deliver the expected business value. What should the project manager do to address this concern?",
+            "process_group": "Closing",
+            "knowledge_area": "Integration Management"
+        },
+        {
+            "scenario": "A project team has installed software for the client, passed the knowledge to operations, sent the final report, and celebrated. Then 1 week later, the client sends a list of requirements that have not been met. The client is requesting to fix the issues quickly and within the initial budget. What should the project manager have done to prevent this from happening?",
+            "process_group": "Closing",
+            "knowledge_area": "Integration Management"
+        },
+        {
+            "scenario": "A large construction project is progressing well as per the project objectives. The project manager would like to report the project's value to the project sponsor and seek the next phase of funding closure. What should the project manager do?",
+            "process_group": "Closing",
+            "knowledge_area": "Integration Management"
+        },
+        {
+            "scenario": "The scope of a project is to replace the street signs within a 10-km radius. The client does not want to sign the project closure report if the radius is not extended by 1 km, to be aligned with the council's development plan. What should the project manager do?",
+            "process_group": "Closing",
+            "knowledge_area": "Scope Management"
+        }
+    ]
+} 

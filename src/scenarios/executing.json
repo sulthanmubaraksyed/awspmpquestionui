@@ -1,0 +1,164 @@
+{
+    "scenarios": [
+        {
+            "scenario": "A project team member is sick and will not be able to return to the project for a few weeks. During the daily meeting, the team shares their concerns as the sick team member was the only one skilled in their developing component. What should the project manager have done to prevent this?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project manager agreed to a team member's request to have an alternative working schedule whereby they begin working at 12:00 p.m. each day. This arrangement has worked well for the project, but has recently been scrutinized by members from other project teams because the company's core working hours begin at 9:00 a.m. What should the project manager have done to prevent this situation?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "Knowledge sharing has been a key priority for a complex technological project with a large number of team members. During the project execution phase, the project manager receives numerous complaints from all team members that they are overloaded with knowledge-sharing emails, which contain useful information but are unmanageable due to the high volume. What should the project manager do to solve this problem?",
+            "process_group": "Executing",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "A company is implementing a project with team members located in different countries and time zones. Individual performance is satisfactory, but the team's performance as a whole is low, especially in terms of group activities. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project team has established contracts for purchasing vehicles and construction services. In the middle of project execution, the team learned that the vehicle supplier could not deliver the vehicles. There is not enough time to find a new supplier without delaying the project. Which action should the project manager take to procure the vehicles?",
+            "process_group": "Executing",
+            "knowledge_area": "Procurement Management"
+        },
+        {
+            "scenario": "A customer's technical lead discussed a new feature with the project manager. The project manager believes the new feature will boost performance significantly and adds it as a high-priority item in the sprint backlog. At the end of the sprint, all of the planned stories were not completed because the new feature took more time. What should the project manager do next?",
+            "process_group": "Executing",
+            "knowledge_area": "Scope Management"
+        },
+        {
+            "scenario": "A nonsupervisory resource and immediately begins challenging all decisions made by the current supervisor. What should the project manager do to resolve this conflict?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "There is frequent conflict between two project team members working on a project. This has caused a negative impact on the project. How should the project manager handle this situation?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A typically high-performing team member has started to demonstrate a performance drop as well as some aggressive behaviors toward other team members in meetings. The project manager has worked with this individual for many months on this project and has not seen this type of behavior before. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project stakeholder complained that they did not receive an important delivery stated in the schedule. The team member responsible for this deliverable explained that they emailed the stakeholder, advising them that the deliverable would not be delivered on time. What should the project manager have done to avoid this situation?",
+            "process_group": "Executing",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "A customer is concerned about the time required to complete a project and is asking the project team to reduce the number of iterations required to complete the product. Which approach should the project manager take?",
+            "process_group": "Executing",
+            "knowledge_area": "Scope Management"
+        },
+        {
+            "scenario": "An organization is embarking on the deployment of a new digital solution that will revolutionize purchasing services. The project manager has created all the necessary plans and activities to ensure a successful integration and solution launch. There is a risk of a partner's system being unavailable which could impact the project negatively. What key activity is needed to ensure the project's success?",
+            "process_group": "Executing",
+            "knowledge_area": "Risk Management"
+        },
+        {
+            "scenario": "A company is working on a project to develop an integration of their existing systems. There are known issues in production. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "A project manager is working on an agile project that is within the scope of a recently announced corporate audit. The project manager was appointed to attend the first meeting with the auditors scheduled for the following week. What should the project manager do to prepare for the audit?",
+            "process_group": "Executing",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "A project manager assigned to an education project needs to train a workforce in application development. The customer is responsible for providing the training center, and the deadline to start the first training is in 2 weeks. The customer calls to say that the center will not be available in 2 weeks due to some unforeseen problems. What should the project manager do next?",
+            "process_group": "Executing",
+            "knowledge_area": "Risk Management"
+        },
+        {
+            "scenario": "A project team member, who is inexperienced in system development work is not performing well. Currently, there are no other staff members available who are qualified to complete the work. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A self-organizing team for a critical project is consistently delivering value according to their commitments. During a retrospective, the project manager observed that most of the team members were stressed due to over commitments. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project is comprised of team members who are not engaged and committed to project success. What should the project manager do to address this situation?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "Eight highly qualified experts have been assembled to work for a 6-month period on a specific aspect of an organization's product development process. How should the project manager support this team to succeed?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project manager receives a suggestion from a team member to improve the product attributes without impacting the schedule or cost. This will add value to the project and the customer. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Quality Management"
+        },
+        {
+            "scenario": "An enthusiastic, newly hired vice-president has been assigned as the product owner for a digital transformation project. The project manager advises the product owner that some of the functional requirements are not aligned with the chief information technology officer's (CTO) strategy. The product owner tells the project manager that the CTO is not part of the project and should not be engaged at this moment. What should the project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Stakeholder Management"
+        },
+        {
+            "scenario": "A project team is implementing an enterprise notification tool with a vendor. The project manager noticed that this vendor's developer has been reporting the same status for several weeks in a row. A few days later, the vendor communicated that the deliverable would not be completed on time due to resource constraints within their company. What should the project manager do next?",
+            "process_group": "Executing",
+            "knowledge_area": "Procurement Management"
+        },
+        {
+            "scenario": "A project that uses an incremental approach has colocated team members and uses a kanban board to visualize the work in progress (WIP). A key external stakeholder requests that all project activities be placed on hold until a status report is distributed. What should the project manager have done to avoid this situation?",
+            "process_group": "Executing",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "A project manager finds it challenging to comply with standardized processes for knowledge transfer. The project teams and stakeholders are scattered around field sites, the office, and remote locations. In addition, some team members have limited access to the electronically shared files. How should the project manager manage this challenge?",
+            "process_group": "Executing",
+            "knowledge_area": "Communications Management"
+        },
+        {
+            "scenario": "An agile team is working on a 2-week sprint to deliver business value. About 1 week after the sprint starts, the team members do not feel confident about the product increment they are building. They do not want to wait until the end of the sprint and want to validate the product increment with the product owner now. What should the project manager do to mitigate this risk?",
+            "process_group": "Executing",
+            "knowledge_area": "Risk Management"
+        },
+        {
+            "scenario": "A project had scheduling delays, which necessitated the team to work overtime to meet critical milestones. This led to some misunderstandings among team members. The project sponsor has allocated a monetary award. How should the project manager utilize the award?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A team member who is working on a critical project deliverable reported that their computer is not working. The IT department says that due to a high workload, they will not be able to provide assistance for 1 week. How should the project manager address this situation?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "There is a conflict on an agile project about following organizational processes, many of which do not add any value to the project. To resolve this, which one of the following should be regarded with the highest priority?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project manager is leading a global team that they have worked with in the past and has a high level of trust with them. The team is located in different countries and time zones and will need decisions in a timely manner. In order to ensure that the project runs smoothly across the team, how should the project manager approach delegation?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "An agile project manager notices that one of the team members is developing extensive knowledge in a specific matter. Other team members are likely to require this knowledge in the future. What should the agile project manager do?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A project manager is managing a project that requires specialized architecture services. This project was identified as a high risk for the organization. The project manager works with an external architect who is highly specialized. However, the architect will soon resign because they accepted an offer from another firm. What should the project manager do next?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        },
+        {
+            "scenario": "A team member has experienced personal conflicts on past projects, making them nervous about working on the current project. The project manager knows this team member could add value to the project. What should the project manager do to get the most value from this team member?",
+            "process_group": "Executing",
+            "knowledge_area": "Resource Management"
+        }
+    ]
+} 

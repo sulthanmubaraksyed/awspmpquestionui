@@ -1,0 +1,45 @@
+.action-buttons-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.generate-button,
+.submit-button,
+.reset-button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.generate-button {
+    background-color: #0071e3;
+    color: white;
+}
+
+.generate-button:hover {
+    background-color: #0077ed;
+}
+
+.submit-button {
+    background-color: #34c759;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #30b753;
+}
+
+.reset-button {
+    background-color: #ff9500;
+    color: white;
+}
+
+.reset-button:hover {
+    background-color: #ffa033;
+} 
