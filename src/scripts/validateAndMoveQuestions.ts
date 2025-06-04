@@ -1,30 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-
-// Define QAResponseIndividual interface locally
-interface QAResponseIndividual {
-  id: string;
-  question_pmp: string;
-  OPTION_A: string;
-  OPTION_B: string;
-  OPTION_C: string;
-  OPTION_D: string;
-  option_a_result: string;
-  option_b_result: string;
-  option_c_result: string;
-  option_d_result: string;
-  process_group: string;
-  knowledge_area: string;
-  tool: string;
-  suggested_read: string;
-  concepts_to_understand: string;
-  is_attempted: boolean;
-  whatuserselected?: string;
-  did_user_get_it_right?: boolean;
-  selected_option?: string;
-  question_type: string;
-}
+import { QAResponseIndividual } from '../types';
 
 // Get the directory name using import.meta.url
 const __filename = fileURLToPath(import.meta.url);
@@ -120,11 +97,10 @@ async function processQuestionsInBatches(batchSize: number = 50) {
     
     // Extract questions from tempLoad.ts
     let tempQuestions: any[] = [];
-    // Find the start of the object
-    const objStart = tempLoadContent.indexOf('{');
-    const objEnd = tempLoadContent.lastIndexOf('}');
-    if (objStart !== -1 && objEnd !== -1) {
-      const jsonString = tempLoadContent.substring(objStart, objEnd + 1);
+    // Find the start of the object, accounting for export const questionsData =
+    const exportMatch = tempLoadContent.match(/export\s+const\s+questionsData\s*=\s*({[\s\S]*?});/);
+    if (exportMatch) {
+      const jsonString = exportMatch[1];
       try {
         const tempObj = JSON.parse(jsonString);
         if (Array.isArray(tempObj.questions)) {
@@ -136,15 +112,9 @@ async function processQuestionsInBatches(batchSize: number = 50) {
         console.error('Failed to parse questionsData object from tempload.ts:', e);
         throw e;
       }
-    } else {
-      // Try array format fallback
-      const tempLoadArrayMatch = tempLoadContent.match(/export const questionsData = (\[[\s\S]*?\]);/);
-      if (tempLoadArrayMatch) {
-        tempQuestions = JSON.parse(tempLoadArrayMatch[1]);
       } else {
         console.error('Content of tempload.ts:', tempLoadContent.substring(0, 500) + '...');
-        throw new Error('Could not find questionsData in tempload.ts');
-      }
+      throw new Error('Could not find questionsData export in tempload.ts');
     }
     console.log(`Found ${tempQuestions.length} questions in tempload.ts`);
 
@@ -200,6 +170,7 @@ async function processQuestionsInBatches(batchSize: number = 50) {
             const transformedQuestion: QAResponseIndividual = {
               id: question.id,
               question_pmp: question.question_pmp,
+              options_pmp: question.options_pmp,
               OPTION_A: question.options_pmp.OPTION_A,
               OPTION_B: question.options_pmp.OPTION_B,
               OPTION_C: question.options_pmp.OPTION_C,
@@ -216,8 +187,11 @@ async function processQuestionsInBatches(batchSize: number = 50) {
                 question.analysis.suggested_read,
               concepts_to_understand: question.analysis.concepts_to_understand,
               is_attempted: false,
-              whatuserselected: '',
-              question_type: "Option"
+              selected_option: '',
+              question_type: "Option",
+              analysis: question.analysis,
+              is_verified: true,
+              did_user_get_it_right: undefined
             };
             validQuestions.push(transformedQuestion);
           } else {

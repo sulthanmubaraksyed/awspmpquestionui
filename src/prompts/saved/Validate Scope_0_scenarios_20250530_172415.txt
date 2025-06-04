@@ -1,0 +1,62 @@
+
+You are a PMP exam question generator. Generate up to 25 unique, high-quality, scenario-based PMP-style multiple-choice questions for the process: Validate Scope (Process Group: Monitoring and Controlling).
+
+Requirements:
+- Each question must be realistic, relevant, and test a specific concept from the process.
+- Each question must have exactly 4 unique, plausible options (A, B, C, D).
+- Only one option must be correct, and the correct answer must be randomly distributed among A/B/C/D (i.e. the correct answer must be randomly placed as OPTION_A, OPTION_B, OPTION_C, or OPTION_D). Do not always place the correct answer in the same position (for example, do not always put the correct answer as OPTION_A).
+- Each option must be a complete sentence and not reused across questions.
+- Each question must include detailed explanations for all options:
+    - CORRECT: Start with "CORRECT - ", explain why it's correct, reference PMBOK/PMI best practices, and provide real-world context (3-4 sentences).
+    - INCORRECT: Start with "INCORRECT - ", explain why it's wrong, reference PMI concepts, and describe negative impacts (3-4 sentences).
+- Explanations must be unique, detailed, and never generic or repeated.
+- Each question must include an analysis section with:
+    - process_group (must be one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing)
+    - knowledge_area (must be one of: Integration, Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurement, Stakeholders) (for this process, use: Scope)
+    - tool (if applicable)
+    - suggested_read (2-3 specific PMBOK/PMI resources)
+    - concepts_to_understand (concise, max 150 words)
+    - additional_notes (quick read links or "No quick reads available for this process")
+- Output must be valid JSON, following this format:
+
+{
+  "questions": [
+    {
+      "id": "[unique_id]",
+      "question_pmp": "Your unique PMP-style question text here (2-8 lines as needed)",
+      "options_pmp": {
+        "OPTION_A": "Unique first option text (PMP exam style) (randomly place the correct answer here, or in B, C, or D)",
+        "OPTION_B": "Unique second option text (PMP exam style) (randomly place the correct answer here, or in A, C, or D)",
+        "OPTION_C": "Unique third option text (PMP exam style) (randomly place the correct answer here, or in A, B, or D)",
+        "OPTION_D": "Unique fourth option text (PMP exam style) (randomly place the correct answer here, or in A, B, or C)"
+      },
+      "is_attempted": false,
+      "selected_option": "",
+      "question_type": "Option",
+      "is_valid": false,
+      "analysis": {
+        "option_a_result": "CORRECT - ... or INCORRECT - ... (randomly place the correct answer here, or in B, C, or D)",
+        "option_b_result": "... (randomly place the correct answer here, or in A, C, or D)",
+        "option_c_result": "... (randomly place the correct answer here, or in A, B, or D)",
+        "option_d_result": "... (randomly place the correct answer here, or in A, B, or C)",
+        "process_group": "Monitoring and Controlling",
+        "knowledge_area": "Scope",
+        "tool": "[Tool]",
+        "suggested_read": ["...", "..."],
+        "concepts_to_understand": "...",
+        "additional_notes": "..."
+      }
+    }
+    // ... more questions ...
+  ]
+}
+
+IMPORTANT JSON RULES:
+- No trailing commas
+- All strings in double quotes
+- No comments or undefined/null values
+- All objects/arrays properly closed
+- Boolean values lowercase (true/false)
+- No line breaks within string values
+
+Do not include any explanations or text outside the JSON structure.

@@ -1,0 +1,176 @@
+Role: You are a certified PMP exam content developer tasked with creating high-quality, realistic PMP-style questions. Your responsibility is to ensure that each question tests deep understanding of PMI's best practices and the PMBOK Guide, specifically focusing on the "Initiating" process group and the "Acquire Resources" process. Your questions must reflect real-world project scenarios, be pedagogically sound, and strictly follow the PMP exam structure and expectations.
+
+Process Group: Initiating
+Process: Acquire Resources
+Target Number of Questions: 25
+
+Instructions:
+Generate 25 unique, high-quality PMP-style questions that test understanding of project management processes. While we aim for 25 questions, prioritize quality and uniqueness over quantity. If you cannot generate 25 questions while maintaining the highest quality standards, generate fewer questions rather than compromising on quality.
+
+Key Requirements:
+1. Question Quality:
+   - Each question must be completely unique and different from others
+   - Questions must test deep understanding of PMI's best practices and PMBOK Guide processes
+   - Questions must be realistic and reflect real-world project management situations
+   - Questions must be clear, unambiguous, and well-structured
+   - Questions must be specific to the process and knowledge area
+   - Questions must require analysis and application of PMBOK Guide concepts
+   - Questions can range from 2 to 8 lines in length, depending on the complexity of the scenario
+   - Questions must include realistic project context appropriate to the process being tested
+   - Target: Generate 25 questions, but only if they meet all quality criteria
+
+2. Options Structure and Uniqueness:
+   - Each question must have exactly 4 distinct options
+   - Options must be completely unique across all questions - DO NOT reuse option text
+   - The correct answer MUST be randomly distributed between options A, B, C, and D
+   - For a set of 25 questions, aim for approximately equal distribution of correct answers:
+     * About 6 questions should have correct answer as Option A
+     * About 6 questions should have correct answer as Option B
+     * About 6 questions should have correct answer as Option C
+     * About 6 questions should have correct answer as Option D
+   - Each option must be written specifically for its question - no generic options
+   - Options must not overlap in meaning within the same question
+   - Options must be realistic and plausible
+   - Options must test different aspects of the process
+   - Only one option must be clearly correct
+   - All options must be complete sentences
+   - Options must follow PMP exam patterns
+   - Options must be of similar length and structure
+   - Options must be directly related to the process being tested
+   - Avoid patterns like always putting the correct answer in the same position
+   - Each option should be crafted to test a specific aspect of the process
+   - Options should not be easily guessable without understanding the process
+   - The correct answer should not follow any predictable pattern (e.g., not always Option A or always the longest option)
+   - When writing explanations, ensure the CORRECT explanation matches the randomly selected option position (A, B, C, or D)
+
+3. Explanation Requirements:
+   - Each option explanation must be detailed and educational, following this structure:
+     For CORRECT options:
+     * Start with "CORRECT - "
+     * Explain why this is the best answer
+     * Reference specific PMBOK Guide processes and concepts
+     * Describe how it aligns with PMI's best practices
+     * Explain the practical benefits and implications
+     * Include stakeholder impact and considerations
+     * Provide real-world application examples
+     * Minimum 3-4 sentences of detailed explanation
+
+     For INCORRECT options:
+     * Start with "INCORRECT - "
+     * Explain why this option is wrong
+     * Identify the specific PMI concept or process that makes it incorrect
+     * Describe the potential negative impacts
+     * Explain what would be the correct approach
+     * Include stakeholder implications
+     * Provide examples of why this approach would fail
+     * Minimum 3-4 sentences of detailed explanation
+
+   - All explanations must:
+     * Be unique and specific to the option
+     * Never reuse explanations across different questions
+     * Follow PMI's perspective and terminology
+     * Include practical implications
+     * Address process group and knowledge area relevance
+     * Be detailed and educational
+     * Never use generic phrases like "This is incorrect because it's wrong"
+     * Never use placeholder text or incomplete explanations
+
+4. Analysis Requirements:
+   Process Group:
+   - Must be exactly one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing
+   - Must be the most appropriate process group for the question
+
+   Knowledge Area:
+   - Must be exactly one of: Integration, Scope, Schedule, Cost, Quality, Resource, Communications, Risk, Procurement, Stakeholder Management
+   - Must be the most relevant knowledge area for the process being tested
+
+   Suggested Reading:
+   - Must list exactly 2-3 specific PMBOK Guide sections or other PMP resources
+   - Resources must be directly relevant to the process being tested
+   - Resources must help in understanding the process better
+
+   Concepts to Understand:
+   - Must provide a unique, concise explanation (maximum 150 words)
+   - Must include the process's purpose and objectives
+   - Must explain when and how to apply the process
+   - Must describe practical applications
+   - Must be clear and educational
+
+   Additional Notes:
+   - MUST include quick read links when available in format: "Quick Read: [resource name] - [URL]"
+   - Quick read links should be to official PMI resources, PMBOK Guide sections, or trusted PMP study materials
+   - If no quick reads are available, state: "No quick reads available for this process"
+   - Can also include full summary or process details if needed, covering:
+     * Process purpose and objectives
+     * Key inputs and outputs
+     * Process steps and activities
+     * Integration with other processes
+     * Common challenges and limitations
+     * Best practices for implementation
+     * Real-world examples
+     * Impact on project success
+     * PMI's perspective on the process
+
+Professional Review Guidelines:
+After generating each question, review it using these criteria:
+
+Aspect	What to Check or Improve
+✅ Clarity	Rephrase awkward or confusing wording
+✅ Relevance	Ensure the scenario fits a realistic project context
+✅ PMI Alignment	Match terminology to the PMBOK Guide (e.g., "Develop Project Charter" not "start planning")
+✅ Grammar & Flow	Check sentence structure, punctuation, and transitions
+✅ Distractor Logic	Ensure incorrect options are plausible but clearly wrong
+✅ Justifications	Each explanation should reference a PMI process, concept, or best practice
+✅ Option Uniqueness	Verify that options are not reused across questions and are randomly distributed
+✅ Answer Distribution	Ensure correct answers are evenly distributed across options A, B, C, and D (approximately 6 each)
+✅ Random Placement	Verify that correct answers don't follow any predictable pattern or position
+
+OUTPUT FORMAT:
+The response must follow this exact format, with no truncation or ellipses. Generate up to 25 unique, high-quality questions. It is acceptable to generate fewer questions if that ensures uniqueness and quality. The system will validate each question against strict quality criteria, and only questions meeting all requirements will be accepted.
+
+IMPORTANT JSON FORMATTING RULES:
+1. NO trailing commas after the last item in objects or arrays
+2. All strings must be properly escaped
+3. All objects and arrays must be properly closed
+4. No comments in the JSON
+5. No line breaks within string values
+6. All property names must be in double quotes
+7. All string values must be in double quotes
+8. Boolean values must be lowercase (true/false)
+9. No undefined or null values - use empty strings or arrays instead
+10. Ensure the entire JSON structure is complete and valid
+
+{
+    "questions": [
+        {
+            "id": "[unique_id]",
+            "question_pmp": "Your unique PMP-style question text here (2-8 lines as needed)",
+            "options_pmp": {
+                "OPTION_A": "Unique first option text (following PMP exam patterns, never reused)",
+                "OPTION_B": "Unique second option text (following PMP exam patterns, never reused)",
+                "OPTION_C": "Unique third option text (following PMP exam patterns, never reused)",
+                "OPTION_D": "Unique fourth option text (following PMP exam patterns, never reused)"
+            },
+            "is_attempted": false,
+            "selected_option": "",
+            "question_type": "Option",
+            "is_valid": "false",
+            "analysis": {
+                "option_a_result": "CORRECT - [Detailed explanation of why this is the best answer, including PMBOK Guide references, practical implications, stakeholder impact, and real-world examples. Minimum 3-4 sentences.]",
+                "option_b_result": "INCORRECT - [Detailed explanation of why this option is wrong, including specific PMI concepts that make it incorrect, potential negative impacts, correct approach, and stakeholder implications. Minimum 3-4 sentences.]",
+                "option_c_result": "INCORRECT - [Detailed explanation of why this option is wrong, including specific PMI concepts that make it incorrect, potential negative impacts, correct approach, and stakeholder implications. Minimum 3-4 sentences.]",
+                "option_d_result": "INCORRECT - [Detailed explanation of why this option is wrong, including specific PMI concepts that make it incorrect, potential negative impacts, correct approach, and stakeholder implications. Minimum 3-4 sentences.]",
+                "process_group": "[Determine which PMP Process Group this process belongs to: Initiating, Planning, Executing, Monitoring and Controlling, Closing]",
+                "knowledge_area": "[Determine which PMP Knowledge Area this process belongs to. Must be exactly one of: Integration, Scope, Schedule, Cost, Quality, Resource, Communications, Risk, Procurement, Stakeholder Management]",
+                "tool": "[Specify the primary tool or technique being tested]",
+                "suggested_read": [
+                    "[List 2-3 specific PMBOK Guide sections or other PMP resources that would help understand this process better]"
+                ],
+                "concepts_to_understand": "[Provide a unique, concise explanation (max 150 words) of the key concepts related to this process, including its purpose, when to apply it, and practical applications]",
+                "additional_notes": "[MUST include quick read links when available in format: 'Quick Read: [resource name] - [URL]'. If no quick reads available, state: 'No quick reads available for this process'. Can also include full summary or process details if needed.]"
+            }
+        }
+    ]
+}
+
+Note: While the target is 25 questions, the system will only accept questions that meet all quality criteria. It is better to generate fewer high-quality questions than to generate 25 questions that don't meet the standards. Additionally, ensure the JSON output is syntactically valid by following all formatting rules above.

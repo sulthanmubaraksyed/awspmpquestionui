@@ -417,10 +417,13 @@ class PMPQuestionGenerator:
         return converted_scenarios
 
     def generate_question_id(self, process_group: str, scenario_id: str) -> str:
-        """Generate a unique question ID in the format Q_YYYYMMDD_1_XXX"""
-        today = datetime.datetime.now().strftime("%Y%m%d")
-        unique_num = str(uuid.uuid4().int)[:3]  # Get first 3 digits of UUID
-        return f"Q_{today}_1_{unique_num}"
+        """Generate a unique question ID using timestamp in milliseconds followed by UUID."""
+        # Get current timestamp in milliseconds
+        timestamp_ms = int(datetime.datetime.now().timestamp() * 1000)
+        # Generate a UUID and convert to string, removing hyphens
+        unique_id = str(uuid.uuid4()).replace('-', '')
+        # Combine timestamp and UUID with an underscore
+        return f"{timestamp_ms}_{unique_id}"
 
     def sanitize_filename(self, filename: str) -> str:
         """Sanitize a string to be used as a filename"""
@@ -472,229 +475,49 @@ class PMPQuestionGenerator:
         num_of_questions: int = 20
     ) -> Dict[str, Any]:
         """Generate PMP questions directly without scenario dependency"""
-        if not runinLLM:
-            # Create a simplified prompt for direct question generation
-            prompt_content = f"""Role: You are a certified PMP exam content developer tasked with creating high-quality, realistic PMP-style questions. Your responsibility is to ensure that each question tests deep understanding of PMI's best practices and the PMBOK Guide, specifically focusing on the "{process_group}" process group and the "{process}" process. Your questions must reflect real-world project scenarios, be pedagogically sound, and strictly follow the PMP exam structure and expectations.
-
-Process Group: {process_group}
-Process: {process}
-Target Number of Questions: {num_of_questions}
-
-Instructions:
-Generate {num_of_questions} unique, high-quality PMP-style questions that test understanding of project management processes. While we aim for {num_of_questions} questions, prioritize quality and uniqueness over quantity. If you cannot generate {num_of_questions} questions while maintaining the highest quality standards, generate fewer questions rather than compromising on quality.
-
-Key Requirements:
-1. Question Quality:
-   - Each question must be completely unique and different from others
-   - Questions must test deep understanding of PMI's best practices and PMBOK Guide processes
-   - Questions must be realistic and reflect real-world project management situations
-   - Questions must be clear, unambiguous, and well-structured
-   - Questions must be specific to the process and knowledge area
-   - Questions must require analysis and application of PMBOK Guide concepts
-   - Questions can range from 2 to 8 lines in length, depending on the complexity of the scenario
-   - Questions must include realistic project context appropriate to the process being tested
-   - Target: Generate {num_of_questions} questions, but only if they meet all quality criteria
-
-2. Options Structure and Uniqueness:
-   - Each question must have exactly 4 distinct options
-   - Options must be completely unique across all questions - DO NOT reuse option text
-   - The correct answer MUST be randomly distributed between options A, B, C, and D
-   - For a set of {num_of_questions} questions, aim for approximately equal distribution of correct answers:
-     * About {num_of_questions//4} questions should have correct answer as Option A
-     * About {num_of_questions//4} questions should have correct answer as Option B
-     * About {num_of_questions//4} questions should have correct answer as Option C
-     * About {num_of_questions//4} questions should have correct answer as Option D
-   - Each option must be written specifically for its question - no generic options
-   - Options must not overlap in meaning within the same question
-   - Options must be realistic and plausible
-   - Options must test different aspects of the process
-   - Only one option must be clearly correct
-   - All options must be complete sentences
-   - Options must follow PMP exam patterns
-   - Options must be of similar length and structure
-   - Options must be directly related to the process being tested
-   - Avoid patterns like always putting the correct answer in the same position
-   - Each option should be crafted to test a specific aspect of the process
-   - Options should not be easily guessable without understanding the process
-   - The correct answer should not follow any predictable pattern (e.g., not always Option A or always the longest option)
-   - When writing explanations, ensure the CORRECT explanation matches the randomly selected option position (A, B, C, or D)
-
-3. Explanation Requirements:
-   - Each option explanation must be detailed and educational, following this structure:
-     For CORRECT options:
-     * Start with "CORRECT - "
-     * Explain why this is the best answer
-     * Reference specific PMBOK Guide processes and concepts
-     * Describe how it aligns with PMI's best practices
-     * Explain the practical benefits and implications
-     * Include stakeholder impact and considerations
-     * Provide real-world application examples
-     * Minimum 3-4 sentences of detailed explanation
-
-     For INCORRECT options:
-     * Start with "INCORRECT - "
-     * Explain why this option is wrong
-     * Identify the specific PMI concept or process that makes it incorrect
-     * Describe the potential negative impacts
-     * Explain what would be the correct approach
-     * Include stakeholder implications
-     * Provide examples of why this approach would fail
-     * Minimum 3-4 sentences of detailed explanation
-
-   - All explanations must:
-     * Be unique and specific to the option
-     * Never reuse explanations across different questions
-     * Follow PMI's perspective and terminology
-     * Include practical implications
-     * Address process group and knowledge area relevance
-     * Be detailed and educational
-     * Never use generic phrases like "This is incorrect because it's wrong"
-     * Never use placeholder text or incomplete explanations
-
-4. Analysis Requirements:
-   Process Group:
-   - Must be exactly one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing
-   - Must be the most appropriate process group for the question
-
-   Knowledge Area:
-   - Must be exactly one of: Integration, Scope, Schedule, Cost, Quality, Resource, Communications, Risk, Procurement, Stakeholder Management
-   - Must be the most relevant knowledge area for the process being tested
-
-   Suggested Reading:
-   - Must list exactly 2-3 specific PMBOK Guide sections or other PMP resources
-   - Resources must be directly relevant to the process being tested
-   - Resources must help in understanding the process better
-
-   Concepts to Understand:
-   - Must provide a unique, concise explanation (maximum 150 words)
-   - Must include the process's purpose and objectives
-   - Must explain when and how to apply the process
-   - Must describe practical applications
-   - Must be clear and educational
-
-   Additional Notes:
-   - MUST include quick read links when available in format: "Quick Read: [resource name] - [URL]"
-   - Quick read links should be to official PMI resources, PMBOK Guide sections, or trusted PMP study materials
-   - If no quick reads are available, state: "No quick reads available for this process"
-   - Can also include full summary or process details if needed, covering:
-     * Process purpose and objectives
-     * Key inputs and outputs
-     * Process steps and activities
-     * Integration with other processes
-     * Common challenges and limitations
-     * Best practices for implementation
-     * Real-world examples
-     * Impact on project success
-     * PMI's perspective on the process
-
-Professional Review Guidelines:
-After generating each question, review it using these criteria:
-
-Aspect	What to Check or Improve
-✅ Clarity	Rephrase awkward or confusing wording
-✅ Relevance	Ensure the scenario fits a realistic project context
-✅ PMI Alignment	Match terminology to the PMBOK Guide (e.g., "Develop Project Charter" not "start planning")
-✅ Grammar & Flow	Check sentence structure, punctuation, and transitions
-✅ Distractor Logic	Ensure incorrect options are plausible but clearly wrong
-✅ Justifications	Each explanation should reference a PMI process, concept, or best practice
-✅ Option Uniqueness	Verify that options are not reused across questions and are randomly distributed
-✅ Answer Distribution	Ensure correct answers are evenly distributed across options A, B, C, and D (approximately {num_of_questions//4} each)
-✅ Random Placement	Verify that correct answers don't follow any predictable pattern or position
-
-OUTPUT FORMAT:
-The response must follow this exact format, with no truncation or ellipses. Generate up to {num_of_questions} unique, high-quality questions. It is acceptable to generate fewer questions if that ensures uniqueness and quality. The system will validate each question against strict quality criteria, and only questions meeting all requirements will be accepted.
-
-IMPORTANT JSON FORMATTING RULES:
-1. NO trailing commas after the last item in objects or arrays
-2. All strings must be properly escaped
-3. All objects and arrays must be properly closed
-4. No comments in the JSON
-5. No line breaks within string values
-6. All property names must be in double quotes
-7. All string values must be in double quotes
-8. Boolean values must be lowercase (true/false)
-9. No undefined or null values - use empty strings or arrays instead
-10. Ensure the entire JSON structure is complete and valid
-
-{{
-    "questions": [
-        {{
-            "id": "[unique_id]",
-            "question_pmp": "Your unique PMP-style question text here (2-8 lines as needed)",
-            "options_pmp": {{
-                "OPTION_A": "Unique first option text (following PMP exam patterns, never reused)",
-                "OPTION_B": "Unique second option text (following PMP exam patterns, never reused)",
-                "OPTION_C": "Unique third option text (following PMP exam patterns, never reused)",
-                "OPTION_D": "Unique fourth option text (following PMP exam patterns, never reused)"
-            }},
-            "is_attempted": false,
-            "selected_option": "",
-            "question_type": "Option",
-            "is_valid": "false",
-            "analysis": {{
-                "option_a_result": "CORRECT - [Detailed explanation of why this is the best answer, including PMBOK Guide references, practical implications, stakeholder impact, and real-world examples. Minimum 3-4 sentences.]",
-                "option_b_result": "INCORRECT - [Detailed explanation of why this option is wrong, including specific PMI concepts that make it incorrect, potential negative impacts, correct approach, and stakeholder implications. Minimum 3-4 sentences.]",
-                "option_c_result": "INCORRECT - [Detailed explanation of why this option is wrong, including specific PMI concepts that make it incorrect, potential negative impacts, correct approach, and stakeholder implications. Minimum 3-4 sentences.]",
-                "option_d_result": "INCORRECT - [Detailed explanation of why this option is wrong, including specific PMI concepts that make it incorrect, potential negative impacts, correct approach, and stakeholder implications. Minimum 3-4 sentences.]",
-                "process_group": "[Determine which PMP Process Group this process belongs to: Initiating, Planning, Executing, Monitoring and Controlling, Closing]",
-                "knowledge_area": "[Determine which PMP Knowledge Area this process belongs to. Must be exactly one of: Integration, Scope, Schedule, Cost, Quality, Resource, Communications, Risk, Procurement, Stakeholder Management]",
-                "tool": "[Specify the primary tool or technique being tested]",
-                "suggested_read": [
-                    "[List 2-3 specific PMBOK Guide sections or other PMP resources that would help understand this process better]"
-                ],
-                "concepts_to_understand": "[Provide a unique, concise explanation (max 150 words) of the key concepts related to this process, including its purpose, when to apply it, and practical applications]",
-                "additional_notes": "[MUST include quick read links when available in format: 'Quick Read: [resource name] - [URL]'. If no quick reads available, state: 'No quick reads available for this process'. Can also include full summary or process details if needed.]"
-            }}
-        }}
-    ]
-}}
-
-Note: While the target is {num_of_questions} questions, the system will only accept questions that meet all quality criteria. It is better to generate fewer high-quality questions than to generate {num_of_questions} questions that don't meet the standards. Additionally, ensure the JSON output is syntactically valid by following all formatting rules above."""
-
-            # Save the prompt to a file
-            filepath = self.save_prompt_to_file(process, [], prompt_content)
-            print(f"Prompt saved to: {filepath}")
-            return None
-
-        # If runinLLM is True, create empty question records for LLM to fill
-        # Note: We don't force a specific number of questions, letting the LLM generate unique ones
-        questions = []
         try:
-            # Generate a unique question ID
-            question_id = self.generate_question_id(process_group, "DIRECT")
-            
-            # Create an empty question record to be filled by LLM
-            record = {
-                "id": question_id,
-                "question_pmp": "",  # To be filled by LLM
-                "options_pmp": {
-                    "OPTION_A": "",  # To be filled by LLM
-                    "OPTION_B": "",  # To be filled by LLM
-                    "OPTION_C": "",  # To be filled by LLM
-                    "OPTION_D": ""   # To be filled by LLM
-                },
-                "is_attempted": False,
-                "selected_option": "",
-                "question_type": "Option",
-                "is_valid": "false",
-                "analysis": {
-                    "option_a_result": "",  # To be filled by LLM
-                    "option_b_result": "",  # To be filled by LLM
-                    "option_c_result": "",  # To be filled by LLM
-                    "option_d_result": "",  # To be filled by LLM
-                    "process_group": process_group,
-                    "knowledge_area": "",  # To be filled by LLM
-                    "tool": "",  # To be filled by LLM
-                    "suggested_read": [],  # To be filled by LLM
-                    "concepts_to_understand": "",  # To be filled by LLM
-                    "additional_notes": ""  # Can be a link to full summary, or attached separately if too long
-                }
-            }
-            
-            questions.append(record)
+            # Validate process group
+            if process_group not in self.process_groups and process_group != "all":
+                raise ValueError(f"Invalid process group: {process_group}. Valid groups are: {', '.join(self.process_groups.keys())})")
         except Exception as e:
-            print(f"Warning: Error creating question record: {str(e)}")
-        
+            print(f"Warning: Error validating process group: {str(e)}")
+            return []
+
+        questions = []
+        for _ in range(num_of_questions):
+                try:
+                # Generate a unique question ID
+                question_id = self.generate_question_id(process_group, "direct")
+                # Create an empty question record to be filled by LLM
+                    record = {
+                    "id": question_id,
+                    "question_pmp": "",  # To be filled by LLM
+                        "options_pmp": {
+                        "OPTION_A": "",  # To be filled by LLM
+                        "OPTION_B": "",  # To be filled by LLM
+                        "OPTION_C": "",  # To be filled by LLM
+                        "OPTION_D": ""   # To be filled by LLM
+                        },
+                        "is_attempted": False,
+                        "selected_option": "",
+                        "question_type": "Option",
+                    "is_valid": "false",
+                        "analysis": {
+                        "option_a_result": "",  # To be filled by LLM
+                        "option_b_result": "",  # To be filled by LLM
+                        "option_c_result": "",  # To be filled by LLM
+                        "option_d_result": "",  # To be filled by LLM
+                        "process_group": process_group,  # Always use the passed process_group
+                        "knowledge_area": "",  # To be filled by LLM
+                        "tool": "",  # To be filled by LLM
+                        "suggested_read": [],  # To be filled by LLM
+                        "concepts_to_understand": "",  # To be filled by LLM
+                        "additional_notes": ""  # Can be a link to full summary, or attached separately if too long
+                    }
+                }
+                    questions.append(record)
+                except Exception as e:
+                print(f"Warning: Error creating question record: {str(e)}")
         return questions
 
     def generate_questions_from_scenarios(
@@ -723,9 +546,9 @@ Note: While the target is {num_of_questions} questions, the system will only acc
                 runinLLM,
                 num_of_questions
             )
-            
-            return questions if questions else [], process_group
-            
+            if not questions:
+                questions = []
+            return (questions, process_group)
         except Exception as e:
             print(f"Warning: Error in question generation: {str(e)}")
             # Try to generate questions with default process group
@@ -736,7 +559,9 @@ Note: While the target is {num_of_questions} questions, the system will only acc
                 runinLLM,
                 num_of_questions
             )
-            return questions if questions else [], "Initiating"
+            if not questions:
+                questions = []
+            return (questions, "Initiating")
 
     def save_questions(self, questions: List[Dict[str, Any]], process_group: str, output_file: str = None):
         """Save questions to a TypeScript file, appending to existing questions and avoiding duplicates"""
@@ -815,7 +640,7 @@ Note: While the target is {num_of_questions} questions, the system will only acc
                 print(f"Warning: Skipping question {question.get('id', 'unknown')} - options reused from existing questions")
                 duplicates_found += 1
                 continue
-            
+                
             # Check explanations
             analysis = question.get('analysis', {})
             option_results = [
@@ -843,7 +668,7 @@ Note: While the target is {num_of_questions} questions, the system will only acc
                 print(f"Warning: Skipping question {question.get('id', 'unknown')} - must have exactly one correct answer")
                 invalid_questions += 1
                 continue
-            
+                
             # Check if this question is similar to any existing question
             is_similar = False
             for existing_text in existing_question_texts:
@@ -908,6 +733,133 @@ Note: While the target is {num_of_questions} questions, the system will only acc
             raise ValueError(f"Invalid process group: {process_group}. Valid groups are: {', '.join(self.process_groups.keys())}")
         return self.process_groups[process_group]
 
+    def _get_knowledge_area_for_process(self, process: str, process_group: str) -> str:
+        """
+        Helper method to map a process (and its process group) to a knowledge area.
+        (For example, 'Control Quality' in 'Monitoring and Controlling' maps to 'Quality'.)
+        """
+        # (You can expand this mapping as needed.)
+        mapping = {
+            "Control Quality": "Quality",
+            "Validate Scope": "Scope",
+            "Control Scope": "Scope",
+            "Control Schedule": "Schedule",
+            "Control Costs": "Cost",
+            "Control Resources": "Resources",
+            "Monitor Communications": "Communications",
+            "Monitor Risks": "Risk",
+            "Control Procurements": "Procurement",
+            "Monitor Stakeholder Engagement": "Stakeholders",
+            "Manage Quality": "Quality",
+            "Acquire Resources": "Resources",
+            "Manage Communications": "Communications",
+            "Conduct Procurements": "Procurement",
+            "Manage Stakeholder Engagement": "Stakeholders",
+            "Develop Project Charter": "Integration",
+            "Identify Stakeholders": "Stakeholders",
+            "Develop Project Management Plan": "Integration",
+            "Plan Scope Management": "Scope",
+            "Collect Requirements": "Scope",
+            "Define Scope": "Scope",
+            "Create WBS": "Scope",
+            "Plan Schedule Management": "Schedule",
+            "Define Activities": "Schedule",
+            "Sequence Activities": "Schedule",
+            "Estimate Activity Durations": "Schedule",
+            "Develop Schedule": "Schedule",
+            "Plan Cost Management": "Cost",
+            "Estimate Costs": "Cost",
+            "Determine Budget": "Cost",
+            "Plan Quality Management": "Quality",
+            "Plan Resource Management": "Resources",
+            "Estimate Activity Resources": "Resources",
+            "Plan Communications Management": "Communications",
+            "Plan Risk Management": "Risk",
+            "Identify Risks": "Risk",
+            "Perform Qualitative Risk Analysis": "Risk",
+            "Perform Quantitative Risk Analysis": "Risk",
+            "Plan Risk Responses": "Risk",
+            "Plan Procurement Management": "Procurement",
+            "Plan Stakeholder Engagement": "Stakeholders",
+            "Direct and Manage Project Work": "Integration",
+            "Manage Project Knowledge": "Integration",
+            "Monitor and Control Project Work": "Integration",
+            "Perform Integrated Change Control": "Integration",
+            "Close Project or Phase": "Integration",
+            "Close Procurements": "Procurement"
+        }
+        return mapping.get(process, "Integration")  # Default to "Integration" if not found
+
+    def build_prompt_text(self, process: str, process_group: str, num_questions: int) -> str:
+        """
+        Build the full prompt text (instructions + requirements + output format) for the LLM.
+        """
+        knowledge_area = self._get_knowledge_area_for_process(process, process_group)
+        prompt = f"""
+You are a PMP exam question generator. Generate up to {num_questions} unique, high-quality, scenario-based PMP-style multiple-choice questions for the process: {process} (Process Group: {process_group}).
+
+Requirements:
+- Each question must be realistic, relevant, and test a specific concept from the process.
+- Each question must have exactly 4 unique, plausible options (A, B, C, D).
+- Only one option must be correct, and the correct answer must be randomly distributed among A/B/C/D (i.e. the correct answer must be randomly placed as OPTION_A, OPTION_B, OPTION_C, or OPTION_D). Do not always place the correct answer in the same position (for example, do not always put the correct answer as OPTION_A).
+- Each option must be a complete sentence and not reused across questions.
+- Each question must include detailed explanations for all options:
+    - CORRECT: Start with "CORRECT - ", explain why it's correct, reference PMBOK/PMI best practices, and provide real-world context (3-4 sentences).
+    - INCORRECT: Start with "INCORRECT - ", explain why it's wrong, reference PMI concepts, and describe negative impacts (3-4 sentences).
+- Explanations must be unique, detailed, and never generic or repeated.
+- Each question must include an analysis section with:
+    - process_group (must be one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing)
+    - knowledge_area (must be one of: Integration, Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurement, Stakeholders) (for this process, use: {knowledge_area})
+    - tool (if applicable)
+    - suggested_read (2-3 specific PMBOK/PMI resources)
+    - concepts_to_understand (concise, max 150 words)
+    - additional_notes (quick read links or "No quick reads available for this process")
+- Output must be valid JSON, following this format:
+
+{{
+  "questions": [
+    {{
+      "id": "[unique_id]",
+      "question_pmp": "Your unique PMP-style question text here (2-8 lines as needed)",
+      "options_pmp": {{
+        "OPTION_A": "Unique first option text (PMP exam style) (randomly place the correct answer here, or in B, C, or D)",
+        "OPTION_B": "Unique second option text (PMP exam style) (randomly place the correct answer here, or in A, C, or D)",
+        "OPTION_C": "Unique third option text (PMP exam style) (randomly place the correct answer here, or in A, B, or D)",
+        "OPTION_D": "Unique fourth option text (PMP exam style) (randomly place the correct answer here, or in A, B, or C)"
+      }},
+      "is_attempted": false,
+      "selected_option": "",
+      "question_type": "Option",
+      "is_valid": false,
+      "analysis": {{
+        "option_a_result": "CORRECT - ... or INCORRECT - ... (randomly place the correct answer here, or in B, C, or D)",
+        "option_b_result": "... (randomly place the correct answer here, or in A, C, or D)",
+        "option_c_result": "... (randomly place the correct answer here, or in A, B, or D)",
+        "option_d_result": "... (randomly place the correct answer here, or in A, B, or C)",
+        "process_group": "{process_group}",
+        "knowledge_area": "{knowledge_area}",
+        "tool": "[Tool]",
+        "suggested_read": ["...", "..."],
+        "concepts_to_understand": "...",
+        "additional_notes": "..."
+      }}
+    }}
+    // ... more questions ...
+  ]
+}}
+
+IMPORTANT JSON RULES:
+- No trailing commas
+- All strings in double quotes
+- No comments or undefined/null values
+- All objects/arrays properly closed
+- Boolean values lowercase (true/false)
+- No line breaks within string values
+
+Do not include any explanations or text outside the JSON structure.
+"""
+        return prompt
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generate PMP questions from scenario files')
@@ -960,7 +912,10 @@ def main():
             process_group = args.process_group
         
         if not runinLLM:
-            print(f"Prompts have been saved to {generator.prompts_dir}")
+            # Build the actual prompt text for the LLM
+            prompt_text = generator.build_prompt_text(args.process, process_group, args.num_questions)
+            filepath = generator.save_prompt_to_file(args.process, [], prompt_text)
+            print(f"Prompts have been saved to {filepath}")
             return 0
             
         if not questions:

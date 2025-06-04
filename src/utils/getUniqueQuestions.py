@@ -17,6 +17,7 @@ class QuestionManager:
         self.project_root = Path(__file__).parent.parent.parent
         self.questions_dir = self.project_root / "src" / "questions"
         self.util_dir = self.project_root / "src" / "utils"
+        self.load_files_dir = self.util_dir / "loadFiles"  # New directory for load files
         self.temp_load_path = self.project_root / "src" / "tempload.ts"
         self.initial_load_path = self.questions_dir / "initialLoad.ts"
         
@@ -33,25 +34,40 @@ class QuestionManager:
         self._existing_questions: Dict[str, Set[str]] = {}
         
     def _get_file_path(self, filename: str) -> Path:
-        """Get the full path for a file in the utils directory."""
-        return self.util_dir / filename
+        """Get the full path for a file in the loadFiles directory."""
+        return self.load_files_dir / filename
     
     def _get_questions_file_path(self, process_group: str) -> Path:
         """Get the full path for a process group's questions file."""
         return self.questions_dir / self.process_group_files[process_group]
     
-    def _load_json_file(self, file_path: Path) -> Dict:
-        """Safely load a JSON file with error handling."""
+    def _load_json_file(self, file_path: Path) -> Dict[str, Any]:
+        """Load a JSON file, handling both .json and .ts files."""
         try:
             if not file_path.exists():
                 print(f"Warning: File not found: {file_path}")
                 return {}
-            
+
             with open(file_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in {file_path}: {str(e)}")
-            return {}
+                content = f.read().strip()
+
+            # Handle TypeScript files
+            if file_path.suffix == '.ts':
+                # Match export const questionsData = {...};
+                import re
+                match = re.search(r'export\s+const\s+questionsData\s*=\s*({[\s\S]*?});', content)
+                if match:
+                    content = match.group(1)
+                else:
+                    print(f"Warning: Could not find questionsData export in {file_path}")
+                    return {}
+
+            try:
+                return json.loads(content)
+            except json.JSONDecodeError as e:
+                print(f"Error: Invalid JSON in {file_path}: {str(e)}")
+                print(f"Content preview: {content[:200]}...")
+                return {}
         except Exception as e:
             print(f"Error reading {file_path}: {str(e)}")
             return {}
@@ -153,12 +169,15 @@ class QuestionManager:
                 errors.append("All analysis fields must be non-empty strings")
             if "suggested_read" in analysis and not (isinstance(analysis["suggested_read"], (str, list))):
                 errors.append("suggested_read must be a string or list")
-        
-        # Check for correct answer format
-        if "analysis" in question:
-            analysis = question["analysis"]
-            correct_count = sum(1 for opt in ["a", "b", "c", "d"] 
-                              if analysis[f"option_{opt}_result"].startswith("CORRECT"))
+            
+            # Check for correct answer format
+            correct_count = 0
+            for opt in ["a", "b", "c", "d"]:
+                result_key = f"option_{opt}_result"
+                if result_key in analysis and isinstance(analysis[result_key], str):
+                    if analysis[result_key].strip().startswith("CORRECT"):
+                        correct_count += 1
+            
             if correct_count != 1:
                 errors.append(f"Exactly one option must be marked as CORRECT, found {correct_count}")
         

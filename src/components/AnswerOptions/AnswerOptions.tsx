@@ -17,11 +17,9 @@ interface AnswerOptionsProps {
     onNext: () => void;
     isFirstQuestion: boolean;
     isLastQuestion: boolean;
-    onReview: () => void;
-    onRetrieve: () => void;
-    onDebug: () => void;
     responseArray: any[];
     currentIndex: number;
+    onRetrieve: () => void;
 }
 
 const AnswerOptions: React.FC<AnswerOptionsProps> = ({
@@ -35,11 +33,9 @@ const AnswerOptions: React.FC<AnswerOptionsProps> = ({
     onNext,
     isFirstQuestion,
     isLastQuestion,
-    onReview,
-    onRetrieve,
-    onDebug,
     responseArray,
-    currentIndex
+    currentIndex,
+    onRetrieve
 }) => {
     const optionsList = [
         { key: 'A', value: options.optionA },
@@ -119,34 +115,14 @@ const AnswerOptions: React.FC<AnswerOptionsProps> = ({
                 >
                     Next
                 </button>
-                {isAttempted && (
-                  <>
-                  <button
-                      className={styles['apple-submit-button']}
-                      style={{ marginLeft: 12, background: '#0071e3' }}
-                      onClick={onReview}
-                      type="button"
-                  >
-                      Review
-                  </button>
-                    <button
-                        className={styles['apple-submit-button']}
-                        style={{ marginLeft: 12, background: '#34c759' }}
-                        onClick={onRetrieve}
-                        type="button"
-                    >
-                        Retrieve
-                    </button>
-                    <button
-                        className={styles['apple-submit-button']}
-                        style={{ marginLeft: 12, background: '#ff9500' }}
-                        onClick={onDebug}
-                        type="button"
-                    >
-                        Debug
-                    </button>
-                  </>
-                )}
+                <button
+                    className={styles['apple-submit-button']}
+                    style={{ marginLeft: 12, background: '#34c759' }}
+                    onClick={onRetrieve}
+                    type="button"
+                >
+                    Retrieve
+                </button>
             </div>
         </div>
     );

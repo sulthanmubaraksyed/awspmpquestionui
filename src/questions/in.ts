@@ -1,7 +1,7 @@
 export const questionsData = {
   "questions": [
     {
-      "id": "1717049940186_a0b1c2d3-e4f5-6789-0123-4567890abcde",
+      "id": "1717049940186",
       "question_pmp": "You are assembling the initial project team for a new internal system implementation. During the Identify Stakeholders process, you are trying to understand the full breadth of stakeholders, including those who may not be immediately obvious. Which of the following data gathering techniques would be MOST effective for uncovering hidden or less obvious stakeholders?",
       "options_pmp": {
         "OPTION_A": "Surveys and questionnaires distributed to a broad audience.",
@@ -12,7 +12,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - Surveys and questionnaires are useful for gathering data from a large group, but they are generally more effective when the target audience is already somewhat defined or known. They are less effective for uncovering truly 'hidden' or unexpected stakeholders, as the questions are usually structured around known areas. They might confirm existing knowledge but are less likely to reveal entirely new categories of stakeholders.",
         "option_b_result": "CORRECT - Interviews with project sponsors and subject matter experts (SMEs) are often the MOST effective data gathering technique for uncovering hidden or less obvious stakeholders. Sponsors often have a high-level view of the organization and its political landscape, while SMEs possess deep knowledge of specific functional areas, processes, or technologies, and can identify individuals or groups who might be indirectly affected or have informal influence. This one-on-one interaction allows for probing questions and the exploration of subtle connections that might be missed in other methods, aligning with expert judgment and individual consultations.",
@@ -31,7 +31,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940176_1a2b3c4d-5e6f-7890-1234-567890abcdef",
+      "id": "1717049941186",
       "question_pmp": "The project to develop a new e-commerce platform has just received its project charter. As the project manager, you are now tasked with identifying all individuals, groups, or organizations that could be affected by the project or who perceive themselves to be affected by it. What is the MOST appropriate initial step to take in this process?",
       "options_pmp": {
         "OPTION_A": "Begin to prepare the stakeholder engagement plan and define communication requirements",
@@ -42,7 +42,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - Preparing the stakeholder engagement plan and defining communication requirements are part of the Planning Process Group (Plan Stakeholder Engagement and Plan Communications Management, respectively). The Identify Stakeholders process, which occurs in the Initiating Process Group, focuses on recognizing and documenting stakeholders before detailed planning begins. Attempting to plan engagement without a comprehensive understanding of all stakeholders could lead to missed critical individuals and misdirected efforts, potentially causing project delays or resistance later on",
         "option_b_result": "CORRECT - Conducting a stakeholder analysis is the fundamental initial step in the Identify Stakeholders process. This involves systematically gathering and analyzing qualitative and quantitative information to determine whose interests should be taken into account throughout the project. By identifying their interests, influence, and potential impact early, the project manager can proactively develop strategies to manage stakeholder expectations and foster positive relationships, which is critical for project success. This aligns directly with PMI's best practices in the Initiating Process Group",
@@ -60,7 +60,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940177_e5f6g7h8-9i0j-1234-5678-90abcdef1234",
+      "id": "1717049942186",
       "question_pmp": "A large-scale infrastructure project has just been initiated, and the project manager is in the process of identifying key stakeholders. During this phase, various project documents and organizational process assets are being reviewed. Which of the following inputs is LEAST likely to be useful for identifying stakeholders at this early stage?",
       "options_pmp": {
         "OPTION_A": "The project charter, which provides high-level project objectives and initial stakeholder lists.",
@@ -71,7 +71,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - The project charter is a primary input to the Identify Stakeholders process. It formally authorizes the project and often contains an initial list of key stakeholders or groups, providing a starting point for comprehensive identification. This document is essential as it establishes the project's purpose and objectives, which in turn helps in understanding who might be affected or have an interest.",
         "option_b_result": "INCORRECT - Organizational process assets (OPAs) are vital inputs for identifying stakeholders. These can include existing stakeholder registers from previous projects, lessons learned repositories, and templates for stakeholder analysis, all of which provide valuable historical information and structured approaches to identifying stakeholders. Leveraging OPAs ensures consistency and efficiency in the process.",
@@ -90,7 +90,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940178_2a3b4c5d-6e7f-8901-2345-67890abcdef1",
+      "id": "1717049943186",
       "question_pmp": "You are managing a software development project for a new mobile application. During the Initiating Process Group, you have identified numerous potential stakeholders, including internal departments, external vendors, and future end-users. Which of the following tools or techniques would be MOST effective for categorizing these diverse stakeholders and understanding their relationships and potential impact on the project?",
       "options_pmp": {
         "OPTION_A": "Expert judgment from senior project managers and industry consultants.",
@@ -101,7 +101,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - Expert judgment is a valuable tool and technique for identifying stakeholders, as it leverages the knowledge of individuals with specialized expertise. However, it is primarily used for identifying stakeholders, brainstorming potential impacts, and determining engagement strategies. While useful, it is not the MOST effective tool for systematically categorizing and understanding complex stakeholder relationships and their potential impact. It's an input to the analysis, not the analysis method itself.",
         "option_b_result": "CORRECT - A stakeholder cube, or similar analytical models like the power/interest grid or power/influence grid, is highly effective for categorizing and understanding diverse stakeholders. By mapping attributes like influence, impact, and interest, the project manager can visualize the relationships between stakeholders and the project, and prioritize their engagement efforts. This technique, part of data representation in the Identify Stakeholders process, helps in developing a comprehensive understanding of the stakeholder landscape and formulating appropriate engagement strategies tailored to each group's characteristics.",
@@ -120,7 +120,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940179_3b4c5d6e-7f8a-9012-3456-7890abcdef12",
+      "id": "1717049944186",
       "question_pmp": "A project manager is working on a new product development project. During the Identify Stakeholders process, it becomes apparent that several key individuals have conflicting interests and potentially negative impacts on the project's success. What should be the IMMEDIATE next step after identifying these stakeholders and their potential impact?",
       "options_pmp": {
         "OPTION_A": "Initiate conflict resolution techniques to resolve immediate disagreements.",
@@ -131,7 +131,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - Initiating conflict resolution techniques is premature at this stage. While conflicts may exist, the immediate next step after identification and initial analysis is to formally document the findings. Conflict resolution is typically a tool used during the Executing or Monitoring and Controlling Process Groups when stakeholder engagement activities lead to disagreements. Attempting to resolve conflicts without a clear understanding of all stakeholder attributes and a documented plan can be ineffective and even exacerbate issues.",
         "option_b_result": "CORRECT - The immediate next step after identifying stakeholders and analyzing their potential impact is to formally document this information in the stakeholder register. This output of the Identify Stakeholders process provides a comprehensive list of stakeholders along with their identified interests, influence, involvement, and potential impact. This documentation is crucial for all subsequent stakeholder management activities, including planning engagement and communications. Without this formal record, it becomes challenging to track and manage stakeholders effectively.",
@@ -150,7 +150,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940180_4c5d6e7f-8a9b-0123-4567-890abcdef123",
+      "id": "1717049945186",
       "question_pmp": "A project manager has just been assigned to a highly sensitive healthcare IT project. In the Initiating Process Group, the project manager realizes that identifying stakeholders requires a delicate approach due to strict privacy regulations and potential political sensitivities. Which of the following approaches is BEST suited to identify all relevant stakeholders while adhering to ethical and compliance considerations?",
       "options_pmp": {
         "OPTION_A": "Focus solely on internal stakeholders listed in the organizational chart to avoid external complications.",
@@ -161,7 +161,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - Focusing solely on internal stakeholders would be a critical oversight, especially in a sensitive healthcare IT project. Many crucial external stakeholders, such as regulatory bodies (e.g., HIPAA, FDA), patient advocacy groups, and even software vendors, have significant influence and impact. Ignoring them would lead to non-compliance, legal issues, and ultimately project failure. PMI emphasizes comprehensive stakeholder identification, including both internal and external parties.",
         "option_b_result": "INCORRECT - While utilizing company directories and public information can be a starting point, it is insufficient for a highly sensitive project with privacy regulations. Relying solely on readily available information might miss critical hidden stakeholders or misinterpret their true interests and influence. This approach lacks the depth and tailored engagement required to navigate complex stakeholder landscapes effectively and could lead to overlooking essential parties.",
@@ -180,7 +180,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940181_5d6e7f8a-9b0c-1234-5678-90abcdef1234",
+      "id": "1717049946186",
       "question_pmp": "During the Initiating Process Group of a construction project, the project manager is creating the stakeholder register. Several stakeholders have been identified as having high power but low interest in the project. According to stakeholder analysis best practices, how should these stakeholders be categorized and managed going forward?",
       "options_pmp": {
         "OPTION_A": "Keep informed through regular, detailed communication to raise their interest.",
@@ -191,7 +191,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - This approach is typically for stakeholders with high interest and low power ('Keep Informed'). For stakeholders with high power and low interest, overwhelming them with detailed communication can be counterproductive and annoying. The primary goal is to keep them satisfied and prevent negative intervention, not necessarily to increase their interest, which might not be feasible or desired.",
         "option_b_result": "INCORRECT - This approach ('Manage Closely') is for stakeholders with both high power and high interest, as they are crucial to project success and require active involvement. For stakeholders with high power but low interest, involving them in all major decisions might be an overreach and can lead to their disengagement or annoyance, as they may not want to be heavily involved.",
@@ -210,7 +210,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940182_6e7f8a9b-0c1d-2345-6789-0abcdef12345",
+      "id": "1717049947186",
       "question_pmp": "The project charter for a new software integration project has just been signed, formally authorizing the project. As the project manager, your next crucial step is to identify all stakeholders. Which of the following activities is NOT part of the 'Identify Stakeholders' process in the Initiating Process Group?",
       "options_pmp": {
         "OPTION_A": "Analyzing potential impact and influence of identified stakeholders on project success.",
@@ -221,7 +221,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - Analyzing potential impact and influence of identified stakeholders is a core activity within the Identify Stakeholders process. This analysis helps in understanding the level of engagement required and how different stakeholders might affect project outcomes, whether positively or negatively. This information is crucial for populating the stakeholder register effectively.",
         "option_b_result": "INCORRECT - Conducting interviews with experts, often referred to as expert judgment or data gathering, is a common and effective tool and technique used in the Identify Stakeholders process. Experts can provide valuable insights into who the key stakeholders are, their interests, and their potential influence, especially in complex or unfamiliar project environments. This is a vital part of comprehensive stakeholder identification.",
@@ -240,7 +240,7 @@ export const questionsData = {
       }
     },
     {
-      "id": "1717049940183_7f8a9b0c-1d2e-3456-7890-abcdef123456",
+      "id": "1717049948186",
       "question_pmp": "A project manager is leading a complex IT project with significant implications across multiple departments. During the Identify Stakeholders process, the project manager wants to ensure no critical stakeholders are missed and to leverage existing knowledge within the organization. Which of the following enterprise environmental factors would be MOST beneficial in this endeavor?",
       "options_pmp": {
         "OPTION_A": "Organizational culture and structure, including established hierarchies and political climate.",
@@ -251,7 +251,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "CORRECT - Organizational culture and structure are highly beneficial enterprise environmental factors for identifying stakeholders. The culture dictates how decisions are made, how information flows, and who holds informal power, all of which are crucial for identifying individuals and groups who might influence or be impacted by the project. The organizational structure (e.g., functional, matrix, projectized) helps identify reporting relationships and key departments that are inherently stakeholders. Understanding the political climate also helps in identifying informal influencers and potential resistors, ensuring a comprehensive stakeholder list.",
         "option_b_result": "INCORRECT - While market conditions and industry trends are important enterprise environmental factors for various project aspects (e.g., business case, risk, procurement), they are less directly beneficial for identifying specific internal and external individuals or groups who are stakeholders. These factors influence the project's external context and viability, but not the direct identification of people involved.",
@@ -265,12 +265,12 @@ export const questionsData = {
           "PMBOK Guide Sixth Edition, Section 13.1.1.3 - Identify Stakeholders: Enterprise Environmental Factors",
           "PMBOK Guide Seventh Edition, Section 4.1.2 - Business Environment"
         ],
-        "concepts_to_understand": "Enterprise Environmental Factors (EEFs) are crucial inputs to the Identify Stakeholders process, representing conditions not under the direct control of the project team. Understanding organizational culture and structure is paramount for comprehensive stakeholder identification, especially in complex projects. These factors provide context on power dynamics, communication channels, and informal networks within the organization, helping to uncover all relevant parties—both formal and informal—who can impact or be impacted by the project. Properly leveraging EEFs ensures that the stakeholder identification process is thorough and reflects the true operating environment of the project.",
+        "concepts_to_understand": "Enterprise Environmental Factors (EEFs) are crucial inputs to the Identify Stakeholders process, representing conditions not under the direct control of the project team. Understanding organizational culture and structure is paramount for comprehensive stakeholder identification, especially in complex projects. These factors provide context on power dynamics, communication channels, and informal networks within the organization, helping to uncover all relevant parties\u2014both formal and informal\u2014who can impact or be impacted by the project. Properly leveraging EEFs ensures that the stakeholder identification process is thorough and reflects the true operating environment of the project.",
         "additional_notes": "No quick reads available for this process."
       }
     },
     {
-      "id": "1717049940184_8a9b0c1d-2e3f-4567-8901-234567890abc",
+      "id": "1717049949186",
       "question_pmp": "The project manager for a new product launch is in the Initiating Process Group, focusing on identifying all relevant stakeholders. A key characteristic of this process is that it is performed iteratively. What is the primary reason for performing 'Identify Stakeholders' iteratively throughout the project life cycle?",
       "options_pmp": {
         "OPTION_A": "To ensure that all stakeholders are documented in the stakeholder register at project closure.",
@@ -281,7 +281,7 @@ export const questionsData = {
       "is_attempted": false,
       "selected_option": "",
       "question_type": "Option",
-      "is_valid": "false",
+      "is_valid": false,
       "analysis": {
         "option_a_result": "INCORRECT - While the stakeholder register should be complete at project closure, the primary reason for iterative identification is not merely to document them at the end. The iterative nature ensures that stakeholder information is current and actionable throughout the project, not just for a final record. Waiting until closure would negate the proactive management benefits of iterative identification.",
         "option_b_result": "CORRECT - The primary reason for performing 'Identify Stakeholders' iteratively throughout the project life cycle is to accommodate changes in the project environment, the emergence of new stakeholders, or shifts in the influence and interest of existing stakeholders. As a project progresses, new phases begin, risks materialize, or external factors evolve, new individuals or groups may become stakeholders, or existing ones may change their stance. Iterative identification ensures the project team continuously maintains an accurate and current understanding of all relevant parties, allowing for adaptive stakeholder engagement strategies and proactive management of potential impacts.",
@@ -296,36 +296,6 @@ export const questionsData = {
           "PMBOK Guide Sixth Edition, Section 13.2 - Plan Stakeholder Engagement"
         ],
         "concepts_to_understand": "The 'Identify Stakeholders' process is not a one-time activity but an ongoing, iterative process throughout the project lifecycle. This iterative nature is crucial because projects operate in dynamic environments where new stakeholders may emerge, or the influence and interests of existing stakeholders can change. Continuous identification ensures that the project team remains aware of all relevant parties, enabling them to adapt engagement strategies, mitigate risks, and leverage opportunities. This proactive approach helps maintain strong stakeholder relationships and contributes significantly to project success by preventing unforeseen challenges arising from unidentified or misunderstood stakeholders.",
-        "additional_notes": "No quick reads available for this process."
-      }
-    },
-    {
-      "id": "1717049940185_9b0c1d2e-3f4a-5678-9012-34567890abcd",
-      "question_pmp": "During the Initiating Process Group, a project manager is defining the high-level scope and objectives for a new product launch. The project sponsor emphasizes the importance of managing expectations from influential external stakeholders, such as industry analysts and media, who could significantly impact market reception. What is the MOST critical output from the 'Identify Stakeholders' process that will directly inform how these external stakeholders' expectations are managed?",
-      "options_pmp": {
-        "OPTION_A": "The project charter, detailing overall project objectives and high-level requirements.",
-        "OPTION_B": "Project team assignments, clearly defining roles and responsibilities for communication.",
-        "OPTION_C": "The stakeholder register, including their classification, assessment, and potential impact.",
-        "OPTION_D": "Organizational process assets, such as templates for communication plans."
-      },
-      "is_attempted": false,
-      "selected_option": "",
-      "question_type": "Option",
-      "is_valid": "false",
-      "analysis": {
-        "option_a_result": "INCORRECT - The project charter is an input to the Identify Stakeholders process and formally authorizes the project. While it sets the stage, it does not directly inform how specific stakeholder expectations (like those of media or analysts) are managed. Its role is to establish the project, not to detail stakeholder management strategies.",
-        "option_b_result": "INCORRECT - Project team assignments are an output of the Acquire Resources process in the Executing Process Group. While a well-defined project team is crucial for project execution, including communication, it is not the primary output of the Identify Stakeholders process that informs stakeholder expectation management. That information comes earlier.",
-        "option_c_result": "CORRECT - The stakeholder register is the MOST critical output from the Identify Stakeholders process that directly informs how stakeholders' expectations are managed. This document contains detailed information about each identified stakeholder, including their classification (e.g., internal/external, supporter/resistor), their assessment (e.g., influence, interest, impact), and potential strategies for engagement. For influential external stakeholders like media and analysts, understanding their specific interests and potential impact, as documented in the register, is essential for developing tailored communication and engagement plans to proactively manage their expectations and mitigate negative perception.",
-        "option_d_result": "INCORRECT - Organizational process assets (OPAs), such as templates for communication plans, are inputs to the Plan Communications Management process and other planning processes. While useful, they are not the direct output of the Identify Stakeholders process that contains specific information about *who* the stakeholders are and *how* their expectations should be managed. The stakeholder register is the source of that specific stakeholder data.",
-        "process_group": "Initiating",
-        "knowledge_area": "Stakeholder Management",
-        "tool": "All",
-        "suggested_read": [
-          "PMBOK Guide Sixth Edition, Section 13.1.3 - Identify Stakeholders: Outputs",
-          "PMBOK Guide Sixth Edition, Section 13.2.3 - Plan Stakeholder Engagement: Outputs (especially Stakeholder Engagement Plan)",
-          "PMBOK Guide Seventh Edition, Section 2.5 - Project Management Principles: Stakeholder Engagement"
-        ],
-        "concepts_to_understand": "The stakeholder register is the cornerstone for all subsequent stakeholder management activities. As the primary output of the 'Identify Stakeholders' process, it systematically captures comprehensive information about all identified stakeholders, including their categorization, assessment of influence, interest, and potential impact. This detailed record is essential for developing effective strategies to manage expectations, especially for influential external parties like media or analysts whose perceptions can significantly affect project success. Without a well-developed stakeholder register, managing diverse stakeholder expectations becomes a reactive and potentially ineffective endeavor, increasing project risks.",
         "additional_notes": "No quick reads available for this process."
       }
     }
