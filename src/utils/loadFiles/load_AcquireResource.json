@@ -1,6 +1,32 @@
 {
     "questions": [
         {
+            "id": "1717049970186",
+            "question_pmp": "A project manager is in the process of acquiring resources for a new project. The project requires specialized software development skills that are not available within the organization. What is the MOST appropriate first step for the project manager to take?",
+            "options_pmp": {
+                "OPTION_A": "Immediately post job openings on external job boards to attract qualified candidates.",
+                "OPTION_B": "Consult with the project sponsor to understand the budget constraints for external hiring.",
+                "OPTION_C": "Review the organizational process assets to understand the established resource acquisition procedures.",
+                "OPTION_D": "Contact the procurement department to initiate the vendor selection process."
+            },
+            "is_attempted": false,
+            "is_valid": false,
+            "selected_option": "",
+            "question_type": "Option",
+            "analysis": {
+                "option_a_result": "INCORRECT - While posting job openings might eventually be necessary, it's not the first step. The project manager should first understand the organization's established procedures and constraints for resource acquisition, including budget limitations and procurement policies.",
+                "option_b_result": "INCORRECT - While understanding budget constraints is important, it's not the first step. The project manager should first review the organization's established procedures for resource acquisition, which may include specific steps for budget approval and resource procurement.",
+                "option_c_result": "CORRECT - The first step in acquiring resources is to review the organizational process assets, which include established procedures, policies, and guidelines for resource acquisition. This ensures compliance with organizational standards and helps identify the appropriate channels and methods for obtaining the required resources.",
+                "option_d_result": "INCORRECT - While procurement may be involved in the process, contacting them directly is not the first step. The project manager should first understand the organization's established procedures for resource acquisition, which may or may not involve procurement depending on the specific circumstances.",
+                "process_group": "Executing",
+                "knowledge_area": "Resource",
+                "tool": "Expert Judgment",
+                "suggested_read": ["PMBOK Guide Sixth Edition, Section 9.1 Plan Resource Management", "PMBOK Guide Seventh Edition, Section 3.2.1 Resource Management Planning", "PMBOK Guide Sixth Edition, Section 9.3 Acquire Resources"],
+                "concepts_to_understand": "Acquire Resources in the Initiating phase focuses on establishing a high-level understanding of the human, physical, and material resources required. This initial assessment often involves leveraging expert judgment and organizational relationships to determine the feasibility of obtaining necessary resources within the project's strategic context. The goal is to identify potential resource constraints early and consider them in the project's overall viability and charter refinement, setting the stage for more detailed resource planning later.",
+                "additional_notes": "No quick reads available for this process"
+            }
+        },
+        {
             "id": "1748645417898",
             "question_pmp": "A project manager has just received the approved project charter and is now moving into the initial phases of the project. A critical specialized engineering team is needed to perform a feasibility study, but they are currently allocated to another high-priority organizational project. What is the BEST immediate action for the project manager to take regarding acquiring this specific resource?",
             "options_pmp": {

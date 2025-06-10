@@ -114,15 +114,15 @@ const AnswerOptions: React.FC<AnswerOptionsProps> = ({
                     disabled={!isAttempted || isLastQuestion}
                 >
                     Next
-                </button>
-                <button
-                    className={styles['apple-submit-button']}
-                    style={{ marginLeft: 12, background: '#34c759' }}
-                    onClick={onRetrieve}
-                    type="button"
-                >
-                    Retrieve
-                </button>
+                  </button>
+                    <button
+                        className={styles['apple-submit-button']}
+                        style={{ marginLeft: 12, background: '#34c759' }}
+                        onClick={onRetrieve}
+                        type="button"
+                    >
+                        Retrieve
+                    </button>
             </div>
         </div>
     );

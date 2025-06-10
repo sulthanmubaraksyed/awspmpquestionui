@@ -13,7 +13,6 @@ export const questionsData = {
       "is_valid": false,
       "selected_option": "",
       "question_type": "Option",
-      "correct_answer": "",
       "analysis": {
         "option_a_result": "INCORRECT - Submitting the deliverable to the change control board is premature and incorrect at this stage. The change control board's primary role is to review and approve change requests, not to formally accept deliverables. Presenting an unvalidated deliverable to the CCB could lead to unnecessary delays and confusion regarding the project's progress and scope validation.",
         "option_b_result": "INCORRECT - While internal inspections are important for quality control (part of the Control Quality process), they are not the primary mechanism for formal customer acceptance of a deliverable. The Validate Scope process focuses on obtaining formal acceptance from the customer or sponsor. Conducting an internal inspection before presenting to the customer might be a preceding step, but it's not the next MOST appropriate step for formal acceptance.",
@@ -22,7 +21,7 @@ export const questionsData = {
         "process_group": "Monitoring and Controlling",
         "knowledge_area": "Scope",
         "tool": "Inspection",
-        "suggested_read": "['PMBOK Guide - Section 5.5.2.1 (Inspections)', 'PMBOK Guide - Section 5.5 (Validate Scope)']",
+        "suggested_read": ["PMBOK Guide - Section 5.5.2.1 (Inspections)", "PMBOK Guide - Section 5.5 (Validate Scope)"],
         "concepts_to_understand": "Validate Scope focuses on obtaining formal acceptance of deliverables from the customer or sponsor. Key inputs include validated deliverables, project documents, and the scope baseline. Tools and techniques include inspections and group decision-making techniques. The output is accepted deliverables and change requests if issues are identified. This process is distinct from Control Quality, which focuses on checking for correctness and meeting quality requirements.",
         "additional_notes": "No quick reads available for this process"
       }
@@ -40,7 +39,6 @@ export const questionsData = {
       "is_valid": false,
       "selected_option": "",
       "question_type": "Option",
-      "correct_answer": "",
       "analysis": {
         "option_a_result": "INCORRECT - While escalation to the sponsor might eventually be necessary, it's not the first step. The project manager first needs to formally document the issue and propose a solution through the change control process. Escalation without a proposed path forward can appear reactive and not problem-solving oriented.",
         "option_b_result": "CORRECT - When a deliverable fails to meet documented scope requirements, even if overlooked, it constitutes a variance or defect. The proper procedure is to initiate a change request to address this issue. This formalizes the corrective action, ensures it goes through integrated change control, and updates relevant project documents, leading to a modified deliverable that can then be re-validated. This proactive approach ensures the project remains aligned with stakeholder expectations and formal processes.",
@@ -49,7 +47,7 @@ export const questionsData = {
         "process_group": "Monitoring and Controlling",
         "knowledge_area": "Scope",
         "tool": "Data Analysis (e.g., Variance Analysis)",
-        "suggested_read": "['PMBOK Guide - Section 4.6 (Perform Integrated Change Control)', 'PMBOK Guide - Section 5.5 (Validate Scope)']",
+        "suggested_read": ["PMBOK Guide - Section 4.6 (Perform Integrated Change Control)", "PMBOK Guide - Section 5.5 (Validate Scope)"],
         "concepts_to_understand": "When a deliverable is rejected during Validate Scope due to a missed requirement, it signifies a defect or variance from the scope baseline. The immediate action is to submit a change request to address the discrepancy. This formalizes the corrective action, ensures it undergoes proper review and approval, and leads to rework to bring the deliverable into compliance with the agreed-upon scope.",
         "additional_notes": "No quick reads available for this process"
       }
@@ -67,7 +65,6 @@ export const questionsData = {
       "is_valid": false,
       "selected_option": "",
       "question_type": "Option",
-      "correct_answer": "",
       "analysis": {
         "option_a_result": "INCORRECT - While the quality management plan defines quality standards and metrics, the direct decision point for acceptance or rejection of a deliverable based on its characteristics, even minor ones, rests with the scope baseline. The quality management plan details how quality will be achieved and measured, but the acceptance criteria are defined within the scope baseline.",
         "option_b_result": "INCORRECT - The stakeholder engagement plan outlines strategies for effective stakeholder engagement and communication. While important for managing the acceptance meeting, it does not provide the criteria for determining deliverable acceptance or rejection based on its features or imperfections. It focuses on how to interact with stakeholders, not what constitutes an acceptable deliverable.",
@@ -76,7 +73,7 @@ export const questionsData = {
         "process_group": "Monitoring and Controlling",
         "knowledge_area": "Scope",
         "tool": "Inspection",
-        "suggested_read": "['PMBOK Guide - Section 5.3.3.1 (Project Scope Statement)', 'PMBOK Guide - Section 5.5 (Validate Scope)']",
+        "suggested_read": ["PMBOK Guide - Section 5.3.3.1 (Project Scope Statement)", "PMBOK Guide - Section 5.5 (Validate Scope)"],
         "concepts_to_understand": "The scope baseline, encompassing the project scope statement, WBS, and WBS dictionary, is paramount in the Validate Scope process. It contains the acceptance criteria for deliverables, which are the formal requirements against which deliverables are measured for customer acceptance. Any deviations, even minor ones, must be assessed against these criteria to determine if they warrant rejection or can be accepted.",
         "additional_notes": "No quick reads available for this process"
       }
@@ -94,7 +91,6 @@ export const questionsData = {
       "is_valid": false,
       "selected_option": "",
       "question_type": "Option",
-      "correct_answer": "",
       "analysis": {
         "option_a_result": "INCORRECT - While updating the project schedule is a necessary administrative task after a deliverable is completed and accepted, it is not the MOST immediate and important action directly tied to the outcome of the Validate Scope process. The core output of Validate Scope is the accepted deliverable itself, which then fuels the next logical process flow.",
         "option_b_result": "INCORRECT - The Control Quality process occurs *before* Validate Scope. Control Quality focuses on ensuring the deliverable meets quality requirements and is fit for purpose, resulting in a 'validated deliverable' as an output. This validated deliverable then becomes an input to Validate Scope. Moving an already accepted deliverable back to Control Quality would be a process misstep.",
@@ -103,7 +99,7 @@ export const questionsData = {
         "process_group": "Monitoring and Controlling",
         "knowledge_area": "Scope",
         "tool": "No specific tool, it's an output flow",
-        "suggested_read": "['PMBOK Guide - Section 5.5.3.1 (Accepted Deliverables)', 'PMBOK Guide - Section 4.7 (Close Project or Phase)']",
+        "suggested_read": ["PMBOK Guide - Section 5.5.3.1 (Accepted Deliverables)", "PMBOK Guide - Section 4.7 (Close Project or Phase)"],
         "concepts_to_understand": "Accepted Deliverables are the key output of the Validate Scope process. These deliverables are then inputs to the Close Project or Phase process. Understanding the flow of outputs from one process to inputs of another is fundamental in PMP. Validate Scope is about formal acceptance by the customer; Control Quality is about internal verification that requirements were met.",
         "additional_notes": "No quick reads available for this process"
       }
@@ -121,7 +117,6 @@ export const questionsData = {
       "is_valid": false,
       "selected_option": "",
       "question_type": "Option",
-      "correct_answer": "",
       "analysis": {
         "option_a_result": "INCORRECT - While communication is always important, emphasizing the communication management plan isn't the primary focus when validating scope against what was agreed upon. The issue isn't a lack of communication, but a potential misalignment between evolving stakeholder vision and the fixed scope baseline. The project manager needs to address the specific scope discrepancy.",
         "option_b_result": "INCORRECT - While new visions do require change requests, immediately jumping to 'future change requests' might imply that the current deliverable is deficient, which is not the case if it aligns with the baseline. The primary goal is to gain acceptance for the current deliverable based on the agreed scope, and only then discuss future changes if the customer desires them.",
@@ -130,7 +125,7 @@ export const questionsData = {
         "process_group": "Monitoring and Controlling",
         "knowledge_area": "Scope",
         "tool": "Inspection",
-        "suggested_read": "['PMBOK Guide - Section 5.5 (Validate Scope)', 'PMBOK Guide - Section 5.3.3.1 (Project Scope Statement)']",
+        "suggested_read": ["PMBOK Guide - Section 5.5 (Validate Scope)", "PMBOK Guide - Section 5.3.3.1 (Project Scope Statement)"],
         "concepts_to_understand": "Validate Scope focuses on formal acceptance of deliverables against the defined scope baseline. If the deliverable meets the documented requirements, the project manager should guide the conversation back to the agreed-upon scope. Any discrepancies between the delivered product and current stakeholder desires, if not part of the baseline, require a change request, which is handled through the Perform Integrated Change Control process, not in Validate Scope.",
         "additional_notes": "No quick reads available for this process"
       }

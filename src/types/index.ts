@@ -7,22 +7,10 @@ export interface QAResponseIndividual {
     OPTION_C: string;
     OPTION_D: string;
   };
-  OPTION_A: string;
-  OPTION_B: string;
-  OPTION_C: string;
-  OPTION_D: string;
-  option_a_result: string;
-  option_b_result: string;
-  option_c_result: string;
-  option_d_result: string;
-  process_group: string;
-  knowledge_area: string;
-  tool: string;
-  suggested_read: string;
-  concepts_to_understand: string;
   is_attempted: boolean;
-  question_type: string;
   selected_option: string;
+  question_type: string;
+  is_valid: boolean;
   analysis: {
     option_a_result: string;
     option_b_result: string;
@@ -31,11 +19,10 @@ export interface QAResponseIndividual {
     process_group: string;
     knowledge_area: string;
     tool: string;
-    suggested_read: string | string[];
+    suggested_read: string[];
     concepts_to_understand: string;
     additional_notes?: string;
   };
-  is_verified: boolean;
   did_user_get_it_right?: boolean;
 }
 

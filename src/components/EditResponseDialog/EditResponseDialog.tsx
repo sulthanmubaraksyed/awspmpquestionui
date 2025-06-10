@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { QAResponseIndividual } from '../../utils/questionService';
+import { QAResponseIndividual } from '../../types/index';
 import styles from './EditResponseDialog.module.css';
+import ProcessGroupSelector from '../ProcessGroupSelector/ProcessGroupSelector';
+import KnowledgeAreaSelector from '../KnowledgeAreaSelector/KnowledgeAreaSelector';
 
 interface EditResponseDialogProps {
   isOpen: boolean;
@@ -26,7 +28,19 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
 
   useEffect(() => {
     if (currentResponse) {
-      setEditedResponse({ ...currentResponse });
+      const response = { ...currentResponse };
+      // Ensure suggested_read is an array
+      if (response.analysis) {
+        response.analysis = {
+          ...response.analysis,
+          suggested_read: Array.isArray(response.analysis.suggested_read)
+            ? response.analysis.suggested_read
+            : response.analysis.suggested_read
+              ? [response.analysis.suggested_read]
+              : []
+        };
+      }
+      setEditedResponse(response);
     }
   }, [currentResponse]);
 
@@ -43,8 +57,42 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
     }
   };
 
-  const handleChange = (field: keyof QAResponseIndividual, value: any) => {
-    setEditedResponse((prev: QAResponseIndividual | null) => prev ? { ...prev, [field]: value } : null);
+  const handleChange = (field: string, value: any) => {
+    setEditedResponse(prev => {
+      if (!prev) return null;
+      const newResponse = { ...prev };
+      
+      if (field.includes('.')) {
+        const [parent, child] = field.split('.');
+        if (parent === 'analysis' && newResponse.analysis) {
+          newResponse.analysis = {
+            ...newResponse.analysis,
+            [child]: value
+          };
+        } else if (parent === 'options_pmp' && newResponse.options_pmp) {
+          newResponse.options_pmp = {
+            ...newResponse.options_pmp,
+            [child]: value
+          };
+        }
+      } else {
+        // Handle direct fields
+        switch (field) {
+          case 'is_valid':
+            newResponse.is_valid = value === 'true';
+            break;
+          case 'id':
+          case 'question_pmp':
+          case 'question_type':
+            newResponse[field] = value;
+            break;
+          default:
+            // For any other fields, use type assertion
+            (newResponse as any)[field] = value;
+        }
+      }
+      return newResponse;
+    });
   };
 
   const handleAnalysisChange = (field: AnalysisField, value: any) => {
@@ -71,19 +119,51 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!editedResponse) return;
+  const handleSuggestedReadChange = (value: string) => {
+    const suggestions = value.split('\n').filter(line => line.trim() !== '');
+    handleChange('analysis.suggested_read', suggestions);
+  };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log('=== EditResponseDialog: Save Changes Button Clicked ===');
+    e.preventDefault();
+    if (!editedResponse) {
+      console.log('❌ No edited response available');
+      return;
+    }
+
+    console.log('Edited Response before save:', {
+      id: editedResponse.id,
+      question_pmp: editedResponse.question_pmp?.substring(0, 50) + '...',
+      is_valid: editedResponse.is_valid,
+      process_group: editedResponse.analysis?.process_group,
+      knowledge_area: editedResponse.analysis?.knowledge_area,
+      tool: editedResponse.analysis?.tool,
+      additional_notes: editedResponse.analysis?.additional_notes
+    });
+
+    console.log('Setting isSaving to true');
     setIsSaving(true);
     setError(null);
 
     try {
+      console.log('Calling onSave function...');
       await onSave(editedResponse);
+      console.log('✅ onSave completed successfully');
+      console.log('Calling onClose...');
       onClose();
+      console.log('✅ Dialog closed');
+      console.log('=== EditResponseDialog: Save Changes Completed Successfully ===');
     } catch (err) {
+      console.error('❌ Error in EditResponseDialog handleSubmit:', err);
+      console.error('Error details:', {
+        message: err instanceof Error ? err.message : String(err),
+        stack: err instanceof Error ? err.stack : undefined
+      });
       setError(err instanceof Error ? err.message : 'Failed to save changes');
+      console.log('=== EditResponseDialog: Save Changes Failed ===');
     } finally {
+      console.log('Setting isSaving to false');
       setIsSaving(false);
     }
   };
@@ -93,201 +173,209 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
       <div className={styles.dialog}>
         <div className={styles.header}>
           <h2>Edit Response</h2>
-          <button onClick={onClose} className={styles.closeButton}>×</button>
+          <button className={styles.closeButton} onClick={onClose}>&times;</button>
         </div>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           {error && <div className={styles.error}>{error}</div>}
-
+          
           <div className={styles.idSection}>
             <div className={styles.idField}>
-              <label>Question ID:</label>
+              <label>Question ID</label>
               <div className={styles.idInputGroup}>
                 <input
                   type="text"
-                  value={editedResponse.id}
-                  disabled
                   className={styles.idInput}
+                  value={editedResponse.id}
+                  readOnly
                 />
                 <button
                   type="button"
-                  onClick={handleCopyId}
                   className={styles.copyButton}
+                  onClick={handleCopyId}
                 >
-                  {copySuccess || 'Copy ID'}
+                  Copy ID
                 </button>
               </div>
             </div>
           </div>
 
-          <div className={styles.section}>
-            <h3>Basic Information</h3>
-            <div className={styles.field}>
-              <label>Question:</label>
-              <textarea
-                value={editedResponse.question_pmp}
-                onChange={(e) => handleChange('question_pmp', e.target.value)}
-                className={styles.textarea}
-              />
+          <div className={styles.contentGrid}>
+            {/* Left Column */}
+            <div className={styles.section}>
+              <h3>Basic Information</h3>
+              <div className={styles.field}>
+                <label>Process Group</label>
+                <input
+                  type="text"
+                  className={styles.input}
+                  value={editedResponse.analysis.process_group}
+                  readOnly
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Knowledge Area</label>
+                <input
+                  type="text"
+                  className={styles.input}
+                  value={editedResponse.analysis.knowledge_area}
+                  readOnly
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Tool</label>
+                <select
+                  className={styles.select}
+                  value={editedResponse.analysis.tool}
+                  onChange={(e) => handleChange('analysis.tool', e.target.value)}
+                >
+                  <option value="All">All</option>
+                  <option value="Data Gathering">Data Gathering</option>
+                  <option value="Data Analysis">Data Analysis</option>
+                  <option value="Decision Making">Decision Making</option>
+                  <option value="Communication">Communication</option>
+                  <option value="Interpersonal and Team">Interpersonal and Team</option>
+                </select>
+              </div>
+              <div className={styles.field}>
+                <label>Is Valid</label>
+                <select
+                  className={styles.select}
+                  value={editedResponse.is_valid === undefined ? 'false' : editedResponse.is_valid.toString()}
+                  onChange={(e) => handleChange('is_valid', e.target.value)}
+                >
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
             </div>
 
-            <div className={styles.field}>
-              <label>Option A:</label>
-              <textarea
-                value={editedResponse.OPTION_A}
-                onChange={(e) => handleChange('OPTION_A', e.target.value)}
-                className={styles.textarea}
-              />
+            {/* Right Column */}
+            <div className={styles.section}>
+              <h3>Question Details</h3>
+              <div className={styles.field}>
+                <label>Question</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.question_pmp}
+                  onChange={(e) => handleChange('question_pmp', e.target.value)}
+                  rows={4}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option A</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.options_pmp.OPTION_A}
+                  onChange={(e) => handleChange('options_pmp.OPTION_A', e.target.value)}
+                  rows={2}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option B</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.options_pmp.OPTION_B}
+                  onChange={(e) => handleChange('options_pmp.OPTION_B', e.target.value)}
+                  rows={2}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option C</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.options_pmp.OPTION_C}
+                  onChange={(e) => handleChange('options_pmp.OPTION_C', e.target.value)}
+                  rows={2}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option D</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.options_pmp.OPTION_D}
+                  onChange={(e) => handleChange('options_pmp.OPTION_D', e.target.value)}
+                  rows={2}
+                />
+              </div>
             </div>
 
-            <div className={styles.field}>
-              <label>Option B:</label>
-              <textarea
-                value={editedResponse.OPTION_B}
-                onChange={(e) => handleChange('OPTION_B', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Option C:</label>
-              <textarea
-                value={editedResponse.OPTION_C}
-                onChange={(e) => handleChange('OPTION_C', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Option D:</label>
-              <textarea
-                value={editedResponse.OPTION_D}
-                onChange={(e) => handleChange('OPTION_D', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-          </div>
-
-          <div className={styles.section}>
-            <h3>Analysis</h3>
-            <div className={styles.field}>
-              <label>Option A Result:</label>
-              <textarea
-                value={editedResponse.analysis?.option_a_result || ''}
-                onChange={(e) => handleAnalysisChange('option_a_result', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Option B Result:</label>
-              <textarea
-                value={editedResponse.analysis?.option_b_result || ''}
-                onChange={(e) => handleAnalysisChange('option_b_result', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Option C Result:</label>
-              <textarea
-                value={editedResponse.analysis?.option_c_result || ''}
-                onChange={(e) => handleAnalysisChange('option_c_result', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Option D Result:</label>
-              <textarea
-                value={editedResponse.analysis?.option_d_result || ''}
-                onChange={(e) => handleAnalysisChange('option_d_result', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Process Group:</label>
-              <input
-                type="text"
-                value={editedResponse.analysis?.process_group || ''}
-                onChange={(e) => handleAnalysisChange('process_group', e.target.value)}
-                className={styles.input}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Knowledge Area:</label>
-              <input
-                type="text"
-                value={editedResponse.analysis?.knowledge_area || ''}
-                onChange={(e) => handleAnalysisChange('knowledge_area', e.target.value)}
-                className={styles.input}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Tool:</label>
-              <input
-                type="text"
-                value={editedResponse.analysis?.tool || ''}
-                onChange={(e) => handleAnalysisChange('tool', e.target.value)}
-                className={styles.input}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Suggested Read:</label>
-              <textarea
-                value={editedResponse.analysis 
-                  ? (Array.isArray(editedResponse.analysis.suggested_read)
+            {/* Analysis Section - Full Width */}
+            <div className={styles.section} style={{ gridColumn: '1 / -1' }}>
+              <h3>Analysis</h3>
+              <div className={styles.field}>
+                <label>Option A Analysis</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.option_a_result}
+                  onChange={(e) => handleChange('analysis.option_a_result', e.target.value)}
+                  rows={3}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option B Analysis</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.option_b_result}
+                  onChange={(e) => handleChange('analysis.option_b_result', e.target.value)}
+                  rows={3}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option C Analysis</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.option_c_result}
+                  onChange={(e) => handleChange('analysis.option_c_result', e.target.value)}
+                  rows={3}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Option D Analysis</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.option_d_result}
+                  onChange={(e) => handleChange('analysis.option_d_result', e.target.value)}
+                  rows={3}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Concepts to Understand</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.concepts_to_understand}
+                  onChange={(e) => handleChange('analysis.concepts_to_understand', e.target.value)}
+                  rows={3}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Suggested Read</label>
+                <textarea
+                  className={styles.textarea}
+                  value={Array.isArray(editedResponse.analysis.suggested_read) 
                     ? editedResponse.analysis.suggested_read.join('\n')
-                    : editedResponse.analysis.suggested_read || '')
-                  : ''}
-                onChange={(e) => handleAnalysisChange('suggested_read', e.target.value.split('\n'))}
-                className={styles.textarea}
-                placeholder="Enter each suggestion on a new line"
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Concepts to Understand:</label>
-              <textarea
-                value={editedResponse.analysis?.concepts_to_understand || ''}
-                onChange={(e) => handleAnalysisChange('concepts_to_understand', e.target.value)}
-                className={styles.textarea}
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label>Additional Notes:</label>
-              <textarea
-                value={editedResponse.analysis?.additional_notes || ''}
-                onChange={(e) => handleAnalysisChange('additional_notes', e.target.value)}
-                className={styles.textarea}
-              />
+                    : editedResponse.analysis.suggested_read || ''}
+                  onChange={(e) => handleSuggestedReadChange(e.target.value)}
+                  rows={3}
+                  placeholder="Enter each suggestion on a new line"
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Additional Notes</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.additional_notes}
+                  onChange={(e) => handleChange('analysis.additional_notes', e.target.value)}
+                  rows={2}
+                />
+              </div>
             </div>
           </div>
-
-          {userRole === 'Admin' && (
-            <div className={styles.field}>
-              <label>Is Verified:</label>
-              <select
-                value={editedResponse.is_verified ? 'true' : 'false'}
-                onChange={(e) => handleChange('is_verified', e.target.value === 'true')}
-                className={styles.select}
-              >
-                <option value="true">True</option>
-                <option value="false">False</option>
-              </select>
-            </div>
-          )}
 
           <div className={styles.actions}>
             <button
               type="button"
-              onClick={onClose}
               className={styles.cancelButton}
+              onClick={onClose}
               disabled={isSaving}
             >
               Cancel

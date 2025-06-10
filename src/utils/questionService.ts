@@ -1,9 +1,5 @@
-import { questionsData as inQuestions } from '../questions/in';
-import { questionsData as plQuestions } from '../questions/pl';
-import { questionsData as exQuestions } from '../questions/ex';
-import { questionsData as mcQuestions } from '../questions/mc';
-import { questionsData as clQuestions } from '../questions/cl';
-import type { QAResponseIndividual, RetrieveParams, BaseQuestion } from '../types';
+import { API_CONFIG, getApiUrl } from '../config';
+import type { QAResponseIndividual, RetrieveParams } from '../types/index';
 
 // Add electron types
 declare global {
@@ -56,125 +52,151 @@ export async function retrieveRecordsFromFile({
   count = 100 
 }: RetrieveParams): Promise<QAResponseIndividual[]> {
   try {
-    // Get questions from the appropriate file based on process group
-    let questions: BaseQuestion[] = [];
+    // Construct query parameters, only including non-empty values
+    const params = new URLSearchParams();
     
-    if (processGroup === 'all') {
-      // If process group is 'all', get questions from all files
-      const allQuestions = [
-        ...(inQuestions.questions as BaseQuestion[]),
-        ...(plQuestions.questions as BaseQuestion[]),
-        ...(exQuestions.questions as BaseQuestion[]),
-        ...(mcQuestions.questions as BaseQuestion[]),
-        ...(clQuestions.questions as BaseQuestion[])
-      ];
-      questions = allQuestions;
-    } else {
-      // Get questions from specific process group file
-      const fileMap: { [key: string]: any } = {
-        'Initiating': inQuestions,
-        'Planning': plQuestions,
-        'Executing': exQuestions,
-        'Monitoring and Controlling': mcQuestions,
-        'Closing': clQuestions
-      };
-      
-      const selectedFile = fileMap[processGroup];
-      if (!selectedFile) {
-        throw new Error(`Invalid process group: ${processGroup}`);
-      }
-      
-      questions = selectedFile.questions as BaseQuestion[];
+    if (processGroup && processGroup !== 'all') {
+      params.append('processGroup', processGroup);
     }
     
-    // Filter by knowledge area if specified
     if (knowledgeArea && knowledgeArea !== 'all') {
-      questions = questions.filter(q => q.analysis.knowledge_area === knowledgeArea);
+      params.append('knowledgeArea', knowledgeArea);
     }
     
-    // Filter by tool if specified
     if (tool && tool !== 'all') {
-      questions = questions.filter(q => q.analysis.tool === tool);
+      params.append('tool', tool);
     }
     
-    // Shuffle and limit the number of questions
-    if (questions.length > count) {
-      questions = shuffleArray(questions).slice(0, count);
+    if (count) {
+      params.append('count', count.toString());
     }
     
-    // Transform questions to QAResponseIndividual format
-    return questions.map(transformQuestion);
+    // Add is_valid = False parameter
+    params.append('is_valid', 'false');
+
+    // Make API request with constructed parameters and API key
+    const url = getApiUrl(`${API_CONFIG.endpoints.questions}${params.toString() ? `?${params.toString()}` : ''}`);
+    console.log('API Request Details:');
+    console.log('URL:', url);
+    console.log('Headers:', {
+      'X-API-Key': API_CONFIG.apiKey ? '***' : 'Not Set',
+      'Content-Type': 'application/json'
+    });
+    console.log('Parameters:', Object.fromEntries(params.entries()));
+    
+    const response = await fetch(url, {
+      headers: {
+        'X-API-Key': API_CONFIG.apiKey,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    console.log('API Response Status:', response.status);
+    console.log('API Response Headers:', Object.fromEntries(response.headers.entries()));
+    
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
+
+    // Get the response text first to check if it's valid JSON
+    const responseText = await response.text();
+    console.log('API Response Text (first 500 chars):', responseText.substring(0, 500));
+    
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (jsonError) {
+      console.error('JSON parsing error:', jsonError);
+      console.error('Response text:', responseText);
+      throw new Error(`Invalid JSON response from API. Response may be HTML or malformed JSON. Status: ${response.status}`);
+    }
+    
+    console.log('API Response Data:', {
+      totalQuestions: data.questions?.length || 0,
+      firstQuestion: data.questions?.[0] ? {
+        id: data.questions[0].id,
+        question_pmp: data.questions[0].question_pmp?.substring(0, 50) + '...',
+        process_group: data.questions[0].process_group,
+        knowledge_area: data.questions[0].knowledge_area,
+        tool: data.questions[0].tool
+      } : null
+    });
+    
+    // Return the questions array from the response
+    return data.questions || [];
   } catch (error) {
     console.error('Error retrieving questions:', error);
     throw error;
   }
 }
 
-function transformQuestion(q: BaseQuestion): QAResponseIndividual {
-  return {
-    id: q.id,
-    question_pmp: q.question_pmp,
-    options_pmp: q.options_pmp,
-    OPTION_A: q.options_pmp.OPTION_A,
-    OPTION_B: q.options_pmp.OPTION_B,
-    OPTION_C: q.options_pmp.OPTION_C,
-    OPTION_D: q.options_pmp.OPTION_D,
-    option_a_result: q.analysis.option_a_result,
-    option_b_result: q.analysis.option_b_result,
-    option_c_result: q.analysis.option_c_result,
-    option_d_result: q.analysis.option_d_result,
-    process_group: q.analysis.process_group,
-    knowledge_area: q.analysis.knowledge_area,
-    tool: q.analysis.tool,
-    suggested_read: Array.isArray(q.analysis.suggested_read) 
-      ? q.analysis.suggested_read.join(', ') 
-      : q.analysis.suggested_read,
-    concepts_to_understand: q.analysis.concepts_to_understand,
-    is_attempted: false,
-    question_type: 'Option',
-    selected_option: '',
-    analysis: q.analysis,
-    is_verified: true,
-    did_user_get_it_right: undefined
-  };
-}
-
 export async function saveResponseToFile(questionResponse: QAResponseIndividual): Promise<void> {
+  console.log('=== saveResponseToFile Service Call Started ===');
+  console.log('Question Response to save:', {
+    id: questionResponse.id,
+    question_pmp: questionResponse.question_pmp?.substring(0, 50) + '...',
+    is_valid: questionResponse.is_valid,
+    selected_option: questionResponse.selected_option,
+    is_attempted: questionResponse.is_attempted,
+    did_user_get_it_right: questionResponse.did_user_get_it_right,
+    process_group: questionResponse.analysis?.process_group,
+    knowledge_area: questionResponse.analysis?.knowledge_area,
+    tool: questionResponse.analysis?.tool,
+    additional_notes: questionResponse.analysis?.additional_notes
+  });
+  
   try {
-    // Get the appropriate file based on process group
-    const fileMap: { [key: string]: any } = {
-      'Initiating': inQuestions,
-      'Planning': plQuestions,
-      'Executing': exQuestions,
-      'Monitoring and Controlling': mcQuestions,
-      'Closing': clQuestions
-    };
-    
-    const selectedFile = fileMap[questionResponse.process_group];
-    if (!selectedFile) {
-      throw new Error(`Invalid process group: ${questionResponse.process_group}`);
-    }
-    
-    // Find and update the question in the file
-    const questionIndex = selectedFile.questions.findIndex((q: BaseQuestion) => q.id === questionResponse.id);
-    if (questionIndex === -1) {
-      throw new Error(`Question with ID ${questionResponse.id} not found`);
-    }
-    
-    // Update the question with the new response
-    selectedFile.questions[questionIndex] = {
-      ...selectedFile.questions[questionIndex],
-      is_attempted: questionResponse.is_attempted,
+    const url = getApiUrl('/api/saveRecord');
+    console.log('API Request Details:');
+    console.log('URL:', url);
+    console.log('Method:', 'POST');
+    console.log('Headers:', {
+      'X-API-Key': API_CONFIG.apiKey ? '***' : 'Not Set',
+      'Content-Type': 'application/json'
+    });
+    console.log('Request Body (full):', JSON.stringify(questionResponse, null, 2));
+    console.log('Request Body (summary):', {
+      id: questionResponse.id,
+      question_pmp: questionResponse.question_pmp?.substring(0, 50) + '...',
       selected_option: questionResponse.selected_option,
-      did_user_get_it_right: questionResponse.did_user_get_it_right
-    };
+      is_attempted: questionResponse.is_attempted,
+      did_user_get_it_right: questionResponse.did_user_get_it_right,
+      additional_notes: questionResponse.analysis?.additional_notes
+    });
+
+    console.log('Making fetch request...');
+    // Make API request to save the response with API key
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'X-API-Key': API_CONFIG.apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(questionResponse),
+    });
+
+    console.log('Fetch request completed');
+    console.log('Response Status:', response.status);
+    console.log('Response Headers:', Object.fromEntries(response.headers.entries()));
+
+    if (!response.ok) {
+      console.error('❌ Response not OK:', response.status, response.statusText);
+      throw new Error(`Failed to save response: ${response.status}`);
+    }
+
+    console.log('✅ Response OK, reading response body...');
+    const responseText = await response.text();
+    console.log('Response Body:', responseText);
     
-    // Save the updated file
-    // Note: In a real application, you would want to save this to a file
-    // For now, we'll just update the in-memory state
-    console.log('Question updated:', selectedFile.questions[questionIndex]);
+    console.log('✅ Question updated successfully in backend');
+    console.log('=== saveResponseToFile Service Call Completed Successfully ===');
   } catch (error) {
-    console.error('Error saving response:', error);
+    console.error('❌ Error in saveResponseToFile:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+    console.log('=== saveResponseToFile Service Call Failed ===');
     throw error;
   }
 }
