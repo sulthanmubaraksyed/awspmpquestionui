@@ -205,21 +205,38 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
               <h3>Basic Information</h3>
               <div className={styles.field}>
                 <label>Process Group</label>
-                <input
-                  type="text"
-                  className={styles.input}
+                <select
+                  className={styles.select}
                   value={editedResponse.analysis.process_group}
-                  readOnly
-                />
+                  onChange={(e) => handleChange('analysis.process_group', e.target.value)}
+                >
+                  <option value="">Select Process Group</option>
+                  <option value="Initiating">Initiating</option>
+                  <option value="Planning">Planning</option>
+                  <option value="Executing">Executing</option>
+                  <option value="Monitoring and Controlling">Monitoring and Controlling</option>
+                  <option value="Closing">Closing</option>
+                </select>
               </div>
               <div className={styles.field}>
                 <label>Knowledge Area</label>
-                <input
-                  type="text"
-                  className={styles.input}
+                <select
+                  className={styles.select}
                   value={editedResponse.analysis.knowledge_area}
-                  readOnly
-                />
+                  onChange={(e) => handleChange('analysis.knowledge_area', e.target.value)}
+                >
+                  <option value="">Select Knowledge Area</option>
+                  <option value="Integration">Integration</option>
+                  <option value="Scope">Scope</option>
+                  <option value="Schedule">Schedule</option>
+                  <option value="Cost">Cost</option>
+                  <option value="Quality">Quality</option>
+                  <option value="Resources">Resources</option>
+                  <option value="Communications">Communications</option>
+                  <option value="Risk">Risk</option>
+                  <option value="Procurement">Procurement</option>
+                  <option value="Stakeholders">Stakeholders</option>
+                </select>
               </div>
               <div className={styles.field}>
                 <label>Tool</label>

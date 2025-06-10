@@ -168,29 +168,31 @@ const RetrieveQuestionDialog: React.FC<RetrieveQuestionDialogProps> = ({
               <div className={styles.resultSection}>
                 <h3>Question Details</h3>
                 <div className={styles.questionInfo}>
-                  <div className={styles.field}>
-                    <label>ID:</label>
-                    <span>{retrievedQuestion.id}</span>
+                  <div className={styles.metadataRow}>
+                    <div className={styles.metadataItem}>
+                      <label>ID:</label>
+                      <span>{retrievedQuestion.id}</span>
+                    </div>
+                    <div className={styles.metadataItem}>
+                      <label>Process Group:</label>
+                      <span>{retrievedQuestion.analysis?.process_group || 'Not specified'}</span>
+                    </div>
+                    <div className={styles.metadataItem}>
+                      <label>Knowledge Area:</label>
+                      <span>{retrievedQuestion.analysis?.knowledge_area || 'Not specified'}</span>
+                    </div>
+                    <div className={styles.metadataItem}>
+                      <label>Tool:</label>
+                      <span>{retrievedQuestion.analysis?.tool || 'Not specified'}</span>
+                    </div>
+                    <div className={styles.metadataItem}>
+                      <label>Is Valid:</label>
+                      <span>{retrievedQuestion.is_valid ? 'True' : 'False'}</span>
+                    </div>
                   </div>
                   <div className={styles.field}>
                     <label>Question:</label>
                     <div className={styles.questionText}>{retrievedQuestion.question_pmp}</div>
-                  </div>
-                  <div className={styles.field}>
-                    <label>Process Group:</label>
-                    <span>{retrievedQuestion.analysis?.process_group || 'Not specified'}</span>
-                  </div>
-                  <div className={styles.field}>
-                    <label>Knowledge Area:</label>
-                    <span>{retrievedQuestion.analysis?.knowledge_area || 'Not specified'}</span>
-                  </div>
-                  <div className={styles.field}>
-                    <label>Tool:</label>
-                    <span>{retrievedQuestion.analysis?.tool || 'Not specified'}</span>
-                  </div>
-                  <div className={styles.field}>
-                    <label>Is Valid:</label>
-                    <span>{retrievedQuestion.is_valid ? 'True' : 'False'}</span>
                   </div>
                   <div className={styles.field}>
                     <label>Options:</label>

@@ -238,26 +238,12 @@ function App() {
       });
       console.log('✅ Current question and options updated');
 
-      console.log('Step 3: Checking if filters need updating');
-      // Update filters if they've changed
-      if (updatedResponse.analysis.process_group !== selectedProcessGroup ||
-          updatedResponse.analysis.knowledge_area !== selectedKnowledgeArea ||
-          updatedResponse.analysis.tool !== selectedTool) {
-        console.log('Filters changed, updating...');
-        setSelectedProcessGroup(updatedResponse.analysis.process_group);
-        setSelectedKnowledgeArea(updatedResponse.analysis.knowledge_area);
-        setSelectedTool(updatedResponse.analysis.tool);
-        console.log('✅ Filters updated');
-      } else {
-        console.log('No filter changes needed');
-      }
-      
-      console.log('Step 4: Closing dialog');
+      console.log('Step 3: Closing dialog');
       // Close the dialog
       setShowEditDialog(false);
       console.log('✅ Dialog closed');
       
-      console.log('Step 5: Calling saveResponseToFile service');
+      console.log('Step 4: Calling saveResponseToFile service');
       // Call the service AFTER updating in-memory structures
       await saveResponseToFile(updatedResponse);
       console.log('✅ saveResponseToFile service call completed successfully');
