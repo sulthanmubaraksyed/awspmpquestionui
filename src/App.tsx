@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import ProcessGroupSelector from './components/ProcessGroupSelector/ProcessGroupSelector';
 import KnowledgeAreaSelector from './components/KnowledgeAreaSelector/KnowledgeAreaSelector';
@@ -40,6 +40,8 @@ class ErrorBoundary extends React.Component<
 }
 
 function App() {
+  console.log('🚀 APP: App component initialized');
+  
   // State for filters
   const [selectedProcessGroup, setSelectedProcessGroup] = useState<string>('all');
   const [selectedKnowledgeArea, setSelectedKnowledgeArea] = useState<string>('all');
@@ -102,6 +104,12 @@ function App() {
       tool: string;
     }): Promise<QAResponseIndividual[]> => {
       try {
+        console.log('🔍 SERVICE CALL: retrieveRecordsFromFile called with params:', {
+          count,
+          processGroup,
+          knowledgeArea,
+          tool
+        });
         setIsLoading(true);
         const questions = await retrieveRecordsFromFile({
           processGroup,
@@ -109,11 +117,14 @@ function App() {
           tool,
           count
         });
+        console.log('✅ SERVICE RESPONSE: Retrieved', questions.length, 'questions from service');
         setIsLoading(false);
-        return questions || [];
-      } catch {
+        return questions;
+      } catch (error) {
+        console.error('❌ SERVICE ERROR:', error);
         setIsLoading(false);
-        return [];
+        // Re-throw the error instead of returning empty array
+        throw error;
       }
     }
   }));
@@ -127,15 +138,27 @@ function App() {
 
   // Load initial questions when filters change
   useEffect(() => {
+    console.log('🔄 APP: useEffect triggered for loading questions with filters:', {
+      selectedProcessGroup,
+      selectedKnowledgeArea,
+      selectedTool
+    });
+    
     const loadQuestions = async () => {
       try {
+        console.log('🔄 APP: Calling questionManager.loadInitialQuestions...');
         await questionManager.loadInitialQuestions(
           selectedProcessGroup,
           selectedKnowledgeArea,
           selectedTool
         );
+        console.log('✅ APP: loadInitialQuestions completed');
       } catch (err) {
-        console.error('Failed to load initial questions:', err);
+        console.error('❌ APP: Failed to load initial questions:', err);
+        // Show error message to user when service is not available
+        const errorMessage = err instanceof Error ? err.message : 'Failed to load questions from service';
+        console.error('❌ SERVICE UNAVAILABLE:', errorMessage);
+        // The error will be handled by the QuestionManager and displayed in the UI
       }
     };
 
@@ -218,6 +241,17 @@ function App() {
       additional_notes: updatedResponse.analysis?.additional_notes
     });
     
+    // Validate that we have the required fields
+    if (!updatedResponse.id) {
+      throw new Error('Missing required field: id');
+    }
+    
+    if (!updatedResponse.process_group && !updatedResponse.analysis?.process_group) {
+      throw new Error('Missing required field: process_group (either at root level or in analysis)');
+    }
+    
+    console.log('✅ Validation passed - all required fields present');
+    
     try {
       console.log('Setting isSubmitting to true');
       setIsSubmitting(true);
@@ -266,6 +300,39 @@ function App() {
   };
 
   const [showDebugDialog, setShowDebugDialog] = useState<boolean>(false);
+
+  const questionAreaRef = useRef<HTMLTextAreaElement>(null);
+  
+  // Function to adjust textarea height
+  const adjustTextareaHeight = () => {
+    if (questionAreaRef.current) {
+      const textarea = questionAreaRef.current;
+      // Reset height to auto to get the correct scrollHeight
+      textarea.style.height = 'auto';
+      // Set the height to match the content
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+  };
+
+  // Adjust height when question content changes
+  useEffect(() => {
+    // Add a small delay to ensure the content is rendered
+    const timer = setTimeout(() => {
+      adjustTextareaHeight();
+    }, 10);
+    
+    return () => clearTimeout(timer);
+  }, [currentQuestion?.question_pmp]);
+
+  // Adjust height on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      adjustTextareaHeight();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong. Please refresh the page.</div>}>
@@ -322,6 +389,7 @@ function App() {
                       value={currentQuestion?.question_pmp || ''}
                       readOnly
                   placeholder={isLoading ? "Loading..." : "PMP Question"}
+                  ref={questionAreaRef}
                 />
             </div>
             <AnswerOptions

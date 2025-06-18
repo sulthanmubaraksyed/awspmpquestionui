@@ -2,6 +2,33 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Environment Configuration
+
+### Setting up the PMP Service URL
+
+The app uses environment variables to configure the backend service URL. Create a `.env` file in the root directory:
+
+```bash
+# Copy the example environment file
+cp env.example .env
+
+# Edit the .env file with your service URL
+REACT_APP_PMP_SERVICE_URL=http://localhost:3030
+```
+
+### Available Environment Variables
+
+- `REACT_APP_PMP_SERVICE_URL`: The URL of your PMP backend service (defaults to `http://localhost:3030`)
+- `REACT_APP_API_KEY`: Your API key for authentication (required for service calls)
+
+### Environment File Structure
+
+```bash
+# .env
+REACT_APP_PMP_SERVICE_URL=http://localhost:3030
+REACT_APP_API_KEY=your_actual_api_key_here
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

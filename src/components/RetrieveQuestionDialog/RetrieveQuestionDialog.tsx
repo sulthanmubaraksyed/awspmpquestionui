@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { QAResponseIndividual } from '../../types/index';
-import { API_CONFIG, getApiUrl } from '../../config';
+import { config, buildApiUrl } from '../../config';
 import styles from './RetrieveQuestionDialog.module.css';
 
 interface RetrieveQuestionDialogProps {
@@ -29,8 +29,8 @@ const RetrieveQuestionDialog: React.FC<RetrieveQuestionDialogProps> = ({
     console.log('=== RetrieveQuestionDialog Debug Log ===');
     console.log('Question ID entered:', questionId.trim());
     console.log('API Config:', {
-      baseUrl: API_CONFIG.baseUrl,
-      apiKey: API_CONFIG.apiKey ? '***' : 'Not Set'
+      baseUrl: config.baseUrl,
+      apiKey: config.apiKey ? '***' : 'Not Set'
     });
 
     setIsLoading(true);
@@ -39,17 +39,19 @@ const RetrieveQuestionDialog: React.FC<RetrieveQuestionDialogProps> = ({
 
     try {
       // Call the getQuestion endpoint directly
-      const url = getApiUrl(`/api/getQuestion?id=${encodeURIComponent(questionId.trim())}`);
+      const url = buildApiUrl(config.API_ENDPOINTS.GET_QUESTION, {
+        id: questionId.trim()
+      });
       console.log('API Request URL:', url);
       console.log('API Request Headers:', {
-        'X-API-Key': API_CONFIG.apiKey ? '***' : 'Not Set',
+        'X-API-Key': config.apiKey ? '***' : 'Not Set',
         'Content-Type': 'application/json'
       });
       
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'X-API-Key': API_CONFIG.apiKey,
+          'X-API-Key': config.apiKey,
           'Content-Type': 'application/json',
         },
       });

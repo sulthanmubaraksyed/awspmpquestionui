@@ -11,6 +11,7 @@ export interface QAResponseIndividual {
   selected_option: string;
   question_type: string;
   is_valid: boolean;
+  process_group: string;
   analysis: {
     option_a_result: string;
     option_b_result: string;
@@ -50,7 +51,7 @@ export interface BaseQuestion {
     process_group: string;
     knowledge_area: string;
     tool: string;
-    suggested_read: string | string[];
+    suggested_read: string[];
     concepts_to_understand: string;
     additional_notes?: string;
   };

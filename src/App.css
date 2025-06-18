@@ -122,7 +122,9 @@
   margin-bottom: 0;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  overflow-y: hidden;
+  overflow: visible;
+  box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 .question-area:focus {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { QAResponseIndividual } from '../../utils/questionService';
+import { QAResponseIndividual } from '../../types';
 import styles from './DebugDialog.module.css';
 
 interface DebugDialogProps {

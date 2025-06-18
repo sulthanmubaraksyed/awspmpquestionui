@@ -175,18 +175,19 @@ async function processQuestionsInBatches(batchSize: number = 50) {
               selected_option: '',
               question_type: "Option",
               is_valid: false,
+              process_group: question.analysis.process_group,
               analysis: {
-                option_a_result: question.analysis.option_a_result,
-                option_b_result: question.analysis.option_b_result,
-                option_c_result: question.analysis.option_c_result,
-                option_d_result: question.analysis.option_d_result,
-                process_group: question.analysis.process_group,
-                knowledge_area: question.analysis.knowledge_area,
-                tool: question.analysis.tool,
-                suggested_read: Array.isArray(question.analysis.suggested_read) ? 
+              option_a_result: question.analysis.option_a_result,
+              option_b_result: question.analysis.option_b_result,
+              option_c_result: question.analysis.option_c_result,
+              option_d_result: question.analysis.option_d_result,
+              process_group: question.analysis.process_group,
+              knowledge_area: question.analysis.knowledge_area,
+              tool: question.analysis.tool,
+              suggested_read: Array.isArray(question.analysis.suggested_read) ? 
                   question.analysis.suggested_read : 
                   [question.analysis.suggested_read],
-                concepts_to_understand: question.analysis.concepts_to_understand,
+              concepts_to_understand: question.analysis.concepts_to_understand,
                 additional_notes: question.analysis.additional_notes
               },
               did_user_get_it_right: undefined
