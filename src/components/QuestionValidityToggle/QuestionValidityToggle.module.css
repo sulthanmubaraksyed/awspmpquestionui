@@ -1,0 +1,37 @@
+.validityToggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #495057;
+}
+
+.status {
+  font-size: 12px;
+  font-style: italic;
+  color: #6c757d;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.questionId {
+  font-size: 10px;
+  color: #adb5bd;
+  text-align: center;
+  margin-top: 2px;
+} 

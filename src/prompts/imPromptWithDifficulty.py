@@ -354,8 +354,9 @@ class PMPQuestionGenerator:
         knowledge_area = self._get_knowledge_area_for_process(process, process_group)
         
         # Calculate difficulty distribution
-        difficult_count = int(num_questions * 0.8)  # 80% difficult questions
-        easy_count = num_questions - difficult_count  # 20% easy questions
+        difficult_count = int(num_questions * 0.9)  # 90% difficult questions
+        medium_count = int(num_questions * 0.05)  # 5% medium questions
+        easy_count = num_questions - difficult_count - medium_count  # 5% easy questions
         
         prompt = f"""
 You are a PMP exam question generator. Generate EXACTLY {num_questions} unique, high-quality, scenario-based PMP-style multiple-choice questions for the process: {process} (Process Group: {process_group}).
@@ -461,8 +462,9 @@ QUALITY AND COMPLIANCE STYLES:
 - Use different organizational structures (functional, matrix, projectized)
 
 DIFFICULTY DISTRIBUTION REQUIREMENT:
-- Generate EXACTLY {difficult_count} DIFFICULT questions (80% of {num_questions})
-- Generate EXACTLY {easy_count} EASY questions (20% of {num_questions})
+- Generate EXACTLY {difficult_count} DIFFICULT questions (90% of {num_questions})
+- Generate EXACTLY {medium_count} MEDIUM questions (5% of {num_questions})
+- Generate EXACTLY {easy_count} EASY questions (5% of {num_questions})
 - The total must equal {num_questions} questions
 
 DIFFICULT QUESTIONS REQUIREMENTS:
@@ -474,6 +476,14 @@ DIFFICULT QUESTIONS REQUIREMENTS:
 - The remaining two options should be clearly incorrect but still plausible
 - The challenge should be in identifying the subtle difference that makes one correct and the other incorrect
 - Focus on complex scenarios, edge cases, or nuanced PMBOK concepts where the distinction is subtle
+
+MEDIUM QUESTIONS REQUIREMENTS:
+- Test moderate understanding of PMP concepts
+- Should have ONE OPTION THAT IS CLOSE to the correct answer but clearly incorrect
+- The correct answer should be clearly distinguishable from the close option
+- The remaining two options should be obviously incorrect
+- Focus on standard PMP scenarios with moderate complexity
+- Questions should require some analysis but not extreme difficulty
 
 EASY QUESTIONS REQUIREMENTS:
 - Test basic understanding of PMP concepts
@@ -495,12 +505,13 @@ GENERAL REQUIREMENTS:
     - tool (if applicable)
     - suggested_read (2-3 specific PMBOK/PMI resources)
     - concepts_to_understand (concise, max 150 words)
-    - additional_notes (quick read links or "No quick reads available for this process")
-    - difficulty_level (must be either "difficult" or "easy")
+    - additional_notes (200 words explaining question context, key concepts, and what leads to the correct answer (no bullet points, use paragraphs if needed))
+    - difficulty_level (must be either "difficult", "medium", or "easy")
 
 Output must be valid JSON, following this format:
 
 {{
+  "is_sample": false,
   "questions": [
     {{
       "id": "[unique_id]",
@@ -525,8 +536,8 @@ Output must be valid JSON, following this format:
         "tool": "[Tool]",
         "suggested_read": ["...", "..."],
         "concepts_to_understand": "...",
-        "additional_notes": "...",
-        "difficulty_level": "difficult" or "easy"
+        "additional_notes": "200 words explaining question context, key concepts, and what leads to the correct answer (no bullet points, use paragraphs if needed)",
+        "difficulty_level": "difficult" or "medium" or "easy"
       }}
     }}
     // ... exactly {num_questions} questions total ...
