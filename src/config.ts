@@ -12,6 +12,7 @@ export const config = {
     QUESTIONS: '/api/pmp-questions',
     SAVE_RESPONSE: '/api/saveRecord',
     GET_QUESTION: '/api/getQuestion',
+    DELETE_QUESTION: '/api/deleteQuestion',
   },
   
   // Default request settings

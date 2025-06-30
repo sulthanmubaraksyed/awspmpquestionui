@@ -1,0 +1,75 @@
+
+You are a PMP exam question generator. Generate up to 2 unique, high-quality, scenario-based PMP-style MULTI-SELECT questions for the process: Create WBS (Process Group: Planning).
+
+CRITICAL REQUIREMENT - MULTI-SELECT FORMAT:
+- Each question must have exactly 5 options: A, B, C, D, and E
+- EXACTLY 3 options must be correct answers
+- EXACTLY 2 options must be incorrect answers
+- The correct answers must be randomly distributed among the 5 options
+- Do not always place the correct answers in the same positions
+
+Requirements:
+- Each question must be realistic, relevant, and test multiple concepts from the process.
+- Each question must have exactly 5 unique, plausible options (A, B, C, D, E).
+- Exactly 3 options must be correct, and 2 must be incorrect.
+- Each option must be a complete sentence and not reused across questions.
+- Each question must include detailed explanations for all options:
+    - CORRECT: Start with "CORRECT - ", explain why it's correct, reference PMBOK/PMI best practices, and provide real-world context (3-4 sentences).
+    - INCORRECT: Start with "INCORRECT - ", explain why it's wrong, reference PMI concepts, and describe negative impacts (3-4 sentences).
+- Explanations must be unique, detailed, and never generic or repeated.
+- Each question must include an analysis section with:
+    - process_group (must be one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing)
+    - knowledge_area (must be one of: Integration, Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurement, Stakeholders) (for this process, use: Scope)
+    - tool (if applicable)
+    - suggested_read (2-3 specific PMBOK/PMI resources)
+    - concepts_to_understand (concise, max 150 words)
+    - additional_notes (200 words explaining the question and how to identify all 3 correct answers, no bullet points, can use multiple paragraphs)
+
+Output must be valid JSON, following this format:
+
+{
+  "questions": [
+    {
+      "id": "[unique_id]",
+      "question_pmp": "Your unique PMP-style multi-select question text here (2-8 lines as needed)",
+      "options_pmp": {
+        "OPTION_A": "Unique first option text (PMP exam style) (randomly place correct/incorrect answer)",
+        "OPTION_B": "Unique second option text (PMP exam style) (randomly place correct/incorrect answer)",
+        "OPTION_C": "Unique third option text (PMP exam style) (randomly place correct/incorrect answer)",
+        "OPTION_D": "Unique fourth option text (PMP exam style) (randomly place correct/incorrect answer)",
+        "OPTION_E": "Unique fifth option text (PMP exam style) (randomly place correct/incorrect answer)"
+      },
+      "is_attempted": false,
+      "selected_option": "",
+      "question_type": "multiselect",
+      "is_valid": false,
+      "analysis": {
+        "option_a_result": "CORRECT - ... or INCORRECT - ... (randomly place correct/incorrect answer)",
+        "option_b_result": "CORRECT - ... or INCORRECT - ... (randomly place correct/incorrect answer)",
+        "option_c_result": "CORRECT - ... or INCORRECT - ... (randomly place correct/incorrect answer)",
+        "option_d_result": "CORRECT - ... or INCORRECT - ... (randomly place correct/incorrect answer)",
+        "option_e_result": "CORRECT - ... or INCORRECT - ... (randomly place correct/incorrect answer)",
+        "process_group": "Planning",
+        "knowledge_area": "Scope",
+        "tool": "[Tool]",
+        "suggested_read": ["...", "..."],
+        "concepts_to_understand": "...",
+        "additional_notes": "200 words explaining the question and how to identify all 3 correct answers, no bullet points, can use multiple paragraphs"
+      }
+    }
+    // ... more questions ...
+  ]
+}
+
+IMPORTANT JSON RULES:
+- No trailing commas
+- All strings in double quotes
+- No comments or undefined/null values
+- All objects/arrays properly closed
+- Boolean values lowercase (true/false)
+- No line breaks within string values
+- ALWAYS include exactly 5 options (A, B, C, D, E) for every question
+- EXACTLY 3 options must be marked as CORRECT
+- EXACTLY 2 options must be marked as INCORRECT
+
+Do not include any explanations or text outside the JSON structure.

@@ -1,0 +1,226 @@
+Question 33
+
+In the past year, a company paid US$60,000 to an external subcontractor for an ongoing project. The project manager has been asked to evaluate if the project can be delivered more cost effectively this year by using internal labor.
+The project manager used an optimistic term of 4 months, a pessimistic term of 6 months, and a most expected term of 5 months, and has concluded that the service can be delivered with the following resources:
+Two engineers (monthly salary of US$700 each)
+One project manager (monthly salary of US$1,600)
+Additional estimated monthly expenses of US$2,000
+The project manager used the program evaluation and review technique (PERT) to calculate the savings if the project is delivered with in-house resources.
+How much money will the project manager estimate the company can save?
+Correct answer
+US$35,000
+US$20,000
+US$40,000
+US$30,000
+Overall explanation
+To calculate the estimated savings using in-house resources for the project, we first need to determine the expected duration of the project using the PERT (Program Evaluation and Review Technique) formula and then calculate the total cost for this duration. Finally, we will compare this cost with the external subcontractor cost to find the savings.
+The PERT formula for the expected project duration is:
+Expected Time (TE) = (Optimistic + 4 × Most Likely + Pessimistic)/6
+Given:
+Optimistic (O) = 4 months
+Most Likely (M) = 5 months
+Pessimistic (P) = 6 months
+TE = (4+4×5+6)/6 = 5 months
+Now, calculate the total in-house project cost for 5 months:
+Two engineers' cost = 2 engineers × US$700/month × 5 months = US$7,000
+Project manager cost = US$1,600/month × 5 months = US$8,000
+Additional expenses = US$2,000/month × 5 months = US$10,000
+Total in-house cost = US$7,000 (engineers) + US$8,000 (PM) + US$10,000 (expenses) = US$25,000
+The external subcontractor cost for the year is US$60,000.
+The estimated savings = External cost - In-house cost = US$60,000 - US$25,000 = US$35,000
+Therefore, the project manager will estimate that the company can save US$35,000.
+
+Question 34
+
+A project manager has been assigned to lead an IT project to store information on sold lottery tickets. During the project execution, a failure in the system caused 10 numbers to be sold two times. This happened during the month of greatest demand because the prize was the highest of the year. The project team is concerned that one of those tickets could be the winner.
+What should the project manager do first?
+Reassure the sponsor by explaining the probability of this risk materializing is extremely low.
+Explanation
+
+Downplaying the issue without a thorough review might overlook the potential impact and necessary response strategies.
+Carry out tests to verify that the system does not fail again due to the high occurrence of events.
+Explanation
+
+While important, this should be part of the response action after reviewing the risk plan. It’s not the first step to take immediately after the issue is discovered.
+Correct answer
+Review the list of risks to verify that this issue was considered and execute the detailed action plan.
+Explanation
+
+Reviewing the list of risks to verify that this issue was considered and executing the detailed action plan is the most appropriate first step. It ensures that the project manager and team handle the situation based on predefined risk management strategies, which is crucial for effective and timely resolution of the issue.
+Inform the sponsor about the issue and make a request for sufficient funds to be made available.
+Explanation
+
+While informing the sponsor is important, it should be done with a clear plan of action. Simply requesting funds without a structured response plan might not be effective.
+Overall explanation
+In the scenario where a failure in the lottery ticket system resulted in the duplication of 10 numbers during a high-demand period, the project manager needs to address this critical issue promptly and effectively. The best choice is to review the list of risks to verify that this issue was considered and execute the detailed action plan. This is crucial for several reasons:
+Review the Risk Management Plan: The first step is to review the existing risk management plan and check if this specific issue was identified as a risk. This will help determine whether there is an existing strategy or action plan to address it.
+Execute the Action Plan: If this issue was anticipated and included in the risk management plan, the project manager should immediately execute the detailed action plan designed to mitigate this risk.
+Focus on Risk Mitigation: This approach ensures that the project team responds effectively and systematically to the issue, minimizing potential negative impacts.
+
+Question 35
+
+A project scope statement has been approved, and the project manager and core team have been assigned to the project. Suddenly, the project manager takes a temporary leave of absence due to a medical emergency. The team develops the project schedule while the project manager is on leave. When the project manager returns, a detailed schedule is almost complete.
+What should the project manager do?
+Correct answer
+Ensure that the schedule is aligned with the vision and objectives.
+Explanation
+
+Ensuring that the schedule is aligned with the vision and objectives of the project is the most effective action for the project manager. This approach respects the team's effort while ensuring that the project remains on track and in alignment with its defined goals and scope.
+Escalate the compliance issue to the project management office (PMO).
+Explanation
+
+Escalating the issue to the PMO without first reviewing the work done by the team might be premature. The team’s effort should be evaluated on its own merits before deciding on escalation.
+Congratulate the team and move on to the execution phase.
+Explanation
+
+While congratulating the team is important, moving directly to the execution phase without a thorough review of the schedule could lead to issues later in the project.
+Develop a new detailed schedule with the team and project sponsor.
+Explanation
+
+Creating a new schedule from scratch may not be necessary and could lead to a waste of time and resources. It’s more efficient to review and, if needed, modify the existing schedule.
+Overall explanation
+In the situation where the project manager returns from a temporary leave to find that the team has nearly completed the project schedule, the project manager should take steps to ensure that the schedule aligns with the overall project goals and objectives:
+Review and Align the Schedule: The first step is to review the schedule to ensure it aligns with the project's scope, vision, and objectives. This includes verifying that key deliverables, milestones, and resource allocations are consistent with the project's goals.
+Assess Quality and Completeness: The project manager should assess the completeness and quality of the schedule. This involves checking for any gaps, risks, or potential oversights that might have occurred during their absence.
+Provide Guidance and Input: If necessary, the project manager should provide guidance or input to refine the schedule, ensuring it is robust and effective for successful project execution.
+
+Question 36
+
+Eight highly qualified experts have been assembled to work for a 6-month period on a specific aspect of an organization's product development process
+How should the project manager support this team to succeed?
+Hand over control of specific aspects of their roles as experts and let them agree on their own timelines and targets.
+Explanation
+
+While autonomy is important, completely handing over control without any collaborative objective setting might lead to a lack of coordination and misalignment with the project goals.
+Bring in a senior colleague who is also an expert to ensure the team is on track to achieve the goals and objectives.
+Explanation
+
+This might be seen as undermining the team's expertise and can potentially create unnecessary oversight, which could impede the team’s autonomy and creativity.
+Define roles and targets for all team members and regularly follow up with one-to-one meetings to review progress.
+Explanation
+
+While defining roles and targets is important, this approach may not fully leverage the collaborative potential of the team of experts and might lead to a more rigid structure than necessary. It might be overly prescriptive for a team of highly qualified experts, potentially limiting their autonomy and creativity.
+Correct answer
+Work with the team members to define the overall objective and support them to engage around the goal.
+Explanation
+
+Working with the team members to define the overall objective and supporting them to engage around the goal is the most effective strategy. It harnesses the collective expertise of the team while ensuring alignment with the project's overarching objectives.
+Overall explanation
+For a project involving eight highly qualified experts working on a specific aspect of product development, the project manager's approach should foster collaboration, leverage their expertise, and align their efforts with the project goals. The best choice is to work with the team members to define the overall objective and support them in engaging around the goal. This is crucial for several reasons:
+Collaborative Objective Setting: Work with the team members to define the project objective. This ensures that everyone clearly understands what they are working towards and how their expertise contributes to the project's success.
+Foster Team Engagement: Support the team in engaging around the common goal. This involves facilitating discussions, encouraging input from all experts, and ensuring that there is a shared vision and commitment to the project objectives.
+Leverage Expertise: Recognize and utilize the expertise of each team member. Encourage them to take ownership of their areas of expertise, while ensuring that their work aligns with the overall project objectives.
+
+Question 37
+
+A project manager receives a suggestion from a team member to improve the product attributes without impacting the schedule or cost. This will add value to the project and the customer.
+What should the project manager do?
+Correct answer
+Ask the team member to submit a formal change request.
+Explanation
+
+Asking the team member to submit a formal change request is the most effective action. It adheres to the project's change management procedures, ensuring that the suggestion is evaluated properly and that its impacts on the project are thoroughly assessed.
+Accept the suggestion as it has no impact on the project.
+Explanation
+
+Accepting a change without formal review can lead to scope creep and might overlook potential hidden impacts.
+Ask another team member to validate the impacts of the suggestion.
+Explanation
+
+While peer review is valuable, it should be part of a formal change management process to ensure thorough evaluation and documentation.
+Reject the suggestion and ask the team member to focus on executing the plan.
+Explanation
+
+Rejecting a potentially valuable suggestion without formal review can stifle innovation and may overlook opportunities to enhance project value.
+Overall explanation
+When a project manager receives a suggestion from a team member that could improve the product without impacting the schedule or cost, it's essential to handle the suggestion to respect the team member's contribution while ensuring that the project remains on track. The best choice is to ask the team member to submit a formal change request. This is crucial for several reasons:
+Initiate Formal Change Control Process: Encourage the team member to submit a formal change request. This is a key step in the project's change control process, ensuring that all proposed changes are documented, reviewed, and approved in a structured manner.
+Assess the Change Thoroughly: Even if the suggestion does not immediately impact cost or schedule, it's important to assess its implications comprehensively. This includes evaluating potential risks, quality impacts, or other unforeseen effects.
+Ensure Stakeholder Alignment: A formal change request allows for proper evaluation and ensures that all relevant stakeholders, including the customer, are informed and agree with the proposed change.
+
+Question 38
+
+An enthusiastic, newly hired vice-president has been assigned as the product owner for a digital transformation project. The project manager advises the product owner that some of the functional requirements are not aligned with the chief information technology officer's (CTO) strategy. The product owner tells the project manager that the CTO is not part of the project and should not be engaged at this moment.
+What should the project manager do?
+Advise the CTO about the possible impacts caused by the project.
+Explanation
+
+While it’s important for the CTO to be aware of the project, bypassing the product owner might create conflict and undermine the project manager’s role in facilitating stakeholder engagement.
+Correct answer
+Influence the product owner to review the engagement needed from other stakeholders.
+Explanation
+
+Influencing the product owner to review the engagement needed from other stakeholders, especially the CTO , is the most effective course of action. It ensures that the project is aligned with the broader organizational strategy and mitigates the risks of proceeding without critical stakeholder input.
+Continue building the backlog since they are functional requirements.
+Explanation
+
+Continuing to build the backlog without resolving the alignment issue can lead to problems later in the project, especially if the requirements are not in line with the organization's broader IT strategy.
+Review the organizational process assets (OPAs) for historical information from similar projects.
+Explanation
+
+While reviewing OPAs can provide useful insights, it does not address the immediate need for stakeholder engagement and alignment with the CTO’s strategy.
+Overall explanation
+In a situation where the newly hired vice-president cum product owner for a digital transformation project dismisses concerns about the alignment of functional requirements with the Chief Information Technology Officer's (CTO) strategy, the project manager should navigate this carefully. In this scenario, the project manager should:
+Advocate for Stakeholder Engagement: Work to influence the product owner to recognize the importance of aligning with the CTO’s strategy and the need for broader stakeholder engagement. The project manager should highlight the potential risks and benefits of involving the CTO and other relevant stakeholders.
+Facilitate Collaboration and Alignment: Emphasize the importance of aligning project goals with organizational strategies. The project manager can facilitate discussions between the product owner and the CTO to ensure that the project is in sync with the overall IT strategy of the organization.
+Support Informed Decision-Making: Help the product owner understand that input from key stakeholders, like the CTO, is crucial for the success of the digital transformation project. This can lead to more informed decision-making and a greater chance of project success.
+
+Question 39
+
+A project team is implementing an enterprise notification tool with a vendor. The project manager noticed that this vendor's developer has been reporting the same status for several weeks in a row. A few days later, the vendor communicated that the deliverable would not be completed on time due to resource constraints within their company.
+What should the project manager do next?
+Update the risk register to reflect the delay, communicate the impact to the schedule, and escalate to management for assistance.
+Explanation
+
+While updating the risk register and communicating the impact are important, the immediate next step should be to work with the vendor on a resolution. Escalation can be considered if collaborative efforts fail.
+Conduct a project review with the project sponsor to explain the delay and add a developer to work with the vendor.
+Explanation
+
+Reviewing the situation with the sponsor is important, but the priority should be on resolving the issue with the vendor. Adding a developer may not be feasible or effective without first understanding the vendor’s specific constraints.
+Review the contract with the vendor to go over the financial penalty that is applicable to this situation.
+Explanation
+
+While it’s important to be aware of the contractual terms, focusing on penalties at this stage might strain the relationship with the vendor and could be counterproductive to finding a collaborative solution.
+Correct answer
+Add the delay to the issue log and work with the vendor for a resolution that will bring the schedule back on track.
+Explanation
+
+Adding the delay to the issue log and working with the vendor for a resolution is the most effective next step. It ensures proactive management of the delay, focusing on collaboration and problem-solving to realign the project schedule.
+Overall explanation
+When facing a delay in project deliverables due to resource constraints on the vendor's side, the project manager needs to take actions that address the delay effectively while maintaining a positive working relationship with the vendor. The best choice is to add the delay to the issue log and work with the vendor for a resolution to bring the schedule back on track. This is crucial for several reasons:
+Document the Delay: Record the delay in the issue log. This is important for tracking and managing project issues and their resolution.
+Collaborate with the Vendor: Engage with the vendor to explore solutions and alternative plans. This could involve negotiating revised timelines, additional resources, or other measures to mitigate the delay.
+Focus on Problem-Solving: Working collaboratively with the vendor to find a resolution emphasizes problem-solving and maintaining a constructive working relationship, which is key to successful project delivery.
+
+Question 40
+
+A project that uses an incremental approach has colocated team members and uses a kanban board to visualize the work in progress (WIP). A key external stakeholder requests that all project activities be placed on hold until a status report is distributed.
+What should the project manager have done to avoid this situation?
+Stored project documentation in a shared folder.
+Explanation
+
+Storing project documentation in a shared folder is good for transparency and information accessibility but doesn't actively communicate project progress to stakeholders. It requires stakeholders to take the initiative to access and review the documents. This is a passive approach; stakeholders may not actively review the documents, and it doesn’t ensure that they are kept up-to-date on project progress.
+Organized monthly meetings with the external stakeholders.
+Explanation
+
+Organizing monthly meetings with external stakeholders can be effective for direct engagement but may not be frequent enough to keep all stakeholders adequately informed about an incremental project's rapid developments.
+Invited all of the stakeholders to daily standup meetings.
+Explanation
+
+Inviting all stakeholders to daily standup meetings is not practical or efficient. Daily standups are typically short and focused on the team's immediate work; involving all stakeholders in these meetings could disrupt the workflow and may not be necessary or valuable for external stakeholders.
+Correct answer
+Sent weekly status update reports to all of the stakeholders.
+Explanation
+
+Sending weekly status update reports to all stakeholders is a comprehensive and balanced approach. It ensures that stakeholders, including key external ones, are consistently informed about the project's status, reducing the likelihood of requests for abrupt halts in project activities for status updates. This approach aligns well with the incremental nature of the project and the need for regular stakeholder engagement.
+Overall explanation
+In the context of an incremental project with colocated team members using a kanban board, the project manager should have implemented a proactive and consistent communication strategy to keep stakeholders informed. Sending weekly status update reports to all stakeholders is an effective way to achieve this. This approach ensures that stakeholders are regularly updated about the project's progress, challenges, and any changes in the work in progress (WIP). Regular updates can prevent misunderstandings or concerns from escalating, as demonstrated by the key external stakeholder's request to halt project activities. Weekly reports strike a balance between providing timely information and not overwhelming stakeholders with too frequent communications.
+NOTE: Considering the concerns about the frequency of communication in option B (“monthly” meetings) and the need for tailored communication in option D (“all” of the stakeholders), let's thoroughly evaluate options B and D in the project's context:
+Incremental Project Approach and Colocated Team: This suggests a project that is likely to have frequent updates due to its methodology, but the frequency and depth of communication required by stakeholders can vary.
+Key External Stakeholder's Request: The fact that a key stakeholder has asked for all activities to be placed on hold until they receive a status report indicates a need for more frequent and direct communication with at least this stakeholder.
+Given this context, the most balanced approach would be option D (Sent weekly status update reports to all of the stakeholders). Here's why:
+While "all stakeholders" might seem broad, in practice, this can be managed by tailoring the depth and detail of the reports to suit different stakeholders' needs. Key stakeholders, like the one who requested the halt, would receive more detailed updates, while others might receive more high-level summaries.
+The term "all stakeholders" does not necessarily imply an exhaustive list of everyone involved but rather stakeholders with a significant interest or influence over the project. It's about inclusivity and ensuring that no key parties are left uninformed.
+In an incremental project, changes and progress can occur rapidly. Weekly updates provide a good balance between keeping stakeholders informed and not overwhelming them with too much information. It also prevents the build-up of concerns or questions arising from less frequent communication.
+This approach shows responsiveness to the needs of stakeholders who may require more frequent updates than what monthly meetings offer. It's adaptable; the frequency and detail can be adjusted as the project progresses and stakeholders' needs change.
+In conclusion, sending weekly status update reports tailored to the needs of different stakeholders appears to be the most effective way to keep them informed and engaged, addressing the immediate concern raised by the key external stakeholder and maintaining a steady flow of communication throughout the project.

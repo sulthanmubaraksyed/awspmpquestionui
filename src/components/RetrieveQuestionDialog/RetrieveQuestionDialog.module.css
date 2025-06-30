@@ -291,6 +291,25 @@
   background-color: #e9ecef;
 }
 
+.saveButton {
+  padding: 8px 24px;
+  background-color: #28a745;
+  border: 1px solid #1e7e34;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #1e7e34;
+}
+
+.saveButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .dialog {

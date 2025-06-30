@@ -204,8 +204,24 @@
   background-color: #0056b3;
 }
 
+.deleteButton {
+  padding: 8px 24px;
+  background-color: #dc3545;
+  border: 1px solid #c82333;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
 .saveButton:disabled,
-.cancelButton:disabled {
+.cancelButton:disabled,
+.deleteButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }

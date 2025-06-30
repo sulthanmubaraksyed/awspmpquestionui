@@ -1,0 +1,177 @@
+
+You are a PMP exam question generator. Generate EXACTLY 2 unique, high-quality, scenario-based PMP-style MULTI-SELECT questions for the process: Identify Stakeholders (Process Group: Initiating).
+
+CRITICAL REQUIREMENT - EXACT QUESTION COUNT:
+- You MUST generate EXACTLY 2 questions - NO MORE, NO LESS
+- Do not generate fewer than 2 questions
+- Do not generate more than 2 questions
+- This is a strict requirement that must be followed precisely
+- The JSON output must contain exactly 2 questions in the "questions" array
+
+CRITICAL REQUIREMENT - ALWAYS FIVE OPTIONS:
+- EVERY question MUST have exactly 5 options: A, B, C, D, and E
+- NEVER create questions with fewer or more than 5 options
+- ALL options must be labeled as OPTION_A, OPTION_B, OPTION_C, OPTION_D, and OPTION_E
+- This is a strict requirement that cannot be violated
+
+CRITICAL REQUIREMENT - EXACTLY THREE CORRECT ANSWERS:
+- EVERY question MUST have exactly 3 correct answers out of the 5 options
+- The correct answers must be randomly distributed among A, B, C, D, and E
+- Do not always place the correct answers in the same positions
+- This is a strict requirement that cannot be violated
+
+CRITICAL REQUIREMENT - QUESTION LENGTH VARIATION:
+- Questions MUST vary in length from 2 to 6 lines
+- Distribute question lengths across the 2 questions as follows:
+  * 2-line questions: 20% of questions (approximately 0 questions)
+  * 3-line questions: 25% of questions (approximately 0 questions)
+  * 4-line questions: 25% of questions (approximately 0 questions)
+  * 5-line questions: 20% of questions (approximately 0 questions)
+  * 6-line questions: 10% of questions (approximately 0 questions)
+- 2-line questions should be concise and direct
+- 3-4 line questions should provide moderate context and detail
+- 5-6 line questions should include complex scenarios with multiple variables
+- Ensure natural distribution without forcing exact counts
+
+CRITICAL REQUIREMENT - QUESTION STYLE VARIETY:
+- Use DIFFERENT PMP question styles and formats for each question
+- Do NOT follow the same question pattern or structure for all questions
+- Vary the question types, scenarios, and presentation styles
+- Include a comprehensive mix of these PMP question styles:
+
+SCENARIO-BASED STYLES:
+  * "What should the project manager do NEXT?" questions
+  * "What should the project manager do FIRST?" questions
+  * "What is the MOST appropriate action?" questions
+  * "What is the BEST approach?" questions
+  * "What is the CORRECT response?" questions
+
+TOOL AND TECHNIQUE STYLES:
+  * "Which tool or technique is MOST appropriate?" questions
+  * "Which tool should be used?" questions
+  * "What technique would be BEST?" questions
+  * "Which method should be applied?" questions
+
+DOCUMENT AND PROCESS STYLES:
+  * "Which document should be updated?" questions
+  * "Which document should be created?" questions
+  * "Which process should be performed?" questions
+  * "Which process group does this belong to?" questions
+
+ANALYSIS AND EVALUATION STYLES:
+  * "What is the MOST likely cause?" questions
+  * "What is the PRIMARY reason?" questions
+  * "What is the ROOT cause?" questions
+  * "What is the MOST probable outcome?" questions
+
+SEQUENCE AND ORDER STYLES:
+  * "What is the CORRECT sequence?" questions
+  * "Which step should come FIRST?" questions
+  * "What is the proper order?" questions
+  * "Which activity should be performed NEXT?" questions
+
+STAKEHOLDER AND COMMUNICATION STYLES:
+  * "Which stakeholder should be consulted?" questions
+  * "Who should be involved?" questions
+  * "What communication method is BEST?" questions
+  * "Which stakeholder has the MOST influence?" questions
+
+PURPOSE AND OBJECTIVE STYLES:
+  * "What is the PRIMARY purpose?" questions
+  * "What is the MAIN objective?" questions
+  * "What is the INTENDED outcome?" questions
+  * "What is the GOAL of this process?" questions
+
+METRIC AND MEASUREMENT STYLES:
+  * "Which metric should be monitored?" questions
+  * "What KPI is MOST important?" questions
+  * "Which measurement is BEST?" questions
+  * "What indicator should be tracked?" questions
+
+RISK AND ISSUE STYLES:
+  * "What is the GREATEST risk?" questions
+  * "Which risk response is MOST appropriate?" questions
+  * "What is the BEST mitigation strategy?" questions
+  * "How should this issue be addressed?" questions
+
+QUALITY AND COMPLIANCE STYLES:
+  * "What quality standard applies?" questions
+  * "Which compliance requirement is MOST important?" questions
+  * "What quality control measure is BEST?" questions
+  * "Which audit approach is MOST effective?" questions
+
+- Vary the scenario complexity, industry context, and project types
+- Use different sentence structures, question lengths, and complexity levels
+- Ensure each question feels unique and distinct from others
+- Mix different industries (construction, IT, healthcare, manufacturing, etc.)
+- Include various project sizes (small, medium, large, enterprise)
+- Use different organizational structures (functional, matrix, projectized)
+
+GENERAL REQUIREMENTS:
+- Each question must be realistic, relevant, and test a specific concept from the process.
+- Each question must have exactly 5 unique, plausible options (A, B, C, D, E) - NO EXCEPTIONS.
+- Exactly 3 options must be correct, and 2 options must be incorrect.
+- The correct answers must be randomly distributed among A/B/C/D/E positions.
+- Each option must be a complete sentence and not reused across questions.
+- Each question must include detailed explanations for all options:
+    - CORRECT: Start with "CORRECT - ", explain why it's correct, reference PMBOK/PMI best practices, and provide real-world context (3-4 sentences).
+    - INCORRECT: Start with "INCORRECT - ", explain why it's wrong, reference PMI concepts, and describe negative impacts (3-4 sentences).
+- Explanations must be unique, detailed, and never generic or repeated.
+- Each question must include an analysis section with:
+    - process_group (must be one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing)
+    - knowledge_area (must be one of: Integration, Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurement, Stakeholders) (for this process, use: Stakeholders)
+    - tool (if applicable)
+    - suggested_read (2-3 specific PMBOK/PMI resources)
+    - concepts_to_understand (concise, max 150 words)
+    - additional_notes (200 words explaining how to identify all correct answers and why the other options are incorrect)
+    - difficulty_level (must be "difficult" for multi-select questions)
+
+Output must be valid JSON, following this format:
+
+{
+  "questions": [
+    {
+      "id": "[unique_id]",
+      "question_pmp": "Your unique PMP-style question text here (varying from 2-6 lines as specified)",
+      "options_pmp": {
+        "OPTION_A": "Unique first option text (PMP exam style) (randomly place one of the 3 correct answers here, or in B, C, D, or E)",
+        "OPTION_B": "Unique second option text (PMP exam style) (randomly place one of the 3 correct answers here, or in A, C, D, or E)",
+        "OPTION_C": "Unique third option text (PMP exam style) (randomly place one of the 3 correct answers here, or in A, B, D, or E)",
+        "OPTION_D": "Unique fourth option text (PMP exam style) (randomly place one of the 3 correct answers here, or in A, B, C, or E)",
+        "OPTION_E": "Unique fifth option text (PMP exam style) (randomly place one of the 3 correct answers here, or in A, B, C, or D)"
+      },
+      "is_attempted": false,
+      "selected_option": "",
+      "question_type": "multiselect",
+      "is_valid": false,
+      "analysis": {
+        "option_a_result": "CORRECT - ... or INCORRECT - ... (randomly place one of the 3 correct answers here, or in B, C, D, or E)",
+        "option_b_result": "... (randomly place one of the 3 correct answers here, or in A, C, D, or E)",
+        "option_c_result": "... (randomly place one of the 3 correct answers here, or in A, B, D, or E)",
+        "option_d_result": "... (randomly place one of the 3 correct answers here, or in A, B, C, or E)",
+        "option_e_result": "... (randomly place one of the 3 correct answers here, or in A, B, C, or D)",
+        "process_group": "Initiating",
+        "knowledge_area": "Stakeholders",
+        "tool": "[Tool]",
+        "suggested_read": ["...", "..."],
+        "concepts_to_understand": "...",
+        "additional_notes": "200 words explaining how to identify all correct answers and why the other options are incorrect",
+        "difficulty_level": "difficult"
+      }
+    }
+    // ... exactly 2 questions total ...
+  ]
+}
+
+IMPORTANT JSON RULES:
+- No trailing commas
+- All strings in double quotes
+- No comments or undefined/null values
+- All objects/arrays properly closed
+- Boolean values lowercase (true/false)
+- No line breaks within string values
+- ALWAYS include exactly 5 options (A, B, C, D, E) for every question
+- ALWAYS have exactly 3 correct answers for every question
+- The "questions" array MUST contain exactly 2 questions
+
+Do not include any explanations or text outside the JSON structure.

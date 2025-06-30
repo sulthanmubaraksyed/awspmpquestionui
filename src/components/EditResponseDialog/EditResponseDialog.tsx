@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { QAResponseIndividual } from '../../types/index';
+import { config, buildApiUrl } from '../../config';
 import styles from './EditResponseDialog.module.css';
 import ProcessGroupSelector from '../ProcessGroupSelector/ProcessGroupSelector';
 import KnowledgeAreaSelector from '../KnowledgeAreaSelector/KnowledgeAreaSelector';
@@ -25,6 +26,7 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState<string>('');
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   useEffect(() => {
     if (currentResponse) {
@@ -165,6 +167,65 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
     } finally {
       console.log('Setting isSaving to false');
       setIsSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!editedResponse) {
+      setError('No question to delete');
+      return;
+    }
+
+    console.log('=== EditResponseDialog: Delete Question Button Clicked ===');
+    console.log('Question ID to delete:', editedResponse.id);
+    console.log('Process Group:', editedResponse.analysis?.process_group);
+
+    setIsDeleting(true);
+    setError(null);
+
+    try {
+      const url = buildApiUrl(config.API_ENDPOINTS.DELETE_QUESTION, {
+        id: editedResponse.id,
+        processGroup: editedResponse.analysis?.process_group || ''
+      });
+      
+      console.log('Delete API Request URL:', url);
+      console.log('Delete API Request Headers:', {
+        'X-API-Key': config.apiKey ? '***' : 'Not Set',
+        'Content-Type': 'application/json'
+      });
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'X-API-Key': config.apiKey,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Delete API Response Status:', response.status);
+
+      if (!response.ok) {
+        const errorMsg = `Failed to delete question: ${response.status}`;
+        console.log('Delete Error (HTTP):', errorMsg);
+        throw new Error(errorMsg);
+      }
+
+      const data = await response.json();
+      console.log('Delete API Response Data:', data);
+
+      // Close the dialog after successful deletion
+      console.log('Question deleted successfully, closing dialog');
+      onClose();
+      
+    } catch (err) {
+      console.log('Delete Exception caught:', err);
+      console.log('Delete Exception type:', typeof err);
+      console.log('Delete Exception message:', err instanceof Error ? err.message : String(err));
+      setError(err instanceof Error ? err.message : 'Failed to delete question');
+    } finally {
+      setIsDeleting(false);
+      console.log('Delete loading state set to false');
     }
   };
 
@@ -393,14 +454,22 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
               type="button"
               className={styles.cancelButton}
               onClick={onClose}
-              disabled={isSaving}
+              disabled={isSaving || isDeleting}
             >
               Cancel
             </button>
             <button
+              type="button"
+              className={styles.deleteButton}
+              onClick={handleDelete}
+              disabled={isDeleting || isSaving}
+            >
+              {isDeleting ? 'Deleting...' : 'Delete Question'}
+            </button>
+            <button
               type="submit"
               className={styles.saveButton}
-              disabled={isSaving}
+              disabled={isSaving || isDeleting}
             >
               {isSaving ? 'Saving...' : 'Save Changes'}
             </button>

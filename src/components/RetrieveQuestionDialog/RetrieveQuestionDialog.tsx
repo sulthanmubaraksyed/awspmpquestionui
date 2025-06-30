@@ -16,6 +16,7 @@ const RetrieveQuestionDialog: React.FC<RetrieveQuestionDialogProps> = ({
   const [retrievedQuestion, setRetrievedQuestion] = useState<QAResponseIndividual | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
 
   const handleRetrieve = async () => {
     console.log('=== Retrieve from Service Button Clicked ===');
@@ -114,6 +115,76 @@ const RetrieveQuestionDialog: React.FC<RetrieveQuestionDialogProps> = ({
     } finally {
       setIsLoading(false);
       console.log('Loading state set to false');
+    }
+  };
+
+  const handleSave = async () => {
+    if (!retrievedQuestion) {
+      setError('No question to save');
+      return;
+    }
+
+    console.log('=== Save Changes Button Clicked ===');
+    console.log('Question ID to save:', retrievedQuestion.id);
+    console.log('Process Group:', retrievedQuestion.analysis?.process_group);
+
+    setIsSaving(true);
+    setError(null);
+
+    try {
+      const url = buildApiUrl(config.API_ENDPOINTS.SAVE_RESPONSE);
+      
+      console.log('Save API Request URL:', url);
+      console.log('Save API Request Headers:', {
+        'X-API-Key': config.apiKey ? '***' : 'Not Set',
+        'Content-Type': 'application/json'
+      });
+
+      const saveData = {
+        id: retrievedQuestion.id,
+        question_pmp: retrievedQuestion.question_pmp,
+        options_pmp: retrievedQuestion.options_pmp,
+        is_attempted: retrievedQuestion.is_attempted,
+        selected_option: retrievedQuestion.selected_option,
+        question_type: retrievedQuestion.question_type,
+        is_valid: retrievedQuestion.is_valid,
+        process_group: retrievedQuestion.analysis?.process_group,
+        analysis: retrievedQuestion.analysis
+      };
+
+      console.log('Save API Request Data:', saveData);
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'X-API-Key': config.apiKey,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(saveData),
+      });
+
+      console.log('Save API Response Status:', response.status);
+
+      if (!response.ok) {
+        const errorMsg = `Failed to save question: ${response.status}`;
+        console.log('Save Error (HTTP):', errorMsg);
+        throw new Error(errorMsg);
+      }
+
+      const data = await response.json();
+      console.log('Save API Response Data:', data);
+
+      // Show success message
+      console.log('Question saved successfully');
+      
+    } catch (err) {
+      console.log('Save Exception caught:', err);
+      console.log('Save Exception type:', typeof err);
+      console.log('Save Exception message:', err instanceof Error ? err.message : String(err));
+      setError(err instanceof Error ? err.message : 'Failed to save question');
+    } finally {
+      setIsSaving(false);
+      console.log('Save loading state set to false');
     }
   };
 
@@ -260,6 +331,14 @@ const RetrieveQuestionDialog: React.FC<RetrieveQuestionDialogProps> = ({
             onClick={handleClose}
           >
             Close
+          </button>
+          <button
+            type="button"
+            className={styles.saveButton}
+            onClick={handleSave}
+            disabled={isSaving || !retrievedQuestion}
+          >
+            {isSaving ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
       </div>
