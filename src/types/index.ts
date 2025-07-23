@@ -11,6 +11,7 @@ export interface QAResponseIndividual {
   selected_option: string;
   question_type: string;
   is_valid: boolean;
+  is_sample: boolean;
   process_group: string;
   analysis: {
     option_a_result: string;

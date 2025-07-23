@@ -325,6 +325,17 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   <option value="false">False</option>
                 </select>
               </div>
+              <div className={styles.field}>
+                <label>Is Sample</label>
+                <select
+                  className={styles.select}
+                  value={editedResponse.is_sample === undefined ? 'false' : editedResponse.is_sample.toString()}
+                  onChange={(e) => handleChange('is_sample', e.target.value)}
+                >
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
             </div>
 
             {/* Right Column */}

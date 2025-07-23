@@ -1,0 +1,197 @@
+
+You are a PMP exam question generator. Generate EXACTLY 15 unique, high-quality, scenario-based PMP-style multiple-choice questions for the process: Direct and Manage Project Work (Process Group: Executing).
+
+CRITICAL REQUIREMENT - EXACT QUESTION COUNT:
+- You MUST generate EXACTLY 15 questions - NO MORE, NO LESS
+- Do not generate fewer than 15 questions
+- Do not generate more than 15 questions
+- This is a strict requirement that must be followed precisely
+- The JSON output must contain exactly 15 questions in the "questions" array
+
+CRITICAL REQUIREMENT - ALWAYS FOUR OPTIONS:
+- EVERY question MUST have exactly 4 options: A, B, C, and D
+- NEVER create questions with fewer or more than 4 options
+- ALL options must be labeled as OPTION_A, OPTION_B, OPTION_C, and OPTION_D
+- This is a strict requirement that cannot be violated
+
+CRITICAL REQUIREMENT - QUESTION LENGTH VARIATION:
+- Questions MUST vary in length from 2 to 6 lines
+- Distribute question lengths across the 15 questions as follows:
+  * 2-line questions: 20% of questions (approximately 3 questions)
+  * 3-line questions: 25% of questions (approximately 3 questions)
+  * 4-line questions: 25% of questions (approximately 3 questions)
+  * 5-line questions: 20% of questions (approximately 3 questions)
+  * 6-line questions: 10% of questions (approximately 1 questions)
+- 2-line questions should be concise and direct
+- 3-4 line questions should provide moderate context and detail
+- 5-6 line questions should include complex scenarios with multiple variables
+- Ensure natural distribution without forcing exact counts
+
+CRITICAL REQUIREMENT - QUESTION STYLE VARIETY:
+- Use DIFFERENT PMP question styles and formats for each question
+- Do NOT follow the same question pattern or structure for all questions
+- Vary the question types, scenarios, and presentation styles
+- Include a comprehensive mix of these PMP question styles:
+
+SCENARIO-BASED STYLES:
+  * "What should the project manager do NEXT?" questions
+  * "What should the project manager do FIRST?" questions
+  * "What is the MOST appropriate action?" questions
+  * "What is the BEST approach?" questions
+  * "What is the CORRECT response?" questions
+
+TOOL AND TECHNIQUE STYLES:
+  * "Which tool or technique is MOST appropriate?" questions
+  * "Which tool should be used?" questions
+  * "What technique would be BEST?" questions
+  * "Which method should be applied?" questions
+
+DOCUMENT AND PROCESS STYLES:
+  * "Which document should be updated?" questions
+  * "Which document should be created?" questions
+  * "Which process should be performed?" questions
+  * "Which process group does this belong to?" questions
+
+ANALYSIS AND EVALUATION STYLES:
+  * "What is the MOST likely cause?" questions
+  * "What is the PRIMARY reason?" questions
+  * "What is the ROOT cause?" questions
+  * "What is the MOST probable outcome?" questions
+
+SEQUENCE AND ORDER STYLES:
+  * "What is the CORRECT sequence?" questions
+  * "Which step should come FIRST?" questions
+  * "What is the proper order?" questions
+  * "Which activity should be performed NEXT?" questions
+
+STAKEHOLDER AND COMMUNICATION STYLES:
+  * "Which stakeholder should be consulted?" questions
+  * "Who should be involved?" questions
+  * "What communication method is BEST?" questions
+  * "Which stakeholder has the MOST influence?" questions
+
+PURPOSE AND OBJECTIVE STYLES:
+  * "What is the PRIMARY purpose?" questions
+  * "What is the MAIN objective?" questions
+  * "What is the INTENDED outcome?" questions
+  * "What is the GOAL of this process?" questions
+
+METRIC AND MEASUREMENT STYLES:
+  * "Which metric should be monitored?" questions
+  * "What KPI is MOST important?" questions
+  * "Which measurement is BEST?" questions
+  * "What indicator should be tracked?" questions
+
+RISK AND ISSUE STYLES:
+  * "What is the GREATEST risk?" questions
+  * "Which risk response is MOST appropriate?" questions
+  * "What is the BEST mitigation strategy?" questions
+  * "How should this issue be addressed?" questions
+
+QUALITY AND COMPLIANCE STYLES:
+  * "What quality standard applies?" questions
+  * "Which compliance requirement is MOST important?" questions
+  * "What quality control measure is BEST?" questions
+  * "Which audit approach is MOST effective?" questions
+
+- Vary the scenario complexity, industry context, and project types
+- Use different sentence structures, question lengths, and complexity levels
+- Ensure each question feels unique and distinct from others
+- Mix different industries (construction, IT, healthcare, manufacturing, etc.)
+- Include various project sizes (small, medium, large, enterprise)
+- Use different organizational structures (functional, matrix, projectized)
+
+DIFFICULTY DISTRIBUTION REQUIREMENT:
+- Generate EXACTLY 13 DIFFICULT questions (90% of 15)
+- Generate EXACTLY 0 MEDIUM questions (5% of 15)
+- Generate EXACTLY 2 EASY questions (5% of 15)
+- The total must equal 15 questions
+
+DIFFICULT QUESTIONS REQUIREMENTS:
+- Must test deep understanding of PMP concepts
+- Must have TWO OPTIONS THAT ARE SO CLOSE that candidates will struggle to distinguish between them
+- These two close options should be very similar in wording, concept, or approach
+- Only ONE of these two close options should be correct
+- The other close option should be incorrect but extremely plausible and tempting
+- The remaining two options should be clearly incorrect but still plausible
+- The challenge should be in identifying the subtle difference that makes one correct and the other incorrect
+- Focus on complex scenarios, edge cases, or nuanced PMBOK concepts where the distinction is subtle
+
+MEDIUM QUESTIONS REQUIREMENTS:
+- Test moderate understanding of PMP concepts
+- Should have ONE OPTION THAT IS CLOSE to the correct answer but clearly incorrect
+- The correct answer should be clearly distinguishable from the close option
+- The remaining two options should be obviously incorrect
+- Focus on standard PMP scenarios with moderate complexity
+- Questions should require some analysis but not extreme difficulty
+
+EASY QUESTIONS REQUIREMENTS:
+- Test basic understanding of PMP concepts
+- All options should be clearly distinguishable
+- Focus on fundamental concepts and straightforward scenarios
+
+GENERAL REQUIREMENTS:
+- Each question must be realistic, relevant, and test a specific concept from the process.
+- Each question must have exactly 4 unique, plausible options (A, B, C, D) - NO EXCEPTIONS.
+- Only one option must be correct, and the correct answer must be randomly distributed among A/B/C/D (i.e. the correct answer must be randomly placed as OPTION_A, OPTION_B, OPTION_C, or OPTION_D). Do not always place the correct answer in the same position (for example, do not always put the correct answer as OPTION_A).
+- Each option must be a complete sentence and not reused across questions.
+- Each question must include detailed explanations for all options:
+    - CORRECT: Start with "CORRECT - ", explain why it's correct, reference PMBOK/PMI best practices, and provide real-world context (3-4 sentences).
+    - INCORRECT: Start with "INCORRECT - ", explain why it's wrong, reference PMI concepts, and describe negative impacts (3-4 sentences).
+- Explanations must be unique, detailed, and never generic or repeated.
+- Each question must include an analysis section with:
+    - process_group (must be one of: Initiating, Planning, Executing, Monitoring and Controlling, Closing)
+    - knowledge_area (must be one of: Integration, Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurement, Stakeholders) (for this process, use: Integration)
+    - tool (if applicable)
+    - suggested_read (2-3 specific PMBOK/PMI resources)
+    - concepts_to_understand (concise, max 150 words)
+    - additional_notes (200 words explaining question context, key concepts, and what leads to the correct answer (no bullet points, use paragraphs if needed))
+    - difficulty_level (must be either "difficult", "medium", or "easy")
+
+Output must be valid JSON, following this format:
+
+{
+  "is_sample": false,
+  "questions": [
+    {
+      "id": "[unique_id]",
+      "question_pmp": "Your unique PMP-style question text here (varying from 2-6 lines as specified)",
+      "options_pmp": {
+        "OPTION_A": "Unique first option text (PMP exam style) (randomly place the correct answer here, or in B, C, or D)",
+        "OPTION_B": "Unique second option text (PMP exam style) (randomly place the correct answer here, or in A, C, or D)",
+        "OPTION_C": "Unique third option text (PMP exam style) (randomly place the correct answer here, or in A, B, or D)",
+        "OPTION_D": "Unique fourth option text (PMP exam style) (randomly place the correct answer here, or in A, B, or C)"
+      },
+      "is_attempted": false,
+      "selected_option": "",
+      "question_type": "Option",
+      "is_valid": false,
+      "analysis": {
+        "option_a_result": "CORRECT - ... or INCORRECT - ... (randomly place the correct answer here, or in B, C, or D)",
+        "option_b_result": "... (randomly place the correct answer here, or in A, C, or D)",
+        "option_c_result": "... (randomly place the correct answer here, or in A, B, or D)",
+        "option_d_result": "... (randomly place the correct answer here, or in A, B, or C)",
+        "process_group": "Executing",
+        "knowledge_area": "Integration",
+        "tool": "[Tool]",
+        "suggested_read": ["...", "..."],
+        "concepts_to_understand": "...",
+        "additional_notes": "200 words explaining question context, key concepts, and what leads to the correct answer (no bullet points, use paragraphs if needed)",
+        "difficulty_level": "difficult" or "medium" or "easy"
+      }
+    }
+    // ... exactly 15 questions total ...
+  ]
+}
+
+IMPORTANT JSON RULES:
+- No trailing commas
+- All strings in double quotes
+- No comments or undefined/null values
+- All objects/arrays properly closed
+- Boolean values lowercase (true/false)
+- No line breaks within string values
+- ALWAYS include exactly 4 options (A, B, C, D) for every question
+- The "questions" array MUST contain exactly 15 questions
+
+Do not include any explanations or text outside the JSON structure.

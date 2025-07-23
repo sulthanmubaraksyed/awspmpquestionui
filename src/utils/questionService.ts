@@ -15,7 +15,11 @@ export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<Q
   // Parse the URL to show complete details
   const urlObj = new URL(apiUrl);
   
-  console.log('🌐 COMPLETE SERVICE URL:', apiUrl);
+  // Enhanced logging for debugging
+  console.log('🚀 === API REQUEST DETAILS ===');
+  console.log('🌐 FULL API URL:', apiUrl);
+  console.log('🔑 X-API-Key Value:', config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'] || 'NOT SET');
+  console.log('🔑 X-API-Key Length:', config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'] ? config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'].length : 0);
   console.log('🌐 SERVICE BASE URL:', config.PMP_SERVICE_URL);
   console.log('🌐 SERVICE ENDPOINT:', config.API_ENDPOINTS.QUESTIONS);
   console.log('🌐 URL BREAKDOWN:', {
@@ -27,25 +31,9 @@ export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<Q
     fullUrl: urlObj.href
   });
   console.log('🌐 QUERY PARAMETERS:', Object.fromEntries(urlObj.searchParams.entries()));
-  console.log('🌐 SERVICE URL: Making HTTP request to:', apiUrl);
-  console.log('🌐 SERVICE BASE URL:', config.PMP_SERVICE_URL);
-  console.log('🔑 API KEY: Present:', !!config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key']);
-  console.log('📋 REQUEST DETAILS:', {
-    method: 'GET',
-    url: apiUrl,
-    baseUrl: config.PMP_SERVICE_URL,
-    headers: {
-      ...config.DEFAULT_REQUEST_CONFIG.headers,
-      'X-API-Key': config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'] ? '***' : 'Not Set'
-    },
-    params: params,
-    queryParams: {
-      processGroup: params.processGroup || 'all',
-      knowledgeArea: params.knowledgeArea || 'all',
-      tool: params.tool || 'all',
-      count: params.count || 250
-    }
-  });
+  console.log('📋 ALL REQUEST HEADERS:', config.DEFAULT_REQUEST_CONFIG.headers);
+  console.log('📋 REQUEST METHOD:', 'GET');
+  console.log('🚀 === END API REQUEST DETAILS ===');
   
   // Make the actual HTTP request to the service
   const response = await fetch(apiUrl, {
@@ -106,6 +94,7 @@ export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<Q
       selected_option: question.selected_option || '',
       question_type: question.question_type || 'Option',
       is_valid: question.is_valid !== undefined ? question.is_valid : true,
+      is_sample: question.is_sample !== undefined ? question.is_sample : false,
       process_group: question.process_group || question.analysis?.process_group || '',
       analysis: {
         option_a_result: question.analysis?.option_a_result || question.option_a_result || '',
@@ -160,6 +149,7 @@ export async function saveResponseToFile(response: QAResponseIndividual): Promis
     selected_option: response.selected_option || '',
     question_type: response.question_type || 'Option',
     is_valid: response.is_valid !== undefined ? response.is_valid : true,
+    is_sample: response.is_sample !== undefined ? response.is_sample : false,
     process_group: response.process_group || response.analysis?.process_group || '',
     analysis: {
       option_a_result: response.analysis?.option_a_result || '',
@@ -206,19 +196,17 @@ export async function saveResponseToFile(response: QAResponseIndividual): Promis
   // Build API URL using environment configuration
   const apiUrl = buildApiUrl(config.API_ENDPOINTS.SAVE_RESPONSE);
   
-  console.log('🌐 SAVE URL: Making HTTP request to:', apiUrl);
+  // Enhanced logging for save operation
+  console.log('🚀 === SAVE API REQUEST DETAILS ===');
+  console.log('🌐 FULL SAVE API URL:', apiUrl);
+  console.log('🔑 X-API-Key Value:', config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'] || 'NOT SET');
+  console.log('🔑 X-API-Key Length:', config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'] ? config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'].length : 0);
   console.log('🌐 SAVE BASE URL:', config.PMP_SERVICE_URL);
-  console.log('🔑 API KEY: Present:', !!config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key']);
-  console.log('📋 SAVE REQUEST DETAILS:', {
-    method: 'POST',
-    url: apiUrl,
-    baseUrl: config.PMP_SERVICE_URL,
-    headers: {
-      ...config.DEFAULT_REQUEST_CONFIG.headers,
-      'X-API-Key': config.DEFAULT_REQUEST_CONFIG.headers['X-API-Key'] ? '***' : 'Not Set'
-    },
-    bodySize: JSON.stringify(completeResponse).length + ' characters'
-  });
+  console.log('🌐 SAVE ENDPOINT:', config.API_ENDPOINTS.SAVE_RESPONSE);
+  console.log('📋 ALL SAVE REQUEST HEADERS:', config.DEFAULT_REQUEST_CONFIG.headers);
+  console.log('📋 REQUEST METHOD:', 'POST');
+  console.log('📋 BODY SIZE:', JSON.stringify(completeResponse).length + ' characters');
+  console.log('🚀 === END SAVE API REQUEST DETAILS ===');
   
   // Make the actual HTTP request to the service
   const saveResponse = await fetch(apiUrl, {

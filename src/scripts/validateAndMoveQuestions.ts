@@ -175,6 +175,7 @@ async function processQuestionsInBatches(batchSize: number = 50) {
               selected_option: '',
               question_type: "Option",
               is_valid: false,
+              is_sample: question.is_sample !== undefined ? question.is_sample : false,
               process_group: question.analysis.process_group,
               analysis: {
               option_a_result: question.analysis.option_a_result,

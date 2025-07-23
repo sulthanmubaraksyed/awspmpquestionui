@@ -1,7 +1,7 @@
 // Environment configuration
 export const config = {
-  // PMP Service URL - defaults to localhost:3030 if not set
-  PMP_SERVICE_URL: process.env.REACT_APP_PMP_SERVICE_URL || 'http://localhost:3030',
+  // PMP Service URL - must be set via environment variable
+  PMP_SERVICE_URL: process.env.REACT_APP_PMP_SERVICE_URL || '',
   
   // Legacy API configuration for backward compatibility
   baseUrl: process.env.REACT_APP_API_BASE_URL || '',
@@ -9,10 +9,10 @@ export const config = {
   
   // API endpoints
   API_ENDPOINTS: {
-    QUESTIONS: '/api/pmp-questions',
-    SAVE_RESPONSE: '/api/saveRecord',
-    GET_QUESTION: '/api/getQuestion',
-    DELETE_QUESTION: '/api/deleteQuestion',
+    QUESTIONS: '/prod/api/pmp-questions',
+    SAVE_RESPONSE: '/prod/api/saveRecord',
+    GET_QUESTION: '/prod/api/getQuestion',
+    DELETE_QUESTION: '/prod/api/deleteQuestion',
   },
   
   // Default request settings
@@ -42,7 +42,7 @@ export const API_CONFIG = {
   baseUrl: process.env.REACT_APP_API_BASE_URL || '',
   apiKey: process.env.REACT_APP_API_KEY || '', // API key for authentication
   endpoints: {
-    questions: '/api/pmp-questions'
+    questions: '/prod/api/pmp-questions'
   }
 } as const;
 

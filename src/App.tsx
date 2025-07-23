@@ -8,6 +8,7 @@ import ProcessGroupScores from './components/ProcessGroupScores';
 import EditResponseDialog from './components/EditResponseDialog/EditResponseDialog';
 import RetrieveQuestionDialog from './components/RetrieveQuestionDialog/RetrieveQuestionDialog';
 import QuestionValidityToggle from './components/QuestionValidityToggle/QuestionValidityToggle';
+import SampleToggle from './components/SampleToggle/SampleToggle';
 import { QAResponseIndividual } from './types/index';
 import { QuestionManager, QuestionManagerState } from './utils/questionManager';
 import { retrieveRecordsFromFile, saveResponseToFile } from './utils/questionService';
@@ -346,6 +347,52 @@ function App() {
     }
   };
 
+  const handleSampleToggle = async (isSample: boolean) => {
+    console.log('=== Sample Toggle Flow Started ===');
+    console.log('New sample value:', isSample);
+    console.log('Current question ID:', currentQuestion?.id);
+    
+    if (!currentQuestion) {
+      console.error('❌ No current question available for sample toggle');
+      return;
+    }
+    
+    try {
+      console.log('Step 1: Creating updated response with new sample value');
+      // Create updated response with new sample value
+      const updatedResponse: QAResponseIndividual = {
+        ...currentQuestion,
+        is_sample: isSample
+      };
+      
+      console.log('Step 2: Updating QuestionManager internal state');
+      // Update the QuestionManager's internal state FIRST
+      questionManager.updateQuestionInState(updatedResponse);
+      console.log('✅ QuestionManager state updated');
+      
+      console.log('Step 3: Updating current question');
+      // Update the current question
+      setCurrentQuestion(updatedResponse);
+      console.log('✅ Current question updated');
+      
+      console.log('Step 4: Calling saveResponseToFile service');
+      // Call the service AFTER updating in-memory structures
+      await saveResponseToFile(updatedResponse);
+      console.log('✅ saveResponseToFile service call completed successfully');
+      
+      console.log('=== Sample Toggle Flow Completed Successfully ===');
+      
+    } catch (error) {
+      console.error('❌ Error in handleSampleToggle:', error);
+      console.error('Error details:', {
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
+      // If the service call fails, we might want to revert the in-memory changes
+      // For now, we'll keep the optimistic update
+    }
+  };
+
   const [showDebugDialog, setShowDebugDialog] = useState<boolean>(false);
 
   const questionAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -453,6 +500,12 @@ function App() {
                     responseArray={managerState.responseArray}
                     currentIndex={managerState.currentIndex}
                     onRetrieve={handleRetrieve}
+            />
+            <SampleToggle
+              isSample={currentQuestion?.is_sample ?? false}
+              onSampleChange={handleSampleToggle}
+              questionId={currentQuestion?.id}
+              disabled={!currentQuestion}
             />
                 </div>
                 <div className="process-scores-container">
