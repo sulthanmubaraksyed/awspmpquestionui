@@ -44,7 +44,7 @@ const Login: React.FC = () => {
   return (
     <Container component="main" maxWidth="xs">
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography component="h1" variant="h5" align="center" sx={{ mb: 3 }}>
+        <Typography component="h1" variant="h5" align="center" sx={{ mb: 3, fontWeight: 'bold' }}>
           PMP Questions App
         </Typography>
         
