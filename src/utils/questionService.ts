@@ -4,6 +4,10 @@ import { config, buildApiUrl } from '../config';
 export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<QAResponseIndividual[]> {
   console.log('📞 QUESTION SERVICE: retrieveRecordsFromFile called with params:', params);
   
+  // Debug config values
+  console.log('DEBUG - PMP_SERVICE_URL:', config.PMP_SERVICE_URL);
+  console.log('DEBUG - API_ENDPOINTS.QUESTIONS:', config.API_ENDPOINTS.QUESTIONS);
+  
   // Build API URL using environment configuration
   const apiUrl = buildApiUrl(config.API_ENDPOINTS.QUESTIONS, {
     processGroup: params.processGroup || 'all',
@@ -11,6 +15,8 @@ export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<Q
     tool: params.tool || 'all',
     count: params.count || 250
   });
+  
+  console.log('DEBUG - Constructed apiUrl:', apiUrl);
   
   // Parse the URL to show complete details
   const urlObj = new URL(apiUrl);

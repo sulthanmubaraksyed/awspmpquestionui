@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "PMP Question Service",
   "main": "dist/index.js",
-  "proxy": "http://localhost:3030",
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
@@ -28,8 +27,10 @@
     "@types/node": "^20.11.24",
     "cors": "^2.8.5",
     "express": "^4.18.3",
+    "http-proxy-middleware": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
     "ts-node": "^10.9.2",
     "web-vitals": "^3.5.2"
   },
@@ -52,6 +53,7 @@
     "@types/jest": "^29.5.14",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/react-router-dom": "^5.3.3",
     "@types/testing-library__react": "^10.0.1",
     "css-loader": "^6.10.0",
     "react-scripts": "^5.0.1",

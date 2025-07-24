@@ -5,6 +5,7 @@ interface ProcessGroupSelectorProps {
     value: string;
     onChange: (value: string) => void;
     onValueChange?: (value: string) => void;
+    disabled?: boolean;
 }
 
 const processGroups = [
@@ -19,7 +20,8 @@ const processGroups = [
 export const ProcessGroupSelector: React.FC<ProcessGroupSelectorProps> = ({
     value,
     onChange,
-    onValueChange
+    onValueChange,
+    disabled = false
 }) => {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newValue = e.target.value;
@@ -40,6 +42,7 @@ export const ProcessGroupSelector: React.FC<ProcessGroupSelectorProps> = ({
                     className={styles.select}
                     value={value}
                     onChange={handleChange}
+                    disabled={disabled}
                 >
                     {processGroups.map((group) => (
                         <option key={group} value={group}>

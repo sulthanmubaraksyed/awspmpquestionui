@@ -8,6 +8,7 @@ interface ToolSelectorProps {
     onToolChange?: (value: string) => void;
     selectedProcessGroup: string;
     selectedKnowledgeArea: string;
+    disabled?: boolean;
 }
 
 export const ToolSelector: React.FC<ToolSelectorProps> = ({
@@ -15,7 +16,8 @@ export const ToolSelector: React.FC<ToolSelectorProps> = ({
     onChange,
     onToolChange,
     selectedProcessGroup,
-    selectedKnowledgeArea
+    selectedKnowledgeArea,
+    disabled = false
 }) => {
     // Helper function to normalize process group names
     const normalizeProcessGroup = (group: string): string => {
@@ -83,6 +85,7 @@ export const ToolSelector: React.FC<ToolSelectorProps> = ({
                     className={styles.select}
                     value={value}
                     onChange={handleChange}
+                    disabled={disabled}
                 >
                     {filteredTools.map((tool) => (
                         <option key={tool} value={tool}>

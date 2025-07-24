@@ -9,12 +9,12 @@
 }
 
 .label {
-    font-size: 21px;
+    font-size: 16px;
     font-weight: 700;
     color: #1d1d1f;
     margin-bottom: 8px;
     text-align: left;
-    height: 32px;
+    height: 24px;
     display: flex;
     align-items: center;
     width: 100%;

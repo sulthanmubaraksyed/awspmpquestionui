@@ -13,17 +13,13 @@ interface ProcessGroupScoresProps {
 
 const ProcessGroupScores: React.FC<ProcessGroupScoresProps> = ({ scores, totalAttempted }) => {
   const getScoreColor = (percentage: number) => {
-    // Keep grey until 10 questions are attempted
-    if (totalAttempted < 10) return '#808080'; // Grey color
-    
+    // Show colors based on percentage regardless of question count
     if (percentage < 67) return '#ff4d4d'; // Red for < 67%
     if (percentage <= 76) return '#90EE90'; // Light green for 67-76%
     return '#006400'; // Dark green for > 76%
   };
 
   const getScoreMessage = (percentage: number) => {
-    if (totalAttempted < 10) return 'Complete 10 questions to see your score';
-    
     if (percentage < 67) return 'Needs Improvement';
     if (percentage <= 76) return 'Good Progress';
     return 'Excellent!';
@@ -36,7 +32,55 @@ const ProcessGroupScores: React.FC<ProcessGroupScoresProps> = ({ scores, totalAt
       gap: '12px'
     }}>
       {scores.map((score) => {
-        const percentage = score.totalQuestions > 0 ? (score.correctAnswers / score.totalQuestions) * 100 : 0;
+        // Only show results if there are attempted questions for this process group
+        if (score.totalQuestions === 0) {
+          return (
+            <div
+              key={score.processGroup}
+              className="score-card"
+              style={{
+                backgroundColor: '#f0f0f0',
+                color: '#666',
+                padding: '12px',
+                borderRadius: '8px',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                transition: 'all 0.3s ease-in-out',
+                cursor: 'default',
+                opacity: 0.8
+              }}
+            >
+              <div style={{ 
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '4px'
+              }}>
+                <span style={{ 
+                  fontSize: '0.9rem',
+                  fontWeight: '600'
+                }}>
+                  {score.processGroup}
+                </span>
+                <span style={{ 
+                  fontSize: '0.9rem',
+                  fontWeight: '600'
+                }}>
+                  -
+                </span>
+              </div>
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '0.85rem'
+              }}>
+                <span>No questions attempted yet</span>
+              </div>
+            </div>
+          );
+        }
+        
+        const percentage = (score.correctAnswers / score.totalQuestions) * 100;
         const backgroundColor = getScoreColor(percentage);
         // Always use black text when grey (less than 10 questions)
         const textColor = totalAttempted < 10 ? '#000000' : (percentage <= 76.00 ? '#000000' : '#ffffff');
@@ -53,7 +97,7 @@ const ProcessGroupScores: React.FC<ProcessGroupScoresProps> = ({ scores, totalAt
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
               transition: 'all 0.3s ease-in-out',
               cursor: 'pointer',
-              opacity: totalAttempted < 10 ? 0.8 : 1
+              opacity: 1
             }}
           >
             <div style={{ 
@@ -72,7 +116,7 @@ const ProcessGroupScores: React.FC<ProcessGroupScoresProps> = ({ scores, totalAt
                 fontSize: '0.9rem',
                 fontWeight: '600'
               }}>
-                {totalAttempted < 10 ? '-' : `${percentage.toFixed(1)}%`}
+                {`${percentage.toFixed(1)}%`}
               </span>
             </div>
             <div style={{ 
@@ -82,7 +126,7 @@ const ProcessGroupScores: React.FC<ProcessGroupScoresProps> = ({ scores, totalAt
               fontSize: '0.85rem'
             }}>
               <span>
-                {totalAttempted < 10 ? 'Complete 10 questions' : `${score.correctAnswers}/${score.totalQuestions} correct`}
+                {`${score.correctAnswers}/${score.totalQuestions} correct`}
               </span>
               <span style={{ fontStyle: 'italic' }}>
                 {getScoreMessage(percentage)}

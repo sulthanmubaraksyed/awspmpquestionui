@@ -5,6 +5,7 @@ interface KnowledgeAreaSelectorProps {
     value: string;
     onChange: (value: string) => void;
     onValueChange?: (value: string) => void;
+    disabled?: boolean;
 }
 
 const knowledgeAreas = [
@@ -24,7 +25,8 @@ const knowledgeAreas = [
 export const KnowledgeAreaSelector: React.FC<KnowledgeAreaSelectorProps> = ({
     value,
     onChange,
-    onValueChange
+    onValueChange,
+    disabled = false
 }) => {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newValue = e.target.value;
@@ -45,6 +47,7 @@ export const KnowledgeAreaSelector: React.FC<KnowledgeAreaSelectorProps> = ({
                     className={styles.select}
                     value={value}
                     onChange={handleChange}
+                    disabled={disabled}
                 >
                     {knowledgeAreas.map((area) => (
                         <option key={area} value={area}>

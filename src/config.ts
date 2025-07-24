@@ -9,10 +9,11 @@ export const config = {
   
   // API endpoints
   API_ENDPOINTS: {
-    QUESTIONS: '/prod/api/pmp-questions',
-    SAVE_RESPONSE: '/prod/api/saveRecord',
-    GET_QUESTION: '/prod/api/getQuestion',
-    DELETE_QUESTION: '/prod/api/deleteQuestion',
+    // These should match your API Gateway endpoints
+    QUESTIONS: '/api/pmp-questions',
+    SAVE_RESPONSE: '/api/saveRecord',
+    GET_QUESTION: '/api/getQuestion',
+    DELETE_QUESTION: '/api/deleteQuestion',
   },
   
   // Default request settings
@@ -27,22 +28,42 @@ export const config = {
 
 // Helper function to build API URLs
 export const buildApiUrl = (endpoint: string, params?: Record<string, string | number>): string => {
-  const url = new URL(endpoint, config.PMP_SERVICE_URL);
+  // Always use the full service URL, even in development
+  const isDevelopment = process.env.NODE_ENV === 'development';
   
-  if (params) {
+  console.log('DEBUG - buildApiUrl - isDevelopment:', isDevelopment);
+  console.log('DEBUG - buildApiUrl - endpoint:', endpoint);
+  console.log('DEBUG - buildApiUrl - config.PMP_SERVICE_URL:', config.PMP_SERVICE_URL);
+  
+  // Always use the full service URL
+  const baseUrl = config.PMP_SERVICE_URL;
+  
+  console.log('DEBUG - buildApiUrl - baseUrl:', baseUrl);
+  
+  // Build the URL
+  let urlString = `${baseUrl}${endpoint}`;
+  
+  console.log('DEBUG - buildApiUrl - urlString before params:', urlString);
+  
+  // Add query parameters if provided
+  if (params && Object.keys(params).length > 0) {
+    const queryParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
-      url.searchParams.append(key, value.toString());
+      queryParams.append(key, value.toString());
     });
+    urlString += `?${queryParams.toString()}`;
   }
   
-  return url.toString();
+  console.log('DEBUG - buildApiUrl - final urlString:', urlString);
+  
+  return urlString;
 };
 
 export const API_CONFIG = {
   baseUrl: process.env.REACT_APP_API_BASE_URL || '',
   apiKey: process.env.REACT_APP_API_KEY || '', // API key for authentication
   endpoints: {
-    questions: '/prod/api/pmp-questions'
+    questions: '/api/pmp-questions'
   }
 } as const;
 

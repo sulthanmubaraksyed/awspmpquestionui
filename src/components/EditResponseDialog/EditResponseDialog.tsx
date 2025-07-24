@@ -170,6 +170,14 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
     }
   };
 
+  // Function to check if an option analysis contains the complete word "CORRECT"
+  const isCorrectOption = (analysisText: string) => {
+    if (!analysisText) return false;
+    // Use regex with word boundaries to match only the complete word "CORRECT"
+    const correctRegex = /\bCORRECT\b/i;
+    return correctRegex.test(analysisText);
+  };
+
   const handleDelete = async () => {
     if (!editedResponse) {
       setError('No question to delete');
@@ -233,164 +241,175 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
     <div className={styles.overlay}>
       <div className={styles.dialog}>
         <div className={styles.header}>
-          <h2>Edit Response</h2>
-          <button className={styles.closeButton} onClick={onClose}>&times;</button>
+          <h2>{userRole === 'Admin' ? 'Edit Response' : 'Review of the Question'}</h2>
+          {userRole === 'Admin' ? (
+            <button className={styles.closeButton} onClick={onClose}>&times;</button>
+          ) : (
+            <button className={styles.cancelButton} onClick={onClose} style={{ marginLeft: 'auto' }}>Cancel</button>
+          )}
         </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           {error && <div className={styles.error}>{error}</div>}
           
-          <div className={styles.idSection}>
-            <div className={styles.idField}>
-              <label>Question ID</label>
-              <div className={styles.idInputGroup}>
-                <input
-                  type="text"
-                  className={styles.idInput}
-                  value={editedResponse.id}
-                  readOnly
-                />
-                <button
-                  type="button"
-                  className={styles.copyButton}
-                  onClick={handleCopyId}
-                >
-                  Copy ID
-                </button>
+          {userRole === 'Admin' && (
+            <div className={styles.idSection}>
+              <div className={styles.idField}>
+                <label>Question ID</label>
+                <div className={styles.idInputGroup}>
+                  <input
+                    type="text"
+                    className={styles.idInput}
+                    value={editedResponse.id}
+                    readOnly
+                  />
+                  <button
+                    type="button"
+                    className={styles.copyButton}
+                    onClick={handleCopyId}
+                  >
+                    Copy ID
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className={styles.contentGrid}>
-            {/* Left Column */}
-            <div className={styles.section}>
-              <h3>Basic Information</h3>
-              <div className={styles.field}>
-                <label>Process Group</label>
-                <select
-                  className={styles.select}
-                  value={editedResponse.analysis.process_group}
-                  onChange={(e) => handleChange('analysis.process_group', e.target.value)}
-                >
-                  <option value="">Select Process Group</option>
-                  <option value="Initiating">Initiating</option>
-                  <option value="Planning">Planning</option>
-                  <option value="Executing">Executing</option>
-                  <option value="Monitoring and Controlling">Monitoring and Controlling</option>
-                  <option value="Closing">Closing</option>
-                </select>
-              </div>
-              <div className={styles.field}>
-                <label>Knowledge Area</label>
-                <select
-                  className={styles.select}
-                  value={editedResponse.analysis.knowledge_area}
-                  onChange={(e) => handleChange('analysis.knowledge_area', e.target.value)}
-                >
-                  <option value="">Select Knowledge Area</option>
-                  <option value="Integration">Integration</option>
-                  <option value="Scope">Scope</option>
-                  <option value="Schedule">Schedule</option>
-                  <option value="Cost">Cost</option>
-                  <option value="Quality">Quality</option>
-                  <option value="Resources">Resources</option>
-                  <option value="Communications">Communications</option>
-                  <option value="Risk">Risk</option>
-                  <option value="Procurement">Procurement</option>
-                  <option value="Stakeholders">Stakeholders</option>
-                </select>
-              </div>
-              <div className={styles.field}>
-                <label>Tool</label>
-                <select
-                  className={styles.select}
-                  value={editedResponse.analysis.tool}
-                  onChange={(e) => handleChange('analysis.tool', e.target.value)}
-                >
-                  <option value="All">All</option>
-                  <option value="Data Gathering">Data Gathering</option>
-                  <option value="Data Analysis">Data Analysis</option>
-                  <option value="Decision Making">Decision Making</option>
-                  <option value="Communication">Communication</option>
-                  <option value="Interpersonal and Team">Interpersonal and Team</option>
-                </select>
-              </div>
-              <div className={styles.field}>
-                <label>Is Valid</label>
-                <select
-                  className={styles.select}
-                  value={editedResponse.is_valid === undefined ? 'false' : editedResponse.is_valid.toString()}
-                  onChange={(e) => handleChange('is_valid', e.target.value)}
-                >
-                  <option value="true">True</option>
-                  <option value="false">False</option>
-                </select>
-              </div>
-              <div className={styles.field}>
-                <label>Is Sample</label>
-                <select
-                  className={styles.select}
-                  value={editedResponse.is_sample === undefined ? 'false' : editedResponse.is_sample.toString()}
-                  onChange={(e) => handleChange('is_sample', e.target.value)}
-                >
-                  <option value="true">True</option>
-                  <option value="false">False</option>
-                </select>
-              </div>
-            </div>
+            {/* Show Basic Information and Question Details only for admin users */}
+            {userRole === 'Admin' && (
+              <>
+                {/* Left Column */}
+                <div className={styles.section}>
+                  <h3>Basic Information</h3>
+                  <div className={styles.field}>
+                    <label>Process Group</label>
+                    <select
+                      className={styles.select}
+                      value={editedResponse.analysis.process_group}
+                      onChange={(e) => handleChange('analysis.process_group', e.target.value)}
+                    >
+                      <option value="">Select Process Group</option>
+                      <option value="Initiating">Initiating</option>
+                      <option value="Planning">Planning</option>
+                      <option value="Executing">Executing</option>
+                      <option value="Monitoring and Controlling">Monitoring and Controlling</option>
+                      <option value="Closing">Closing</option>
+                    </select>
+                  </div>
+                  <div className={styles.field}>
+                    <label>Knowledge Area</label>
+                    <select
+                      className={styles.select}
+                      value={editedResponse.analysis.knowledge_area}
+                      onChange={(e) => handleChange('analysis.knowledge_area', e.target.value)}
+                    >
+                      <option value="">Select Knowledge Area</option>
+                      <option value="Integration">Integration</option>
+                      <option value="Scope">Scope</option>
+                      <option value="Schedule">Schedule</option>
+                      <option value="Cost">Cost</option>
+                      <option value="Quality">Quality</option>
+                      <option value="Resources">Resources</option>
+                      <option value="Communications">Communications</option>
+                      <option value="Risk">Risk</option>
+                      <option value="Procurement">Procurement</option>
+                      <option value="Stakeholders">Stakeholders</option>
+                    </select>
+                  </div>
+                  <div className={styles.field}>
+                    <label>Tool</label>
+                    <select
+                      className={styles.select}
+                      value={editedResponse.analysis.tool}
+                      onChange={(e) => handleChange('analysis.tool', e.target.value)}
+                    >
+                      <option value="All">All</option>
+                      <option value="Data Gathering">Data Gathering</option>
+                      <option value="Data Analysis">Data Analysis</option>
+                      <option value="Decision Making">Decision Making</option>
+                      <option value="Communication">Communication</option>
+                      <option value="Interpersonal and Team">Interpersonal and Team</option>
+                    </select>
+                  </div>
+                  <div className={styles.field}>
+                    <label>Is Valid</label>
+                    <select
+                      className={styles.select}
+                      value={editedResponse.is_valid === undefined ? 'false' : editedResponse.is_valid.toString()}
+                      onChange={(e) => handleChange('is_valid', e.target.value)}
+                    >
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                  <div className={styles.field}>
+                    <label>Is Sample</label>
+                    <select
+                      className={styles.select}
+                      value={editedResponse.is_sample === undefined ? 'false' : editedResponse.is_sample.toString()}
+                      onChange={(e) => handleChange('is_sample', e.target.value)}
+                    >
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                </div>
 
-            {/* Right Column */}
-            <div className={styles.section}>
-              <h3>Question Details</h3>
-              <div className={styles.field}>
-                <label>Question</label>
-                <textarea
-                  className={styles.textarea}
-                  value={editedResponse.question_pmp}
-                  onChange={(e) => handleChange('question_pmp', e.target.value)}
-                  rows={4}
-                />
-              </div>
-              <div className={styles.field}>
-                <label>Option A</label>
-                <textarea
-                  className={styles.textarea}
-                  value={editedResponse.options_pmp.OPTION_A}
-                  onChange={(e) => handleChange('options_pmp.OPTION_A', e.target.value)}
-                  rows={2}
-                />
-              </div>
-              <div className={styles.field}>
-                <label>Option B</label>
-                <textarea
-                  className={styles.textarea}
-                  value={editedResponse.options_pmp.OPTION_B}
-                  onChange={(e) => handleChange('options_pmp.OPTION_B', e.target.value)}
-                  rows={2}
-                />
-              </div>
-              <div className={styles.field}>
-                <label>Option C</label>
-                <textarea
-                  className={styles.textarea}
-                  value={editedResponse.options_pmp.OPTION_C}
-                  onChange={(e) => handleChange('options_pmp.OPTION_C', e.target.value)}
-                  rows={2}
-                />
-              </div>
-              <div className={styles.field}>
-                <label>Option D</label>
-                <textarea
-                  className={styles.textarea}
-                  value={editedResponse.options_pmp.OPTION_D}
-                  onChange={(e) => handleChange('options_pmp.OPTION_D', e.target.value)}
-                  rows={2}
-                />
-              </div>
-            </div>
+                {/* Right Column */}
+                <div className={styles.section}>
+                  <h3>Question Details</h3>
+                  <div className={styles.field}>
+                    <label>Question</label>
+                    <textarea
+                      className={styles.textarea}
+                      value={editedResponse.question_pmp}
+                      onChange={(e) => handleChange('question_pmp', e.target.value)}
+                      rows={4}
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label>Option A</label>
+                    <textarea
+                      className={styles.textarea}
+                      value={editedResponse.options_pmp.OPTION_A}
+                      onChange={(e) => handleChange('options_pmp.OPTION_A', e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label>Option B</label>
+                    <textarea
+                      className={styles.textarea}
+                      value={editedResponse.options_pmp.OPTION_B}
+                      onChange={(e) => handleChange('options_pmp.OPTION_B', e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label>Option C</label>
+                    <textarea
+                      className={styles.textarea}
+                      value={editedResponse.options_pmp.OPTION_C}
+                      onChange={(e) => handleChange('options_pmp.OPTION_C', e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label>Option D</label>
+                    <textarea
+                      className={styles.textarea}
+                      value={editedResponse.options_pmp.OPTION_D}
+                      onChange={(e) => handleChange('options_pmp.OPTION_D', e.target.value)}
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
 
             {/* Analysis Section - Full Width */}
-            <div className={styles.section} style={{ gridColumn: '1 / -1' }}>
-              <h3>Analysis</h3>
+            <div className={userRole === 'Admin' ? styles.section : ''} style={{ gridColumn: '1 / -1' }}>
+              {userRole === 'Admin' && <h3>Analysis</h3>}
               <div className={styles.field}>
                 <label>Option A Analysis</label>
                 <textarea
@@ -398,6 +417,8 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   value={editedResponse.analysis.option_a_result}
                   onChange={(e) => handleChange('analysis.option_a_result', e.target.value)}
                   rows={3}
+                  readOnly={userRole !== 'Admin'}
+                  style={isCorrectOption(editedResponse.analysis.option_a_result) ? { backgroundColor: '#2e7d32', color: 'white' } : {}}
                 />
               </div>
               <div className={styles.field}>
@@ -407,6 +428,8 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   value={editedResponse.analysis.option_b_result}
                   onChange={(e) => handleChange('analysis.option_b_result', e.target.value)}
                   rows={3}
+                  readOnly={userRole !== 'Admin'}
+                  style={isCorrectOption(editedResponse.analysis.option_b_result) ? { backgroundColor: '#2e7d32', color: 'white' } : {}}
                 />
               </div>
               <div className={styles.field}>
@@ -416,6 +439,8 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   value={editedResponse.analysis.option_c_result}
                   onChange={(e) => handleChange('analysis.option_c_result', e.target.value)}
                   rows={3}
+                  readOnly={userRole !== 'Admin'}
+                  style={isCorrectOption(editedResponse.analysis.option_c_result) ? { backgroundColor: '#2e7d32', color: 'white' } : {}}
                 />
               </div>
               <div className={styles.field}>
@@ -425,6 +450,18 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   value={editedResponse.analysis.option_d_result}
                   onChange={(e) => handleChange('analysis.option_d_result', e.target.value)}
                   rows={3}
+                  readOnly={userRole !== 'Admin'}
+                  style={isCorrectOption(editedResponse.analysis.option_d_result) ? { backgroundColor: '#2e7d32', color: 'white' } : {}}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Additional Notes</label>
+                <textarea
+                  className={styles.textarea}
+                  value={editedResponse.analysis.additional_notes}
+                  onChange={(e) => handleChange('analysis.additional_notes', e.target.value)}
+                  rows={2}
+                  readOnly={userRole !== 'Admin'}
                 />
               </div>
               <div className={styles.field}>
@@ -434,6 +471,7 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   value={editedResponse.analysis.concepts_to_understand}
                   onChange={(e) => handleChange('analysis.concepts_to_understand', e.target.value)}
                   rows={3}
+                  readOnly={userRole !== 'Admin'}
                 />
               </div>
               <div className={styles.field}>
@@ -446,45 +484,39 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   onChange={(e) => handleSuggestedReadChange(e.target.value)}
                   rows={3}
                   placeholder="Enter each suggestion on a new line"
-                />
-              </div>
-              <div className={styles.field}>
-                <label>Additional Notes</label>
-                <textarea
-                  className={styles.textarea}
-                  value={editedResponse.analysis.additional_notes}
-                  onChange={(e) => handleChange('analysis.additional_notes', e.target.value)}
-                  rows={2}
+                  readOnly={userRole !== 'Admin'}
                 />
               </div>
             </div>
           </div>
 
-          <div className={styles.actions}>
-            <button
-              type="button"
-              className={styles.cancelButton}
-              onClick={onClose}
-              disabled={isSaving || isDeleting}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className={styles.deleteButton}
-              onClick={handleDelete}
-              disabled={isDeleting || isSaving}
-            >
-              {isDeleting ? 'Deleting...' : 'Delete Question'}
-            </button>
-            <button
-              type="submit"
-              className={styles.saveButton}
-              disabled={isSaving || isDeleting}
-            >
-              {isSaving ? 'Saving...' : 'Save Changes'}
-            </button>
-          </div>
+          {userRole === 'Admin' && (
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={onClose}
+                disabled={isSaving || isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className={styles.deleteButton}
+                onClick={handleDelete}
+                disabled={isDeleting || isSaving}
+              >
+                {isDeleting ? 'Deleting...' : 'Delete Question'}
+              </button>
+              <button
+                type="submit"
+                className={styles.saveButton}
+                disabled={isSaving || isDeleting}
+              >
+                {isSaving ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>
