@@ -13,44 +13,38 @@ const Navigation: React.FC = () => {
           PMP Questions
         </Typography>
         
-        {isAuthenticated ? (
-          <>
-            <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
-              <Chip 
-                label={userRole === 'admin' ? 'Admin' : 'Guest'} 
-                color={userRole === 'admin' ? 'secondary' : 'default'}
-                size="small"
-                sx={{ mr: 2 }}
-              />
-              
-              {/* Questions link only for admin users */}
-              {userRole === 'admin' && (
-                <Button color="inherit" component={Link} to="/questions">
-                  Questions
-                </Button>
-              )}
-              
-              {/* Admin-only links */}
-              {userRole === 'admin' && (
-                <>
-                  <Button color="inherit" component={Link} to="/admin/create">
-                    Create
-                  </Button>
-                  <Button color="inherit" component={Link} to="/admin/manage">
-                    Manage
-                  </Button>
-                </>
-              )}
-              
-              <Button color="inherit" onClick={logout}>
-                Logout
+        {isAuthenticated && (
+          <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
+            <Chip 
+              label={userRole === 'admin' ? 'Admin' : 'Guest'} 
+              color={userRole === 'admin' ? 'secondary' : 'default'}
+              size="small"
+              sx={{ mr: 2 }}
+            />
+            
+            {/* Questions link only for admin users */}
+            {userRole === 'admin' && (
+              <Button color="inherit" component={Link} to="/questions">
+                Questions
               </Button>
-            </Box>
-          </>
-        ) : (
-          <Button color="inherit" component={Link} to="/login">
-            Login
-          </Button>
+            )}
+            
+            {/* Admin-only links */}
+            {userRole === 'admin' && (
+              <>
+                <Button color="inherit" component={Link} to="/admin/create">
+                  Create
+                </Button>
+                <Button color="inherit" component={Link} to="/admin/manage">
+                  Manage
+                </Button>
+              </>
+            )}
+            
+            <Button color="inherit" onClick={logout}>
+              Logout
+            </Button>
+          </Box>
         )}
       </Toolbar>
     </AppBar>

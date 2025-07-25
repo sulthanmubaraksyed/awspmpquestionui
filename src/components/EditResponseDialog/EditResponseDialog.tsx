@@ -241,7 +241,7 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
     <div className={styles.overlay}>
       <div className={styles.dialog}>
         <div className={styles.header}>
-          <h2>{userRole === 'Admin' ? 'Edit Response' : 'Review of the Question'}</h2>
+          <h2>{userRole === 'Admin' ? 'Edit Response' : 'Check Answer'}</h2>
           {userRole === 'Admin' ? (
             <button className={styles.closeButton} onClick={onClose}>&times;</button>
           ) : (
@@ -460,7 +460,7 @@ const EditResponseDialog: React.FC<EditResponseDialogProps> = ({
                   className={styles.textarea}
                   value={editedResponse.analysis.additional_notes}
                   onChange={(e) => handleChange('analysis.additional_notes', e.target.value)}
-                  rows={2}
+                  rows={16}
                   readOnly={userRole !== 'Admin'}
                 />
               </div>

@@ -65,6 +65,8 @@
     font-size: 16px;
     line-height: 1.5;
     text-align: left;
+    font-family: inherit;
+    font-family: inherit;
 }
 
 .apple-submit-button {

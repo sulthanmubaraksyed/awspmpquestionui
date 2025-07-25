@@ -121,7 +121,8 @@ function QuestionsApp() {
           processGroup,
           knowledgeArea,
           tool,
-          count
+          count,
+          user: userRole
         });
         console.log('✅ SERVICE RESPONSE: Retrieved', questions.length, 'questions from service');
         setIsLoading(false);
@@ -543,8 +544,8 @@ function QuestionsApp() {
                       disabled={!currentQuestion}
                     />
                   )}
-                  {/* Retrieve Question button is only available to admin users */}
-                  {isAdmin && (
+                  {/* Retrieve Question button is only available to admin users after answer submission */}
+                  {isAdmin && currentQuestion?.is_attempted && (
                     <button 
                       className="retrieve-question-button"
                       onClick={() => setShowRetrieveDialog(true)}

@@ -82,8 +82,8 @@ const ProcessGroupScores: React.FC<ProcessGroupScoresProps> = ({ scores, totalAt
         
         const percentage = (score.correctAnswers / score.totalQuestions) * 100;
         const backgroundColor = getScoreColor(percentage);
-        // Always use black text when grey (less than 10 questions)
-        const textColor = totalAttempted < 10 ? '#000000' : (percentage <= 76.00 ? '#000000' : '#ffffff');
+        // Use white text when any question is answered in this process group
+        const textColor = score.totalQuestions > 0 ? '#ffffff' : '#000000';
 
         return (
           <div

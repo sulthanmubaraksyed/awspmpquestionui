@@ -93,7 +93,7 @@ const AnswerOptions: React.FC<AnswerOptionsProps> = ({
                     </label>
                 ))}
             </div>
-            <div className={styles['buttons-container']}>
+            <div className={styles['buttons-container']} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
                 <button
                     className={`${styles['nav-button']} ${styles['prev-button']}`}
                     onClick={onPrevious}
@@ -114,15 +114,15 @@ const AnswerOptions: React.FC<AnswerOptionsProps> = ({
                     disabled={!isAttempted || isLastQuestion}
                 >
                     Next
-                  </button>
-                    <button
-                        className={styles['apple-submit-button']}
-                        style={{ marginLeft: 12, background: '#34c759' }}
-                        onClick={onRetrieve}
-                        type="button"
-                    >
-                        Retrieve
-                    </button>
+                </button>
+                <button
+                    className={styles['apple-submit-button']}
+                    onClick={onRetrieve}
+                    type="button"
+                    disabled={!isAttempted}
+                >
+                    Check
+                </button>
             </div>
         </div>
     );

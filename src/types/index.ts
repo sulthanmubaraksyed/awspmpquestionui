@@ -33,6 +33,7 @@ export interface RetrieveParams {
   knowledgeArea: string;
   tool: string;
   count?: number;
+  user?: string;
 }
 
 export interface BaseQuestion {

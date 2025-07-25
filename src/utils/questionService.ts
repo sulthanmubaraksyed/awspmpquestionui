@@ -8,12 +8,25 @@ export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<Q
   console.log('DEBUG - PMP_SERVICE_URL:', config.PMP_SERVICE_URL);
   console.log('DEBUG - API_ENDPOINTS.QUESTIONS:', config.API_ENDPOINTS.QUESTIONS);
   
+  // Extract username from stored token
+  let username = 'guest';
+  try {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      const tokenData = JSON.parse(atob(authToken));
+      username = tokenData.username || 'guest';
+    }
+  } catch (error) {
+    console.log('Could not extract username from token, using guest');
+  }
+
   // Build API URL using environment configuration
   const apiUrl = buildApiUrl(config.API_ENDPOINTS.QUESTIONS, {
     processGroup: params.processGroup || 'all',
     knowledgeArea: params.knowledgeArea || 'all',
     tool: params.tool || 'all',
-    count: params.count || 250
+    count: params.count || 250,
+    user: username
   });
   
   console.log('DEBUG - Constructed apiUrl:', apiUrl);
@@ -42,9 +55,13 @@ export async function retrieveRecordsFromFile(params: RetrieveParams): Promise<Q
   console.log('🚀 === END API REQUEST DETAILS ===');
   
   // Make the actual HTTP request to the service
+  const authToken = localStorage.getItem('authToken');
   const response = await fetch(apiUrl, {
     method: 'GET',
-    headers: config.DEFAULT_REQUEST_CONFIG.headers,
+    headers: {
+      ...config.DEFAULT_REQUEST_CONFIG.headers,
+      ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+    },
   });
   
   console.log('📡 HTTP RESPONSE: Status:', response.status, response.statusText);
@@ -215,11 +232,13 @@ export async function saveResponseToFile(response: QAResponseIndividual): Promis
   console.log('🚀 === END SAVE API REQUEST DETAILS ===');
   
   // Make the actual HTTP request to the service
+  const authToken = localStorage.getItem('authToken');
   const saveResponse = await fetch(apiUrl, {
     method: 'POST',
     headers: {
       ...config.DEFAULT_REQUEST_CONFIG.headers,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      ...(authToken && { 'Authorization': `Bearer ${authToken}` })
     },
     body: JSON.stringify(completeResponse)
   });

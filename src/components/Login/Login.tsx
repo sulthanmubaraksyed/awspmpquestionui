@@ -15,28 +15,46 @@ const Login: React.FC = () => {
     event.preventDefault();
     setError('');
 
-    // Don't allow empty username or password
     if (!username.trim()) {
       setError('Please enter a username');
       return;
     }
     
-    if (!password.trim()) {
-      setError('Please enter a password');
-      return;
+    // Check if admin with password
+    if (username === 'admin') {
+      if (!password.trim()) {
+        setError('Please enter a password for admin');
+        return;
+      }
+      if (password !== process.env.REACT_APP_ADMIN_PASSWORD) {
+        setError('Invalid admin password');
+        return;
+      }
     }
     
-    // Simple password check - in a real app, use proper authentication
-    if (username === 'admin' && password === process.env.REACT_APP_ADMIN_PASSWORD) {
-      login('admin');
-      navigate('/');
-    } else {
-      setError('Invalid username or password');
-    }
+    // Generate Base64 token
+    const tokenData = {
+      username: username.trim(),
+      role: username === 'admin' ? 'admin' : 'user',
+      timestamp: Date.now()
+    };
+    const token = btoa(JSON.stringify(tokenData));
+    
+    localStorage.setItem('authToken', token);
+    login(username === 'admin' ? 'admin' : 'guest');
+    navigate('/');
   };
 
   // Handle guest access
   const handleGuestAccess = () => {
+    const tokenData = {
+      username: 'guest',
+      role: 'guest',
+      timestamp: Date.now()
+    };
+    const token = btoa(JSON.stringify(tokenData));
+    
+    localStorage.setItem('authToken', token);
     login('guest');
     navigate('/');
   };
@@ -64,6 +82,7 @@ const Login: React.FC = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            helperText={username === 'admin' ? 'Password required for admin' : 'Password optional for other users'}
           />
           {error && (
             <Typography color="error" align="center" sx={{ mt: 1 }}>
